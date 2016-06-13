@@ -45,6 +45,7 @@ class UsersController extends \BaseController {
 	{
 		$user = User::find($id);
 		$questions = $user->questions;
+		
 
 		return View::make("users.show")->with('user', $user)->with('questions', $questions);
 	}

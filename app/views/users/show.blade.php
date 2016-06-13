@@ -35,7 +35,54 @@
 		
 
 		<hr class="ad-divider">
-        <?php var_dump($questions)?>
+        @if (!$questions->isEmpty())
+        {{$questionNum = 1}}
+        <h2 class="row text-center recent-ads-header">Your Latest questions</h2>
+        <div class="container">
+			<div id="question-holder-normal" class="container col-md-10 col-xs-12 col-md-offset-1">
+        	@foreach($questions as $question)
+		    	<div class="row pre-question">
+			    	<img class="col-xs-6 pre-image" src="/{{$question->image}}">
+			    	<div class="col-xs-6 info">
+					    <div class="pull-right">
+					    	
+		                    <button type="button" class="btn btn-danger btn-small" id="delete-modal-button" data-toggle="modal" data-target=".delete-modal-<?=$questionNum?>">Delete</button>
+	                    </div>
+					    <p><strong>Categories:</strong> {{$question->categories}} </p>
+					    <h3 class="pre-head">{{$question->title}}</h3>
+					    <p class="question-date">{{$question->created_at->setTimezone('America/New_York')->format('F jS Y @ h:i A')}} EST</p>
+					    <p> {{$question->summary}} </p>
+					    
+				    </div>
+			    </div>
+
+	            <!-- DELETE MODAL -->
+				<div class="modal fade delete-modal-<?=$questionNum?>" tabindex="-1" role="dialog" aria-hidden="true">
+					<div class="modal-dialog modal-sm">
+					  <div class="modal-content">
+					    <div class="modal-header">
+					      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+					      <h4 class="modal-title text-center" id="mySmallModalLabel">That's risky business! You sure you want to delete this question?</h4>
+					      <div id="question-actions" class="row col-xs-10 col-xs-offset-1">
+					      	  <button type="button" class="btn btn-sml pull-left" id='dont-delete' data-dismiss="modal" aria-label="Close">Don't delete!</button>
+				              
+						  </div>
+					    </div>
+					  </div>
+					</div>
+				</div>
+				<!-- END DELETE MODAL -->
+        	{{$questionNum++}}
+        	@endforeach
+        	</div>
+        </div>
+    </div>
+</div>
+        @else
+	    	<h2 class="text-center">Slackin'! You haven't written any questions yet.</h2>
+	    	<p class="text-center">(Let's fix that.)</p>
+	 	    
+		@endif
         
 
 	</div>
