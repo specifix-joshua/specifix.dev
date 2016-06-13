@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration {
 			$table->string('first_name');
 			$table->string('last_name');
 			$table->string('languages')->nullable();
-			$table->integer('score')->unsigned()->nullable();
+			$table->integer('score')->unsigned()->default(0);
 			$table->string('is_admin');
 			$table->rememberToken();
 			$table->timestamps();

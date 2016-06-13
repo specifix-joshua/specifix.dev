@@ -9,6 +9,6 @@ Class Post extends BaseModel {
 
     public function votes()
     {
-        return $this->belongsToMany('Vote');
+        return $this->hasMany('Vote');
     }
 }

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCategoriesTable extends Migration {
+class CreateLanguageQuestionTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,14 +12,13 @@ class CreateCategoriesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('votes', function(Blueprint $table)
+		Schema::create('language_question', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('language');
-			$table->integer('user_id')->unsigned()->nullable();
-		    $table->foreign('user_id')->references('id')->on('users');
-		    $table->integer('question_id')->unsigned()->nullable();
+			$table->integer('question_id')->unsigned();
 		    $table->foreign('question_id')->references('id')->on('questions');
+		    $table->integer('language_id')->unsigned();
+		    $table->foreign('language_id')->references('id')->on('languages');
 		});
 	}
 
@@ -30,7 +29,7 @@ class CreateCategoriesTable extends Migration {
 	 */
 	public function down()
 	{
-		//
+		Schema::drop('language_question');
 	}
 
 }

@@ -14,8 +14,13 @@ Class Question extends Post {
         return $this->belongsTo('User');
     }
 
-     public function user()
+     public function answers()
     {
         return $this->hasMany('Answer');
+    }
+
+    public function languages()
+    {
+        return $this->belongsToMany('Language');
     }
 }
