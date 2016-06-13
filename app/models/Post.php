@@ -13,4 +13,10 @@ class Post extends Basemodel
     {
         return $this->belongsTo('User');
     }
+
+
+    public function votes()
+    {
+        return $this->hasMany('Vote');
+    }
 }
