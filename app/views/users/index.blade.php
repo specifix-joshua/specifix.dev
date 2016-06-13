@@ -17,10 +17,11 @@
             <h3>{{{ $user->username }}}</h3>
             <p>{{{ $user->questions->count() }}}</p>
             <p>{{{ $user->answers->count() }}}</p>
-            <p>User Score:</p>
+            <p>User Score: </p>
             <h3>{{{ $user->score }}}</h3>
             <p><a href="#" class="btn btn-primary" role="button">View Profile</a></p>
         </div>
     </div>
 @endforeach
 </div>
+@stop
