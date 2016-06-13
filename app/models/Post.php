@@ -1,5 +1,6 @@
 <?php
 
+
 Class Post extends BaseModel {
 
     protected $table;
@@ -10,6 +11,7 @@ Class Post extends BaseModel {
     {
         return $this->belongsTo('User');
     }
+
 
     public function votes()
     {
