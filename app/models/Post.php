@@ -1,19 +1,22 @@
 <?php
 
-Class Post extends BaseModel {
+class Post extends Basemodel
+{
+    protected $table = 'posts';
 
-    protected $table;
-
-    public static $rules;
+    public static $rules = array(
+        'title'      => 'required|max:100',
+        'content'       => 'required|max:10000'
+    );
 
     public function user()
     {
         return $this->belongsTo('User');
     }
 
+
     public function votes()
     {
         return $this->hasMany('Vote');
     }
-    
 }
