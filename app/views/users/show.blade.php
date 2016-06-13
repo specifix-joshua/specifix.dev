@@ -16,7 +16,11 @@
 	        <div class="col-sm-12">
 	        	<div class="row col-xs-12">
 		            <div id="user-title" class="col-xs-6">
-		                <h1 >Welcome, {{{ $user['first_name'] }}}!</h1>
+		                <h1>Welcome, {{{ $user['first_name'] }}}!</h1>
+		                <h3>{{{$user['username']}}}</h3>
+		                <p>Questions: {{{$questions->count()}}}</p>
+		                <p>Answers: {{{$answers->count()}}}</p>
+		                <p>Score: </p>
 	            	</div>             
 		            <div id="writeQuotes" class="col-xs-6 text-right">
 		                <p id="quote"> </p>
@@ -36,23 +40,20 @@
 
 		<hr class="ad-divider">
         @if (!$questions->isEmpty())
-        {{$questionNum = 1}}
+        <?php $questionNum = 1 ?>
         <h2 class="row text-center recent-ads-header">Your Latest questions</h2>
         <div class="container">
 			<div id="question-holder-normal" class="container col-md-10 col-xs-12 col-md-offset-1">
         	@foreach($questions as $question)
-		    	<div class="row pre-question">
-			    	<div class="col-xs-6 info">
+		    	<div class="row question-preview">
+			    	<div class="col-xs-10 col-xs-offset-1 info">
 					    <div class="pull-right">
 					    	
 		                    <button type="button" class="btn btn-danger btn-small" id="delete-modal-button" data-toggle="modal" data-target=".delete-modal-<?=$questionNum?>">Delete</button>
 	                    </div>
-					    <p><strong>Languages:</strong> {{$question->language}} </p>
-					    <h3 class="pre-head">{{$question->title}}</h3>
-					    <p class="question-date">{{$question->created_at->setTimezone('America/New_York')->format('F jS Y @ h:i A')}} EST</p>
-					    <p> {{$question->content}} </p>
-					    <p> {{$question->code}} </p>
-					    
+					    <h2 class="pre-head">{{$question->title}}</h2>
+					    <p class="question-date">Added: {{$question->created_at->setTimezone('America/New_York')->format('F jS Y @ h:i A')}} EST</p>
+					    <p> {{$question->language}} </p>
 				    </div>
 			    </div>
 
@@ -72,7 +73,7 @@
 					</div>
 				</div>
 				<!-- END DELETE MODAL -->
-        	{{$questionNum++}}
+        	<?php $questionNum++ ?>
         	@endforeach
         	</div>
         </div>
