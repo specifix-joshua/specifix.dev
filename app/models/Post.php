@@ -7,12 +7,6 @@ Class Post extends BaseModel {
 
     public static $rules;
 
-    public function user()
-    {
-        return $this->belongsTo('User');
-    }
-
-
     public function votes()
     {
         return $this->hasMany('Vote');
