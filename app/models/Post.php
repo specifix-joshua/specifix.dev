@@ -17,5 +17,4 @@ Class Post extends BaseModel {
     {
         return $this->hasMany('Vote');
     }
-    
 }
