@@ -7,6 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
+    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 
     <title>Specifix | @yield('title-tag')</title>
 
@@ -36,5 +37,6 @@
     <!-- <script src="/js/main.js"></script> -->
 
     @yield('bottom-script')
+    <script>tinymce.init({ selector:'textarea' });</script>
   </body>
 </html>
