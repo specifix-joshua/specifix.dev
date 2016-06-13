@@ -20,10 +20,21 @@ Ask a Question
         {{ Form::textarea('content', null, array('placeholder' => 'Question Details', 'class' => 'form-control')) }}
         {{ $errors->first('content', '<span class="help-block">:message</span>') }}
     </div>
+<!--Question Categories-->
+    <div class="form-group">
+        {{ Form::label('categories', 'Categories', array('class' => 'control-label')) }}
+        {{ Form::checkbox('language', 'HTML') }}
+        {{ Form::checkbox('language', 'CSS') }}
+        {{ Form::checkbox('language', 'JavaScript') }}
+        {{ Form::checkbox('language', 'jQuery') }}
+        {{ Form::checkbox('language', 'PHP') }}
+        {{ Form::checkbox('language', 'MySQL') }}
+        {{ Form::checkbox('language', 'Laravel') }}
+    </div>
 <!--SUBMIT-->
-         <div class="form-group">
-            <button class="btn btn-primary" name="submit" type="submit">Submit</button>
-        </div>
-    {{ Form::close() }}
+    <div class="form-group">
+        <button class="btn btn-primary" name="submit" type="submit">Submit</button>
+    </div>
+{{ Form::close() }}
 </div>
 @stop
