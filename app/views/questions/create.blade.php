@@ -1,11 +1,10 @@
 @extends('layouts.master')
 
 @section('title')
-Ask a Question
+    Ask a Question
 @stop
 
 @section('content')
-
 <div class="container">
 {{Form::open(array('action' => 'QuestionsController@store')) }}
 <!--Question Title-->
