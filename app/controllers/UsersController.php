@@ -43,7 +43,10 @@ class UsersController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		$user = User::find($id);
+		$questions = $user->questions;
+
+		return View::make("users.show")->with('user', $user)->with('questions', $questions);
 	}
 
 
