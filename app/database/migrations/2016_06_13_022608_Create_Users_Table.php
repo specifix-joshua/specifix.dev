@@ -20,9 +20,8 @@ class CreateUsersTable extends Migration {
 			$table->string('password');
 			$table->string('first_name');
 			$table->string('last_name');
-			$table->string('pref_lang')->nullable();
-			$table->integer('rating')->unsigned()->nullable();
-			$table->integer('answers_count')->nullable();
+			$table->string('languages')->nullable();
+			$table->integer('score')->unsigned()->nullable();
 			$table->string('is_admin');
 			$table->rememberToken();
 			$table->timestamps();

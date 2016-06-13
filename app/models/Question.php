@@ -9,4 +9,13 @@ Class Question extends Post {
         'content'       => 'required|max:10000'
     );
     
+     public function user()
+    {
+        return $this->belongsTo('User');
+    }
+
+     public function user()
+    {
+        return $this->hasMany('Answer');
+    }
 }
