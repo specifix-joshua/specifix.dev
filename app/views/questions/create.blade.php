@@ -20,15 +20,15 @@
         {{ $errors->first('content', '<span class="help-block">:message</span>') }}
     </div>
 <!--Question Categories-->
-    <div class="form-group">
-        {{ Form::label('categories', 'Categories', array('class' => 'control-label')) }}
-        {{ Form::checkbox('language', 'HTML') }}
-        {{ Form::checkbox('language', 'CSS') }}
-        {{ Form::checkbox('language', 'JavaScript') }}
-        {{ Form::checkbox('language', 'jQuery') }}
-        {{ Form::checkbox('language', 'PHP') }}
-        {{ Form::checkbox('language', 'MySQL') }}
-        {{ Form::checkbox('language', 'Laravel') }}
+    <div class="form-group row">
+        {{ Form::label('languages', 'Languages', array('class' => 'control-label')) }}
+        {{ Form::checkbox('language', 'HTML') }}HTML
+        {{ Form::checkbox('language', 'CSS') }}CSS
+        {{ Form::checkbox('language', 'JavaScript') }}JavaScript
+        {{ Form::checkbox('language', 'jQuery') }}jQuery
+        {{ Form::checkbox('language', 'PHP') }}PHP
+        {{ Form::checkbox('language', 'MySQL') }}MySQL
+        {{ Form::checkbox('language', 'Laravel') }}Laravel
     </div>
 <!--SUBMIT-->
     <div class="form-group">
