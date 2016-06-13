@@ -7,13 +7,17 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 
     <title>Specifix | @yield('title-tag')</title>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,800,700,600,400,300' rel='stylesheet' type='text/css'>
     <!-- <link rel="stylesheet" href="/css/main.css" crossorigin="anonymous"> -->
+    <link rel="stylesheet" type="text/css" href="/css/prism.css">
+    <script src="/js/prism.js"></script>
+
+    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+
     @yield('top-links')
 
   </head>
@@ -37,6 +41,6 @@
     <!-- <script src="/js/main.js"></script> -->
 
     @yield('bottom-script')
-    <script>tinymce.init({ selector:'textarea' });</script>
+    <script>tinymce.init({ selector:'textarea', plugins: "codesample", toolbar: "codesample"});</script>
   </body>
 </html>
