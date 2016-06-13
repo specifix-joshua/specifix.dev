@@ -42,16 +42,16 @@
 			<div id="question-holder-normal" class="container col-md-10 col-xs-12 col-md-offset-1">
         	@foreach($questions as $question)
 		    	<div class="row pre-question">
-			    	<img class="col-xs-6 pre-image" src="/{{$question->image}}">
 			    	<div class="col-xs-6 info">
 					    <div class="pull-right">
 					    	
 		                    <button type="button" class="btn btn-danger btn-small" id="delete-modal-button" data-toggle="modal" data-target=".delete-modal-<?=$questionNum?>">Delete</button>
 	                    </div>
-					    <p><strong>Categories:</strong> {{$question->categories}} </p>
+					    <p><strong>Languages:</strong> {{$question->language}} </p>
 					    <h3 class="pre-head">{{$question->title}}</h3>
 					    <p class="question-date">{{$question->created_at->setTimezone('America/New_York')->format('F jS Y @ h:i A')}} EST</p>
-					    <p> {{$question->summary}} </p>
+					    <p> {{$question->content}} </p>
+					    <p> {{$question->code}} </p>
 					    
 				    </div>
 			    </div>
