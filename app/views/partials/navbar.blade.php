@@ -63,7 +63,7 @@
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
               <h4 class="modal-title" id="mySmallModalLabel">Welcome back!</h4>
-			        {{--{{ Form::open(array('action' => 'UsersController@doLogin')) }}--}}
+			        {{ Form::open(array('action' => 'UsersController@doLogin')) }}
 								@if ($errors->has('email'))
 								<div class="alert alert-danger">{{ $errors->first('name', '<span class="help-block">:message</span>') }}</div>
 								@endif
@@ -95,7 +95,7 @@
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
               <h4 class="modal-title text-center" id="mySmallModalLabel">Let's Get Started!</h4>
-							{{--{{ Form::open(array('action' => 'UsersController@store')) }}--}}
+							{{ Form::open(array('action' => 'UsersController@store')) }}
 								@if ($errors->has('username'))
 								<div class="alert alert-danger">{{ $errors->first('name', '<span class="help-block">:message</span>') }}</div>
 								@endif
