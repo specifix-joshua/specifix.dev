@@ -9,7 +9,7 @@ class QuestionsController extends \BaseController {
 	 */
 	public function index()
 	{
-		$questions = Question::paginate(5);
+		$questions = Question::paginate(10);
 		return View::make('questions.index')->with('questions', $questions);
 	}
 
@@ -49,7 +49,7 @@ class QuestionsController extends \BaseController {
 			$newQuestion->save();
 			Session::flash('successMessage', 'Question has been saved');
 			Log::info("New Question Created: id= $newQuestion->id, title= $newQuestion->title, author= $newQuestion->author, categories= $newQuestion->categories");
-			return View::make("questions.show")->with('question', $newQuestion);
+			return Redirect::action("QuestionsController@index");
 		}
 	}
 
@@ -103,8 +103,14 @@ class QuestionsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$question = Question::find($id);
+		$user = User::find($question->user_id);
+		if (Auth::user()->id == $user->id) {
+	        $question->delete();
+	        return Redirect::action('QuestionsController@index');
+	    } else {
+	    	Session::flash('errorMessage', 'You cannot delete someone else\'s post!');
+	    	return Redirect::action('QuestionsController@index');
+	    }
 	}
-
-
 }

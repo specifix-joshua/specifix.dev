@@ -7,11 +7,11 @@
 @section('content')
     @foreach($questions as $question)
         <div class="container">
-            <h2>{{{ $question->title }}}</h2>
-                <p>{{{ $question->content }}}</p>
+            <h2><a href="{{{action('QuestionsController@show', $question->id) }}}">{{{ $question->title }}}</a></h2>
                 <p>Asked by: {{{ $question->user->username }}}</p>
                 <p>Language(s): {{{ $question->language }}} </p>
                 <p>Current rating: {{{ $question->score }}} </p>
         </div>
     @endforeach
+    {{ $questions->links() }}
 @stop
