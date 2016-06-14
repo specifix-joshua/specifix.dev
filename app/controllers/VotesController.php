@@ -33,7 +33,7 @@ class VotesController extends \BaseController {
 	{
 		$newVote = new Vote();
 		$newVote->count = Input::get('count');
-		$newVote->question_id = Input::get('question');
+		$newVote->question_id = Input::get('question_id');
 		$newVote->answer_id = Input::get('answer_id');
 		$newVote->user_id = Auth::id();
 		$newVote->save();
