@@ -31,9 +31,9 @@
 	      <!-- These buttons only show if the user is logged IN -->
 	      
 	      @if (Auth::check())
-	        <li><a href="/posts/create">Create A New Post</a></li>
+	        <li><a href="/questions/create">Ask a Question</a></li>
 	      @else
-	      	<li><a type="button" class="btn btn-default" id="login-modal-button" data-toggle="modal" data-target=".login-modal">Create A New Post</a>
+	      	<li><a type="button" class="btn btn-default" id="login-modal-button" data-toggle="modal" data-target=".login-modal">Ask a Question</a>
 	      @endif
 	    </ul>
 
@@ -44,7 +44,7 @@
         @if (Auth::check())
       
         <a href="/logout" type="button" class="btn btn-default" id="logout-button">Logout</a>
-        <a href="/users/{{--{{{$user->id}}}--}}" type="button" class="btn btn-default" id="profile-button">{{--{{{$user->firstname . ' ' . $user->lastname}}}--}}</a>
+        <a href="/users/{{{ Auth::user()->id }}}" type="button" class="btn btn-default" id="profile-button">Profile{{--{{{$user->firstname . ' ' . $user->lastname}}}--}}</a>
         @else
 
         <!-- Login & Signup Buttons -->
