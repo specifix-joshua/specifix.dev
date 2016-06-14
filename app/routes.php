@@ -18,6 +18,7 @@ Route::get('/', function()
 
 Route::resource('questions', 'QuestionsController');
 Route::resource('users', 'UsersController');
+Route::resource('/votes', 'VotesController');
 
 Route::post('/login', 'UsersController@doLogin');
 Route::get('/logout', 'UsersController@logout');

@@ -10,6 +10,7 @@
 @stop
 
 @section('content')
+<?php var_dump($_POST); ?>
 <div class="container">
 	<!-- OPENING INFO -->
 	<div class="col-xs-12"> 
@@ -23,8 +24,8 @@
 	<div class="row">
 		<div id="vote-apparatus" class="col-xs-2">
 			<div class="vote roundrect">
-				<div class="increment up"></div>
-			    <div class="increment down"></div>
+				<div class="increment up" data-question-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}'></div>
+			    <div class="increment down" data-question-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}'></div>
 			    <div class="count">{{{$question->score}}}</div>
 			</div>
 		</div>
@@ -41,8 +42,8 @@
 	<div class="row">
 		<div id="vote-apparatus" class="col-xs-2 col-xs-offset-2">
 			<div class="vote roundrect">
-				<div class="increment up"></div>
-			    <div class="increment down"></div>
+				<div class="increment up" data-answer-id='{{{$answer->id}}}' data-user-id='{{{$question->user->id}}}'></div>
+			    <div class="increment down" data-answer-id='{{{$answer->id}}}' data-user-id='{{{$question->user->id}}}'></div>
 			    <div class="count">{{{$answer->score}}}</div>
 			</div>
 		</div>
