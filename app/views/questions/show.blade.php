@@ -49,6 +49,16 @@
 		<div class="panel col-xs-8"> 
 			<div class="panel-body"> 
 				<p>{{{$answer->content}}}</p>
+				<p><small>Answered by: {{{ $answer->user->username }}}</small></p>
+				@if(Auth::user()->id == $answer->user->id)
+					{{ Form::open([
+	                    'action' => ['AnswersController@destroy', $answer->id],
+	                    'id'     => 'delete-post-form',
+	                    'method' => 'DELETE',
+	                ]) }}
+					<button class="btn btn-danger" id="delete-post-btn">Delete?</button>
+					{{ Form::close() }}
+				@endif
 			</div> 
 		</div>
 	</div>
@@ -61,7 +71,7 @@
 			<h2>Submit A New Answer:</h2>
 		</div>
 		<div class="row answer-form">
-			{{-- {{Form::open(array('action' => 'AnswersController@store')) }} --}}
+			{{Form::open(array('action' => array('AnswersController@store', $question->id))) }}
 			<!--Question Content-->
 			    <div class="form-group">
 			        {{ Form::label('content', 'Content', array('class' => 'control-label')) }}
