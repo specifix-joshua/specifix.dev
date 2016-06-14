@@ -18,6 +18,12 @@
   </head>
   <body>
     @include('partials.navbar')
+    @if (Session::has('successMessage'))
+        <div class="alert alert-success flashbar">{{{ Session::get('successMessage') }}}</div>
+    @endif
+    @if (Session::has('errorMessage'))
+        <div class="alert alert-danger flashbar">{{{ Session::get('errorMessage') }}}</div>
+    @endif
     <!-- CONTENT -->
 
 
