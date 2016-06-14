@@ -64,6 +64,7 @@ class UsersController extends \BaseController {
 	public function show($id)
 	{
 		$user = User::find($id);
+		$username = $user->username;
 		$questions = $user->questions;
 		$answers = $user->answers;
 		
@@ -80,7 +81,7 @@ class UsersController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		$user = User::find($id);
 	}
 
 
@@ -92,7 +93,7 @@ class UsersController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$user = User::find($id);
 	}
 
 
@@ -104,7 +105,7 @@ class UsersController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$user = User::find($id);
 	}
 
 	public function doLogin()
