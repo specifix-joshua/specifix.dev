@@ -21,3 +21,10 @@ Route::resource('users', 'UsersController');
 
 Route::post('/login', 'UsersController@doLogin');
 Route::get('/logout', 'UsersController@logout');
+
+#Post Answers
+Route::post('/questions/{question}', 'AnswersController@store');
+Route::get('/questions/{question}', 'AnswersController@show');
+
+#Delete Answers
+Route::post('/questions/{answer}', 'AnswersController@destroy');
