@@ -16,7 +16,7 @@ class CreateAnswersTable extends Migration {
 		{
 			$table->increments('id');
 			$table->longText('content');
-			$table->longText('code_content');
+			$table->longText('code_content')->nullable();
 			$table->integer('score')->default(0);
 			$table->integer('user_id')->unsigned();
 		    $table->foreign('user_id')->references('id')->on('users');
