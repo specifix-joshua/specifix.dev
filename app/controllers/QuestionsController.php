@@ -66,8 +66,12 @@ class QuestionsController extends \BaseController {
 		$user = $question->user;
 		$answers = $question->answers;
 		$languages = $question->languages;
-
-		return View::make("questions.show")->with('question', $question)->with('questions', $user)->with('answers', $answers)->with('languages', $languages);
+		$votes = DB::table('votes')
+			->select(DB::raw('SUM(count) as vote_count'))
+			->where('question_id', '=', $id)
+			->get();
+		$votes = $votes['0'];
+		return View::make("questions.show")->with('question', $question)->with('questions', $user)->with('answers', $answers)->with('languages', $languages)->with('votes', $votes);
 	}
 
 

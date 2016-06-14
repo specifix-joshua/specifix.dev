@@ -9,7 +9,7 @@
           var count = parseInt($("~ .count", this).text());
           var question_id = $(".increment").data("question-id")
           var user_id = $(".increment").data("user-id")
-          console.log(question_id);
+          
           if($(this).hasClass("up")) {
             var count = count + 1;
             $("~ .count", this).text(count);
@@ -18,13 +18,13 @@
                   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
               }
             });
-
+            console.log(question_id);  
             $.ajax({        
                 type: "POST", 
                 url: "/votes", // Location of the service      
                 data: {"count" : "1",
-                       "question_id" : "question_id",
-                       "user_id" : "user_id"}, //Data sent to server
+                       "user_id" : user_id,
+                       "question_id" : question_id},
                 success: function (msg) {//On Successfull service call   
                     console.log('success');
                 },
