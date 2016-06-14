@@ -130,7 +130,8 @@ class UsersController extends \BaseController {
                 'password' => Input::get('password')
                 );
             if(Auth::attempt($credentials)) {
-               return Redirect::action('/');
+               return Redirect::to('/');
+            }
 		}
 	}
 
