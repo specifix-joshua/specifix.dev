@@ -49,7 +49,7 @@
 						    	
 			                    <button type="button" class="btn btn-danger btn-small" id="delete-modal-button" data-toggle="modal" data-target=".delete-modal-<?=$questionNum?>">Delete</button>
 		                    </div>
-						    <h2 class="pre-head">{{$question->title}}</h2>
+						    <h2 class="pre-head"><a href="{{{action('QuestionsController@show', $question->id) }}}">{{$question->title}}</a></h2>
 						    <p class="question-date">Added: {{$question->created_at->setTimezone('America/New_York')->format('F jS Y @ h:i A')}} EST</p>
 						    <p> {{$question->language}} </p>
 					    </div>
