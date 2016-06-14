@@ -15,6 +15,8 @@
     <!-- <link rel="stylesheet" href="/css/main.css" crossorigin="anonymous"> -->
     <link rel="stylesheet" type="text/css" href="/css/prism.css">
     <script src="/js/prism.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    
 
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
 
@@ -38,7 +40,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <!-- <script src="/js/main.js"></script> -->
+    <script src="/js/main.js"></script>
 
     @yield('bottom-script')
     <script>tinymce.init({ selector:'textarea', plugins: "codesample", toolbar: "codesample"});</script>
