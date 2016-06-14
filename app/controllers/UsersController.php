@@ -32,7 +32,26 @@ class UsersController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$user = new User();
+		$user->username = Input::get('username');
+		$user->email = Input::get('email');
+		$user->password = Input::get('password');
+		$user->first_name = Input::get('first_name');
+		$user->last_name = Input::get('last_name');
+		$validator = Validator::make(Input::all(), User::$rules);
+
+		if($validator->fails()) 
+		{
+			Session::flash('errorMessage', 'There was an error with your signup!');
+	        return Redirect::back()->withInput()->withErrors($validator);
+		} else if ($user->save()) 
+		{
+			Session::flash('successMessage', 'User has been saved');
+			Log::info("New User Created: id= $newUser->id, title= $newUser->name, email= $newUser->email");
+			return Redirect::back();
+        
+		}
+	
 	}
 
 
@@ -97,7 +116,7 @@ class UsersController extends \BaseController {
 		{
 			return Redirect::to('/users');
 		} else {
-			Session::flash('loginError', 'Username or Password is incorrect!');
+			Session::flash('errorMessage', 'There was an error with your login!');
 			return Redirect::back()->withInput();
 		}
 	}
@@ -106,33 +125,6 @@ class UsersController extends \BaseController {
 	{
 		Auth::logout();
 		return Redirect::to('/');
-	}
-
-	public function signUp()
-	{
-		$user = new User();
-		$user->username = Input::get('username');
-		$user->email = Input::get('email');
-		$user->password = Input::get('password');
-		$user->first_name = Input::get('first_name');
-		$user->last_name = Input::get('last_name');
-		$validator = Validator::make(Input::all(), User::$rules);
-
-		if($validator->fails()) 
-		{
-			Session::flash('signupError', 'There seems to be a problem signing up');
-			return Redirect::back()->withInput()->withErrors($validator);
-		} else if ($user->save()) 
-		{
-			Session::flash('signupSuccess', 'Congratulations, you have created a new account!');
-			$credentials = array(
-                'username' => Input::get('username'),
-                'password' => Input::get('password')
-                );
-            if(Auth::attempt($credentials)) {
-               return Redirect::to('/');
-            }
-		}
-	}
+	}	
 
 }
