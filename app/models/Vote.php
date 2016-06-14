@@ -12,8 +12,13 @@ Class Vote extends BaseModel {
         //grab info from table and return minus 1
     }
 
-    public function posts()
+    public function question()
     {
-        return $this->belongsTo('Post');
+        return $this->belongsTo('Question');
+    }
+
+    public function answer()
+    {
+        return $this->belongsTo('Answer');
     }
 }

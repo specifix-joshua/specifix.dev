@@ -62,7 +62,12 @@ class QuestionsController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		$question = Question::find($id);
+		$user = $question->user;
+		$answers = $question->answers;
+		$languages = $question->languages;
+
+		return View::make("questions.show")->with('question', $question)->with('questions', $user)->with('answers', $answers)->with('languages', $languages);
 	}
 
 

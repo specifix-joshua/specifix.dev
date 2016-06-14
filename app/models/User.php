@@ -42,8 +42,14 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	    return $this->hasMany('Answer');
 	}
 
+
 	public function setPasswordAttribute($value)
 	{
     $this->attributes['password'] = Hash::make($value);
+	}
+	
+	public function languages()
+	{
+		return $this->belongsToMany('languages');
 	}
 }

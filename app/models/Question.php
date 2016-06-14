@@ -10,4 +10,18 @@ Class Question extends Post {
         'language'     => 'required'
     );
     
+     public function user()
+    {
+        return $this->belongsTo('User');
+    }
+
+     public function answers()
+    {
+        return $this->hasMany('Answer');
+    }
+
+    public function languages()
+    {
+        return $this->belongsToMany('Language');
+    }
 }
