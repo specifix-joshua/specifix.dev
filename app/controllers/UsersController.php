@@ -42,18 +42,14 @@ class UsersController extends \BaseController {
 
 		if($validator->fails()) 
 		{
-			Session::flash('signupError', 'There seems to be a problem signing up');
-			return Redirect::back()->withInput()->withErrors($validator);
+			Session::flash('errorMessage', 'There was an error with your signup!');
+	        return Redirect::back()->withInput()->withErrors($validator);
 		} else if ($user->save()) 
 		{
-			Session::flash('signupSuccess', 'Congratulations, you have created a new account!');
-			$credentials = array(
-                'email' => Input::get('email'),
-                'password' => Input::get('password')
-                );
-            if(Auth::attempt($credentials)) {
-               return Redirect::action('UsersController@index');
-            }
+			Session::flash('successMessage', 'User has been saved');
+			Log::info("New User Created: id= $newUser->id, title= $newUser->name, email= $newUser->email");
+			return Redirect::back();
+        
 		}
 	
 	}
@@ -120,7 +116,7 @@ class UsersController extends \BaseController {
 		{
 			return Redirect::to('/users');
 		} else {
-			Session::flash('loginError', 'Username or Password is incorrect!');
+			Session::flash('errorMessage', 'There was an error with your login!');
 			return Redirect::back()->withInput();
 		}
 	}
