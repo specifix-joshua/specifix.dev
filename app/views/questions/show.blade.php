@@ -53,7 +53,7 @@
 				@if (Auth::check())
 					@if(Auth::user()->id == $answer->user->id)
 						{{ Form::open([
-		                    'action' => ['AnswersController@destroy', $answer->id],
+		                    'action' => ['AnswersController@destroy', $question->id],
 		                    'id'     => 'delete-post-form',
 		                    'method' => 'DELETE',
 		                ]) }}
