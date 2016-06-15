@@ -50,14 +50,16 @@
 			<div class="panel-body"> 
 				<p>{{{$answer->content}}}</p>
 				<p><small>Answered by: {{{ $answer->user->username }}}</small></p>
-				@if(Auth::user()->id == $answer->user->id)
-					{{ Form::open([
-	                    'action' => ['AnswersController@destroy', $answer->id],
-	                    'id'     => 'delete-post-form',
-	                    'method' => 'DELETE',
-	                ]) }}
-					<button class="btn btn-danger" id="delete-post-btn">Delete?</button>
-					{{ Form::close() }}
+				@if (Auth::check())
+					@if(Auth::user()->id == $answer->user->id)
+						{{ Form::open([
+		                    'action' => ['AnswersController@destroy', $answer->id],
+		                    'id'     => 'delete-post-form',
+		                    'method' => 'DELETE',
+		                ]) }}
+						<button class="btn btn-danger" id="delete-post-btn">Delete?</button>
+						{{ Form::close() }}
+					@endif
 				@endif
 			</div> 
 		</div>
