@@ -128,8 +128,12 @@
 								<div class="alert alert-danger">{{ $errors->first('password', '<span class="help-block">:message</span>') }}</div>
 								@endif
 								<fieldset class="form-group">
-									{{ Form::label('password', 'Password') }}
-									{{ Form::password('password', ['class' => 'form-control', 'placeholder' => 'Create a Password']) }}
+                                    {{ Form::label('password', 'Password') }}
+                                    {{ Form::password('password', ['class' => 'form-control', 'placeholder' => 'Create a Password']) }}
+                                </fieldset>
+                                <fieldset class="form-group">
+									{{ Form::label('confirmPassword', 'Confirm Password') }}
+									{{ Form::password('confirmPassword', ['class' => 'form-control', 'placeholder' => 'Confirm Password']) }}
 								</fieldset>
 								<button type="submit" class="btn btn-success center-block">CLICK TO SIGN UP</button>
 							{{ Form::close() }}

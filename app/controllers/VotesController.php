@@ -31,13 +31,18 @@ class VotesController extends \BaseController {
 	 */
 	public function store()
 	{
-		$newVote = new Vote();
-		$newVote->count = Input::get('count');
-		$newVote->question_id = Input::get('question_id');
-		$newVote->answer_id = Input::get('answer_id');
-		$newVote->user_id = Auth::id();
-		$newVote->save();
-		Log::info("New Vote Created: id= $newVote->id");
+		if (Input::get('voted')) {
+			$vote = Vote::find(Input::get('vote_id'));
+		} else {
+			$vote = new Vote();
+		}
+		$vote->count = Input::get('count');
+		$vote->question_id = Input::get('question_id');
+		$vote->answer_id = Input::get('answer_id');
+		$vote->user_id = Auth::id();
+		$vote->save();
+		Log::info("New Vote Created: id= $vote->id");
+		
 	}
 
 
@@ -87,6 +92,4 @@ class VotesController extends \BaseController {
 	{
 		//
 	}
-
-
 }

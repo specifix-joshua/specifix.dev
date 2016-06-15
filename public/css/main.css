@@ -60,9 +60,18 @@
     background: #C15044;
     height: 50%;
   }
+
+.increment.disabled {
+    background: #a9a9a9;
+    height: 50%;
+  }
   
 .increment:hover {
     opacity: 1;    
+  }
+
+.increment.disabled:hover {
+    opacity: .5;    
   }
 
 

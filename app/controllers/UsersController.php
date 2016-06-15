@@ -32,19 +32,29 @@ class UsersController extends \BaseController {
 	 */
 	public function store()
 	{
-		$user = new User();
-		$user->username = Input::get('username');
-		$user->email = Input::get('email');
-		$user->password = Input::get('password');
-		$user->first_name = Input::get('first_name');
-		$user->last_name = Input::get('last_name');
-		$validator = Validator::make(Input::all(), User::$rules);
+		if (Input::get('password') == Input::get('confirmPassword'))
+		{
+			$user = new User();
+			$user->username = Input::get('username');
+			$user->email = Input::get('email');
+			$user->password = Input::get('password');
+			$user->first_name = Input::get('first_name');
+			$user->last_name = Input::get('last_name');
+			$validator = Validator::make(Input::all(), User::$rules);
+		}
+		else
+		{
+			//fix validator not need
+			Session::flash('errorMessage', 'Match those passwords!');
+			return Redirect::back()->withInput();
+		}
 
 		if($validator->fails()) 
 		{
 			Session::flash('errorMessage', 'There was an error with your signup!');
 	        return Redirect::back()->withInput()->withErrors($validator);
-		} else if ($user->save()) 
+		}
+		else if ($user->save()) 
 		{
 			Session::flash('successMessage', 'User has been saved');
 			Log::info("New User Created: id= $user->id, title= $user->name, email= $user->email");

@@ -19,9 +19,9 @@ class CreateVotesTable extends Migration {
 			$table->integer('user_id')->unsigned();
 		    $table->foreign('user_id')->references('id')->on('users');
 		    $table->integer('question_id')->unsigned()->nullable();
-		    $table->foreign('question_id')->references('id')->on('questions');
+		    $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
 		    $table->integer('answer_id')->unsigned()->nullable();
-		    $table->foreign('answer_id')->references('id')->on('answers');
+		    $table->foreign('answer_id')->references('id')->on('answers')->onDelete('cascade');
 			$table->unique(['user_id', 'question_id']);
 			$table->unique(['user_id', 'answer_id']);
 			$table->timestamps();
