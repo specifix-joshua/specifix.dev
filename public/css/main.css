@@ -62,7 +62,7 @@
   }
 
 .increment.disabled {
-    background: #a9a9a9;
+    opacity:1;
     height: 50%;
   }
   
