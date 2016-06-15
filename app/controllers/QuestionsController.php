@@ -81,11 +81,11 @@ class QuestionsController extends \BaseController {
 			$vote_id = null;
 			foreach ($answerVotes as $vote) {
 				$vote_count += $vote->vote_count;
-				if ($voted == false && $loggedInUser->id == $vote->user_id) {
-					$voted = true;
-					$vote_value = $vote->vote_count;
-					$vote_id = $vote->id;
-				}
+					if ($voted == false && $loggedInUser->id == $vote->user_id) {
+						$voted = true;
+						$vote_value = $vote->vote_count;
+						$vote_id = $vote->id;
+					}
 			}
 			$answer->vote_count = $vote_count;	
 			$answer->voted = $voted;
