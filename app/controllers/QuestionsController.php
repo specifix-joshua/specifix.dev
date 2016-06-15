@@ -21,7 +21,8 @@ class QuestionsController extends \BaseController {
 	 */
 	public function create()
 	{
-		return View::make('questions.create');
+		$languages = Language::all();
+		return View::make('questions.create')->with('languages', $languages);
 	}
 
 
@@ -43,10 +44,11 @@ class QuestionsController extends \BaseController {
 	        // validation succeeded, create and save the post
 			$newQuestion = new Question();
 			$newQuestion->title = Input::get('title');
-			$newQuestion->language = Input::get('language');
 			$newQuestion->content = Input::get('content');
 			$newQuestion->user_id = Auth::id();
 			$newQuestion->save();
+			$languages = Input::get('language');
+			$newQuestion->languages()->attach($languages);
 			Session::flash('successMessage', 'Question has been saved');
 			Log::info("New Question Created: id= $newQuestion->id, title= $newQuestion->title, author= $newQuestion->author, categories= $newQuestion->categories");
 			return Redirect::action("QuestionsController@index");
