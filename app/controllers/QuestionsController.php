@@ -79,16 +79,18 @@ class QuestionsController extends \BaseController {
 		$vote_id = null;
 		foreach ($votes as $vote) {
 			$vote_count += $vote->vote_count;
-			if ($voted == false && $loggedInUser->id == $vote->user_id) {
-				$voted = true;
-				$vote_value = $vote->vote_count;
-				$vote_id = $vote->id;
+			if (Auth::check()) {
+				if ($voted == false && $loggedInUser->id == $vote->user_id) {
+					$voted = true;
+					$vote_value = $vote->vote_count;
+					$vote_id = $vote->id;
+				}
 			}
 		}
 		
 		$votes = $vote_count;
 		
-		return View::make("questions.show")->with('question', $question)->with('user', $user)->with('answers', $answers)->with('languages', $languages)->with('votes', $votes)->with('vote_value', $vote_value)->with('voted', $voted)->with('vote_id', $vote_id);
+		return View::make("questions.show")->with(['question' => $question,'user' => $user, 'answers' => $answers, 'languages' => $languages, 'votes' => $votes,'vote_value' => $vote_value, 'voted' => $voted, 'vote_id' => $vote_id]);
 	}
 
 
