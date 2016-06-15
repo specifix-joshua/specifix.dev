@@ -111,7 +111,7 @@ class QuestionsController extends \BaseController {
 		$user = User::find($question->user_id);
 		if (Auth::user()->id == $user->id) {
 	        $question->delete();
-	        return Redirect::action('QuestionsController@index');
+	        return Redirect::back();
 	    } else {
 	    	Session::flash('errorMessage', 'You cannot delete someone else\'s question!');
 	    	return Redirect::back();

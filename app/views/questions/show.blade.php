@@ -53,7 +53,7 @@
 				@if (Auth::check())
 					@if(Auth::user()->id == $answer->user->id)
 						{{ Form::open([
-		                    'action' => ['AnswersController@destroy', $question->id],
+		                    'action' => ['AnswersController@destroy', $answer->id],
 		                    'id'     => 'delete-post-form',
 		                    'method' => 'DELETE',
 		                ]) }}
@@ -77,6 +77,7 @@
 			<!--Question Content-->
 			    <div class="form-group">
 			        {{ Form::label('content', 'Content', array('class' => 'control-label')) }}
+			        {{ Form::hidden('question_id', $question->id) }}
 			        {{ Form::textarea('content', null, array('placeholder' => 'Question Details', 'class' => 'form-control')) }}
 			        {{ $errors->first('content', '<span class="help-block">:message</span>') }}
 			    </div>
