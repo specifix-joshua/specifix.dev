@@ -2,6 +2,20 @@
 
 class UsersController extends \BaseController {
 
+	public function getScore($id)
+	{
+		$questionScore = DB::table('votes')
+			->select(DB::raw('SUM(count) as vote_count'))
+			->where('question_id', '=', $id)
+			->get();
+		$answerScore = DB::table('votes')
+			->select(DB::raw('SUM(count) as vote_count'))
+			->where('answer_id', '=', $id)
+			->get();
+		
+
+		return $score = $questionScore[0]->vote_count + $answerScore[0]->vote_count;
+	}
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -9,8 +23,12 @@ class UsersController extends \BaseController {
 	 */
 	public function index()
 	{
-		$users = User::paginate(21);
-		return View::make('users.index')->with('users', $users);
+		$users = User::paginate(20);
+		foreach ($users as $user) {
+			$score[] =  $this->getScore($user->id);
+		}
+
+		return View::make('users.index')->with(['users' => $users, 'score' => $score]);
 	}
 
 
@@ -44,7 +62,6 @@ class UsersController extends \BaseController {
 		}
 		else
 		{
-			//fix validator not need
 			Session::flash('errorMessage', 'Match those passwords!');
 			return Redirect::back()->withInput();
 		}
@@ -74,12 +91,12 @@ class UsersController extends \BaseController {
 	public function show($id)
 	{
 		$user = User::find($id);
+		$languages = Language::all();
 		$username = $user->username;
 		$questions = $user->questions;
 		$answers = $user->answers;
-		
-
-		return View::make("users.show")->with('user', $user)->with('questions', $questions)->with('answers', $answers);
+		$score = $this->getScore($id);
+		return View::make("users.show")->with(['user' => $user, 'questions' => $questions,'answers' => $answers, 'score' => $score]);
 	}
 
 
