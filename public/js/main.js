@@ -8,22 +8,27 @@
         
         $(".increment").click(function(){
           var count = parseInt($("~ .count", this).text());
-          var question_id = $(".increment").data("question-id")
-          var user_id = $(".increment").data("user-id")
-          var voted = $(".increment").data("voted")
-          var vote_id = $(".increment").data("vote-id")
+          var question_id = $(this).data("question-id");
+          var answer_id = $(this).data("answer-id");
+          var user_id = $(this).data("user-id");
+          var question_voted = $(this).data("question-voted");
+          var answer_voted = $(this).data("answer-voted");
+          var question_vote_id = $(this).data("question-vote-id");
+          var answer_vote_id = $(this).data("answer-vote-id");
+          var id = $(this).attr("id");
 
           if ($(this).hasClass("disabled")){
             return;
           } else if($(this).hasClass("up")) {
             if ($(this).hasClass("double")){
+              console.log(this);
               var vote = 1;
               var count = count + (vote*2);
               $(this).removeClass("double");
               $(this).removeClass("enabled");
-              $(".disabled").addClass("enabled");
-              $(".enabled").removeClass("disabled");
-              $(".enabled").addClass("double");
+              $(this).closest(".disabled").addClass("enabled");
+              $(this).closest(".enabled").removeClass("disabled");
+              $(this).closest(".enabled").addClass("double");
               $(this).addClass("disabled");
             } else {
               var vote = 1;
@@ -36,20 +41,21 @@
 
           } else if ($(this).hasClass("down")) {
             if ($(this).hasClass("double")){
+              console.log(this);
               var vote = -1;
               var count = count + (vote*2);
               $(this).removeClass("double");
               $(this).removeClass("enabled");
-              $(".disabled").addClass("enabled");
-              $(".enabled").removeClass("disabled");
-              $(".enabled").addClass("double");
+              $(this).closest(".disabled").addClass("enabled");
+              $(this).closest(".enabled").removeClass("disabled");
+              $(this).closest(".enabled").addClass("double");
               $(this).addClass("disabled");
             } else {
               var vote = -1;
               var count = count + vote;
               $(this).data("voted", "true")
               $(this).removeClass("enabled");
-              $(".enabled").addClass("double");
+              $(this).closest(".enabled").addClass("double");
               $(this).addClass("disabled");
             }
           }
@@ -65,8 +71,11 @@
               data: {"count" : vote,
                      "user_id" : user_id,
                      "question_id" : question_id,
-                     "voted" : voted,
-                     "vote_id" : vote_id},
+                     "answer_id" : answer_id,
+                     "answer_voted" : answer_voted,
+                     "question_voted" : question_voted,
+                     "question_vote_id" : question_vote_id,
+                     "answer_vote_id" : answer_vote_id},
               success: function (msg) {//On Successfull service call   
                   console.log('success');
                   location.reload();

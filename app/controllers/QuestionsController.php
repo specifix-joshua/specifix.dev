@@ -69,10 +69,35 @@ class QuestionsController extends \BaseController {
 		$user = $question->user;
 		$answers = $question->answers;
 		$languages = $question->languages;
+		
+		foreach($answers as $answer)	{
+			$answerVotes = DB::table('votes')
+				->select(DB::raw('count as vote_count, user_id, id'))
+				->where('answer_id', '=', $answer->id)
+				->get();
+			$vote_count = 0;
+			$voted = false;
+			$vote_value = 0;
+			$vote_id = null;
+			foreach ($answerVotes as $vote) {
+				$vote_count += $vote->vote_count;
+				if ($voted == false && $loggedInUser->id == $vote->user_id) {
+					$voted = true;
+					$vote_value = $vote->vote_count;
+					$vote_id = $vote->id;
+				}
+			}
+			$answer->vote_count = $vote_count;	
+			$answer->voted = $voted;
+			$answer->vote_id = $vote_id;
+			$answer->vote_value = $vote_value;
+		}
+
 		$votes = DB::table('votes')
 			->select(DB::raw('count as vote_count, user_id, id'))
 			->where('question_id', '=', $id)
 			->get();
+		
 		$vote_count = 0;
 		$voted = false;
 		$vote_value = 0;
