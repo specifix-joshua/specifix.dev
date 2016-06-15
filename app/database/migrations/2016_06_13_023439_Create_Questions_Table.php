@@ -16,7 +16,6 @@ class CreateQuestionsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('title');
-			$table->string('language');
 			$table->longText('content');
 			$table->longText('code_content')->nullable();
 			$table->integer('user_id')->unsigned();

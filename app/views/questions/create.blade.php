@@ -22,13 +22,9 @@
 <!--Question Categories-->
     <div class="form-group row">
         {{ Form::label('languages', 'Languages', array('class' => 'control-label')) }}
-        {{ Form::checkbox('language', 'HTML') }}HTML
-        {{ Form::checkbox('language', 'CSS') }}CSS
-        {{ Form::checkbox('language', 'JavaScript') }}JavaScript
-        {{ Form::checkbox('language', 'jQuery') }}jQuery
-        {{ Form::checkbox('language', 'PHP') }}PHP
-        {{ Form::checkbox('language', 'MySQL') }}MySQL
-        {{ Form::checkbox('language', 'Laravel') }}Laravel
+        @foreach ($languages as $language)
+            {{ Form::checkbox('language[]', $language->id) }} {{ $language->language }}
+        @endforeach
     </div>
 <!--SUBMIT-->
     <div class="form-group">
