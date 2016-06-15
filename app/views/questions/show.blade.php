@@ -23,9 +23,9 @@
 	<div class="row">
 		<div id="vote-apparatus" class="col-xs-2">
 			<div class="vote roundrect">
-				<div class="increment up"></div>
-			    <div class="increment down"></div>
-			    <div class="count">{{{$question->score}}}</div>
+				<div class="increment up" data-question-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}'></div>
+			    <div class="increment down" data-question-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}'></div>
+			    <div class="count">{{{$votes->vote_count}}}</div>
 			</div>
 		</div>
 		<div class="panel col-xs-10"> 
@@ -41,8 +41,8 @@
 	<div class="row">
 		<div id="vote-apparatus" class="col-xs-2 col-xs-offset-2">
 			<div class="vote roundrect">
-				<div class="increment up"></div>
-			    <div class="increment down"></div>
+				<div class="increment up" data-answer-id='{{{$answer->id}}}' data-user-id='{{{$question->user->id}}}'></div>
+			    <div class="increment down" data-answer-id='{{{$answer->id}}}' data-user-id='{{{$question->user->id}}}'></div>
 			    <div class="count">{{{$answer->score}}}</div>
 			</div>
 		</div>
@@ -50,14 +50,17 @@
 			<div class="panel-body"> 
 				<p>{{{$answer->content}}}</p>
 				<p><small>Answered by: {{{ $answer->user->username }}}</small></p>
-				@if(Auth::user()->id == $answer->user->id)
-					{{ Form::open([
-	                    'action' => ['AnswersController@destroy', $question->id],
-	                    'id'     => 'delete-post-form',
-	                    'method' => 'DELETE',
-	                ]) }}
-					<button class="btn btn-danger" id="delete-post-btn">Delete?</button>
-					{{ Form::close() }}
+
+				@if (Auth::check())
+					@if(Auth::user()->id == $answer->user->id)
+						{{ Form::open([
+		                    'action' => ['AnswersController@destroy', $question->id],
+		                    'id'     => 'delete-post-form',
+		                    'method' => 'DELETE',
+		                ]) }}
+						<button class="btn btn-danger" id="delete-post-btn">Delete?</button>
+						{{ Form::close() }}
+					@endif
 				@endif
 			</div> 
 		</div>

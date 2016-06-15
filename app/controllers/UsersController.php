@@ -47,7 +47,7 @@ class UsersController extends \BaseController {
 		} else if ($user->save()) 
 		{
 			Session::flash('successMessage', 'User has been saved');
-			Log::info("New User Created: id= $newUser->id, title= $newUser->name, email= $newUser->email");
+			Log::info("New User Created: id= $user->id, title= $user->name, email= $user->email");
 			return Redirect::back();
         
 		}
