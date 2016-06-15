@@ -63,8 +63,13 @@
 						      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
 						      <h4 class="modal-title text-center" id="mySmallModalLabel">That's risky business! You sure you want to delete this question?</h4>
 						      <div id="question-actions" class="row col-xs-10 col-xs-offset-1">
-						      	  <button type="button" class="btn btn-sml pull-left" id='dont-delete' data-dismiss="modal" aria-label="Close">Don't delete!</button>
-					              
+						      {{ Form::open([
+			                    'action' => ['QuestionsController@destroy', $question->id],
+			                    'id'     => 'delete-post-form',
+			                    'method' => 'DELETE',
+			                ]) }}
+							<button class="btn btn-danger" id="delete-post-btn">Delete?</button>
+							{{ Form::close() }}
 							  </div>
 						    </div>
 						  </div>
