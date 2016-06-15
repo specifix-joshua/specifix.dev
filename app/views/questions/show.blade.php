@@ -10,6 +10,7 @@
 @stop
 
 @section('content')
+
 <div class="container">
 	<!-- OPENING INFO -->
 	<div class="col-xs-12"> 
@@ -18,14 +19,26 @@
 		<p>Tagged: {{{$question->language}}}</p>
 	</div>
 	<!-- END OPENING INFO -->
-
-	<!-- QUESTION & SCORE -->
 	<div class="row">
 		<div id="vote-apparatus" class="col-xs-2">
 			<div class="vote roundrect">
-				<div class="increment up" data-question-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}'></div>
-			    <div class="increment down" data-question-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}'></div>
-			    <div class="count">{{{$votes->vote_count}}}</div>
+				@if($vote_value == 1) 
+				<!-- VOTING APPARATUS - UP DISABLED -->
+					<div class="increment up disabled" data-question-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}'data-voted='{{{$voted}}}' data-vote-id='{{{$vote_id}}}'></div>
+				    <div class="increment down enabled double" data-question-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}'
+				    data-voted='{{{$voted}}}' data-vote-id='{{{$vote_id}}}'></div>
+				    <div class="count">{{{$votes}}}</div>
+				@elseif($vote_value == -1)
+				<!-- VOTING APPARATUS - DOWN DISABLED -->
+					<div class="increment up enabled double" data-question-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}' data-voted='{{{$voted}}}' data-vote-id='{{{$vote_id}}}'></div>
+				    <div class="increment down disabled" data-question-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}' data-voted='{{{$voted}}}' data-vote-id='{{{$vote_id}}}'></div>
+				    <div class="count">{{{$votes}}}</div>
+				@else
+				<!-- VOTING APPARATUS - ENABLED -->
+					<div class="increment up enabled" data-question-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}' data-voted='{{{$voted}}}' data-vote-id='{{{$vote_id}}}'></div>
+				    <div class="increment down enabled" data-question-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}' data-voted='{{{$voted}}}' data-vote-id='{{{$vote_id}}}'></div>
+				    <div class="count">{{{$votes}}}</div>
+				@endif			    
 			</div>
 		</div>
 		<div class="panel col-xs-10"> 

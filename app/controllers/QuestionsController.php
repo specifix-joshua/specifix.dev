@@ -63,15 +63,30 @@ class QuestionsController extends \BaseController {
 	public function show($id)
 	{
 		$question = Question::find($id);
+		$loggedInUser = Auth::user();
 		$user = $question->user;
 		$answers = $question->answers;
 		$languages = $question->languages;
 		$votes = DB::table('votes')
-			->select(DB::raw('SUM(count) as vote_count'))
+			->select(DB::raw('count as vote_count, user_id, id'))
 			->where('question_id', '=', $id)
 			->get();
-		$votes = $votes['0'];
-		return View::make("questions.show")->with('question', $question)->with('questions', $user)->with('answers', $answers)->with('languages', $languages)->with('votes', $votes);
+		$vote_count = 0;
+		$voted = false;
+		$vote_value = 0;
+		$vote_id = null;
+		foreach ($votes as $vote) {
+			$vote_count += $vote->vote_count;
+			if ($voted == false && $loggedInUser->id == $vote->user_id) {
+				$voted = true;
+				$vote_value = $vote->vote_count;
+				$vote_id = $vote->id;
+			}
+		}
+		
+		$votes = $vote_count;
+		
+		return View::make("questions.show")->with('question', $question)->with('user', $user)->with('answers', $answers)->with('languages', $languages)->with('votes', $votes)->with('vote_value', $vote_value)->with('voted', $voted)->with('vote_id', $vote_id);
 	}
 
 
