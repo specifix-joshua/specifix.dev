@@ -109,7 +109,7 @@ class QuestionsController extends \BaseController {
 	        $question->delete();
 	        return Redirect::action('QuestionsController@index');
 	    } else {
-	    	Session::flash('errorMessage', 'You cannot delete someone else\'s post!');
+	    	Session::flash('errorMessage', 'You cannot delete someone else\'s question!');
 	    	return Redirect::action('QuestionsController@index');
 	    }
 	}
