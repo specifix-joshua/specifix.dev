@@ -38,6 +38,7 @@ class VotesController extends \BaseController {
 		$newVote->user_id = Auth::id();
 		$newVote->save();
 		Log::info("New Vote Created: id= $newVote->id");
+		
 	}
 
 
