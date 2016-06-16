@@ -77,6 +77,7 @@
 			<div class="panel-body"> 
 				<p>{{{$answer->content}}}</p>
 				<p><small>Answered by: {{{ $answer->user->username }}}</small></p>
+
 				@if (Auth::check())
 					@if(Auth::user()->id == $answer->user->id)
 						{{ Form::open([
