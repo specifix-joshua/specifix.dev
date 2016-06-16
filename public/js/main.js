@@ -3,6 +3,8 @@
       
     $(document).ready(function() {
 
+
+
       // VOTING APPARATUS
       $(function(){
         
@@ -20,44 +22,24 @@
           if ($(this).hasClass("disabled")){
             return;
           } else if($(this).hasClass("up")) {
-            if ($(this).hasClass("double")){
-              console.log(this);
-              var vote = 1;
-              var count = count + (vote*2);
-              $(this).removeClass("double");
-              $(this).removeClass("enabled");
-              $(this).closest(".disabled").addClass("enabled");
-              $(this).closest(".enabled").removeClass("disabled");
-              $(this).closest(".enabled").addClass("double");
-              $(this).addClass("disabled");
-            } else {
-              var vote = 1;
-              var count = count + vote;
-              $(this).data("voted", "true")
-              $(this).removeClass("enabled");
-              $(".enabled").addClass("double");
-              $(this).addClass("disabled");
-            }
-
-          } else if ($(this).hasClass("down")) {
-            if ($(this).hasClass("double")){
-              console.log(this);
-              var vote = -1;
-              var count = count + (vote*2);
-              $(this).removeClass("double");
-              $(this).removeClass("enabled");
-              $(this).closest(".disabled").addClass("enabled");
-              $(this).closest(".enabled").removeClass("disabled");
-              $(this).closest(".enabled").addClass("double");
-              $(this).addClass("disabled");
-            } else {
-              var vote = -1;
-              var count = count + vote;
-              $(this).data("voted", "true")
-              $(this).removeClass("enabled");
-              $(this).closest(".enabled").addClass("double");
-              $(this).addClass("disabled");
-            }
+            var vote = 1;
+          } else {
+            var vote = -1
+          }
+          if ($(this).hasClass("double")){
+            var count = count + (vote*2)
+            $(this).removeClass("double");
+            $(this).removeClass("enabled");
+            $(this).closest(".disabled").addClass("enabled");
+            $(this).closest(".enabled").addClass("double");
+            $(this).closest(".enabled").removeClass("disabled");
+            $(this).addClass("disabled");
+          } else {
+            var count = count + vote;
+            $(this).data("voted", "true")
+            $(this).removeClass("enabled");
+            $(".enabled").addClass("double");
+            $(this).addClass("disabled");
           }
           $("~ .count", this).text(count);     
           $.ajaxSetup({
