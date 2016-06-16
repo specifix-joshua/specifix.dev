@@ -2,6 +2,19 @@
 
 class QuestionsController extends \BaseController {
 
+    public function __construct()
+    {
+        // require csrf token for all post, delete, and put actions
+        $this->beforeFilter('csrf', array('on' => array('post', 'delete', 'put')));
+
+        $this->beforeFilter('auth', array(
+            'except' => array(
+                'index', 
+                'show'
+            )
+        ));
+    }
+
 	/**
 	 * Display a listing of the resource.
 	 *
