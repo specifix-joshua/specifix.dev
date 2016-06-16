@@ -16,6 +16,11 @@ Route::get('/', function()
 	return View::make('home');
 });
 
+Route::get('/messages', function()
+{
+	return View::make('messages');
+});
+
 Route::resource('questions', 'QuestionsController');
 Route::resource('answers', 'AnswersController');
 Route::resource('users', 'UsersController');
@@ -23,3 +28,4 @@ Route::resource('/votes', 'VotesController');
 
 Route::post('/login', 'UsersController@doLogin');
 Route::get('/logout', 'UsersController@logout');
+
