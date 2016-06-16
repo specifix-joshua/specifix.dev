@@ -1,3 +1,9 @@
+<?php 
+  if (Auth::check()){
+    $user = Auth::user();
+    $notifications = $user->notifications()->unread()->count();
+  }
+?>
 <!-- NAVBAR -->
 <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -42,7 +48,10 @@
         <!-- Logout & Profile Buttons -->
         <!-- These buttons only show if the user is logged IN -->
         @if (Auth::check())
-      
+        <a href="/messages" type="button" class="btn btn-default" id="messages-button"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+          @if ($notifications > 0)
+          <span class="button__badge">({{{$notifications}}})</span></a>
+          @endif
         <a href="/logout" type="button" class="btn btn-default" id="logout-button">Logout</a>
         <a href="/users/{{{ Auth::user()->id }}}" type="button" class="btn btn-default" id="profile-button">Profile{{--{{{$user->firstname . ' ' . $user->lastname}}}--}}</a>
         @else
