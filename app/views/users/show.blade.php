@@ -12,29 +12,40 @@
 <!-- USER INFO -->
 <div class="container-fluid">
 	<div class="row">
-		<div class=" col-xs-12">
-	        <div class="col-sm-12">
-	        	<div class="row col-xs-12">
-		            <div id="user-title" class="col-xs-6">
-		                <h1>Welcome, {{{ $user['first_name'] }}}!</h1>
-		                <h3>{{{$user['username']}}}</h3>
-		                <p>Questions: {{{$questions->count()}}}</p>
-		                <p>Answers: {{{$answers->count()}}}</p>
-		                <p>Score: </p> {{ $score }}
-		                <p>My Languages: </p>
-	            	</div>             
-		            <div id="writeQuotes" class="col-xs-6 text-right">
-		                <p id="quote"> </p>
-		                <p id="author"> </p>
-		            </div>
+    	<div class="col-xs-12">
+            <div id="user-title" class="col-xs-6">
+            @if ($user->id == Auth::id())
+                <h1>Welcome, {{{ $user['first_name'] }}}!</h1>
+            @endif
+                <h3>Username: {{{$user['username']}}}</h3>
+                <p>Questions: {{{$questions->count()}}}</p>
+                <p>Answers: {{{$answers->count()}}}</p>
+                <p>Score: {{ $score }}</p>
+           </div>
+           <div class="row col-xs-12">
+            @if ($user->id == Auth::id())
+                {{ Form::open(array('action' => array('UsersController@update', $user->id), 'method' => 'PATCH')) }}
+		        {{ Form::label('languages', 'My Languages:', array('class' => 'control-label')) }}
+			        @foreach ($languages as $language)
+			            {{ Form::checkbox('language[]', $language->id) }} {{ $language->language }}
+			        @endforeach
+			        {{ Form::submit('Save', array('class' => 'btn btn-default')) }}
+			        {{ Form::close() }}
 		        </div>
-	        </div>
-	    </div>
+			   @else 
+			   	<p>Languages: </p>
+			   	@endif
+        	</div>             
+            <div id="writeQuotes" class="col-xs-6 text-right">
+                <p id="quote"> </p>
+                <p id="author"> </p>
+            </div>
+        </div>
 	</div>
 </div>
 <!-- END USER INFO -->
 
-<!-- USER'S ADS -->
+<!-- USER'S QUESTIONS -->
 <div class="profile-ads">
 	<div class="container">
 		<hr class="ad-divider">

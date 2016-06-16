@@ -23,7 +23,8 @@ class QuestionsController extends \BaseController {
 	public function index()
 	{
 		$questions = Question::paginate(10);
-		return View::make('questions.index')->with('questions', $questions);
+		$languages = Language::all();
+		return View::make('questions.index')->with(['questions' => $questions, 'languages' => $languages]);
 	}
 
 
