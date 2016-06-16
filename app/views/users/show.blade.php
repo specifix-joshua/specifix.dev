@@ -20,7 +20,8 @@
 		                <h3>{{{$user['username']}}}</h3>
 		                <p>Questions: {{{$questions->count()}}}</p>
 		                <p>Answers: {{{$answers->count()}}}</p>
-		                <p>Score: </p>
+		                <p>Score: </p> {{ $score }}
+		                <p>My Languages: </p>
 	            	</div>             
 		            <div id="writeQuotes" class="col-xs-6 text-right">
 		                <p id="quote"> </p>

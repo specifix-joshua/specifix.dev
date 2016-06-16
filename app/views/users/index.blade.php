@@ -9,7 +9,7 @@
     <div class="page-header">
         <h1>Top Users</h1>
     </div>
-    @foreach($users as $user)
+    @foreach($users as $key => $user)
         <div class="col-sm-12 col-md-6 col-lg-4">
             <div class="thumbnail">
                 <div class="caption">
@@ -17,8 +17,8 @@
                     <p>Questions Asked: {{{ $user->questions->count() }}}</p>
                     <p>Answers Given: {{{ $user->answers->count() }}}</p>
                     <p>Rating: </p>
-                    <h3>{{{ $user->score }}}</h3></span>
-                    <p><a href="#" class="btn btn-primary" role="button">View Profile</a></p>
+                    <h3>{{{ $score[$key] }}}</h3></span>
+                    <p><a href="/users/{{{$user->id}}}" class="btn btn-primary" role="button">View Profile</a></p>
                 </div>
             </div>
         </div>

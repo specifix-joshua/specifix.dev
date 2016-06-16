@@ -24,19 +24,19 @@
 			<div class="vote roundrect">
 				@if($vote_value == 1) 
 				<!-- VOTING APPARATUS - UP DISABLED -->
-					<div class="increment up disabled" data-question-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}'data-voted='{{{$voted}}}' data-vote-id='{{{$vote_id}}}'></div>
+					<div class="increment up disabled" data-question-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}'data-question-voted='{{{$voted}}}' data-question-vote-id='{{{$vote_id}}}'></div>
 				    <div class="increment down enabled double" data-question-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}'
-				    data-voted='{{{$voted}}}' data-vote-id='{{{$vote_id}}}'></div>
+				    data-question-voted='{{{$voted}}}' data-question-vote-id='{{{$vote_id}}}'></div>
 				    <div class="count">{{{$votes}}}</div>
 				@elseif($vote_value == -1)
 				<!-- VOTING APPARATUS - DOWN DISABLED -->
-					<div class="increment up enabled double" data-question-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}' data-voted='{{{$voted}}}' data-vote-id='{{{$vote_id}}}'></div>
-				    <div class="increment down disabled" data-question-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}' data-voted='{{{$voted}}}' data-vote-id='{{{$vote_id}}}'></div>
+					<div class="increment up enabled double" data-question-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}' data-question-voted='{{{$voted}}}' data-question-vote-id='{{{$vote_id}}}'></div>
+				    <div class="increment down disabled" data-question-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}' data-question-voted='{{{$voted}}}' data-question-vote-id='{{{$vote_id}}}'></div>
 				    <div class="count">{{{$votes}}}</div>
 				@else
 				<!-- VOTING APPARATUS - ENABLED -->
-					<div class="increment up enabled" data-question-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}' data-voted='{{{$voted}}}' data-vote-id='{{{$vote_id}}}'></div>
-				    <div class="increment down enabled" data-question-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}' data-voted='{{{$voted}}}' data-vote-id='{{{$vote_id}}}'></div>
+					<div class="increment up enabled" data-question-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}' data-question-voted='{{{$voted}}}' data-question-vote-id='{{{$vote_id}}}'></div>
+				    <div class="increment down enabled" data-question-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}' data-question-voted='{{{$voted}}}' data-question-vote-id='{{{$vote_id}}}'></div>
 				    <div class="count">{{{$votes}}}</div>
 				@endif			    
 			</div>
@@ -54,9 +54,23 @@
 	<div class="row">
 		<div id="vote-apparatus" class="col-xs-2 col-xs-offset-2">
 			<div class="vote roundrect">
-				<div class="increment up" data-answer-id='{{{$answer->id}}}' data-user-id='{{{$question->user->id}}}'></div>
-			    <div class="increment down" data-answer-id='{{{$answer->id}}}' data-user-id='{{{$question->user->id}}}'></div>
-			    <div class="count">{{{$answer->score}}}</div>
+				@if($answer->vote_value == 1) 
+				<!-- VOTING APPARATUS - UP DISABLED -->
+					<div class="increment up disabled" data-answer-id='{{{$answer->id}}}' data-user-id='{{{$question->user->id}}}'data-answer-voted='{{{$answer->voted}}}' data-answer-vote-id='{{{$answer->vote_id}}}'></div>
+				    <div class="increment down enabled double" data-answer-id='{{{$answer->id}}}' data-user-id='{{{$question->user->id}}}'
+				    data-answer-voted='{{{$answer->voted}}}' data-answer-vote-id='{{{$answer->vote_id}}}'></div>
+				    <div class="count">{{{$answer->vote_count}}}</div>
+				@elseif($answer->vote_value == -1)
+				<!-- VOTING APPARATUS - DOWN DISABLED -->
+					<div class="increment up enabled double" data-answer-id='{{{$answer->id}}}' data-user-id='{{{$question->user->id}}}' data-answer-voted='{{{$answer->voted}}}' data-answer-vote-id='{{{$answer->vote_id}}}'></div>
+				    <div class="increment down disabled" data-answer-id='{{{$answer->id}}}' data-user-id='{{{$question->user->id}}}' data-answer-voted='{{{$answer->voted}}}' data-answer-vote-id='{{{$answer->vote_id}}}'></div>
+				    <div class="count">{{{$answer->vote_count}}}</div>
+				@else
+				<!-- VOTING APPARATUS - ENABLED -->
+					<div class="increment up enabled" data-answer-id='{{{$answer->id}}}' data-user-id='{{{$question->user->id}}}' data-answer-voted='{{{$answer->voted}}}' data-answer-vote-id='{{{$answer->vote_id}}}'></div>
+				    <div class="increment down enabled" data-answer-id='{{{$answer->id}}}' data-user-id='{{{$question->user->id}}}' data-answer-voted='{{{$answer->voted}}}' data-answer-vote-id='{{{$answer->vote_id}}}'></div>
+				    <div class="count">{{{$answer->vote_count}}}</div>
+				@endif	
 			</div>
 		</div>
 		<div class="panel col-xs-8"> 
