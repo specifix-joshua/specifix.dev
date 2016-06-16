@@ -27,8 +27,8 @@
               $(this).removeClass("double");
               $(this).removeClass("enabled");
               $(this).closest(".disabled").addClass("enabled");
-              $(this).closest(".enabled").removeClass("disabled");
               $(this).closest(".enabled").addClass("double");
+              $(this).closest(".enabled").removeClass("disabled");
               $(this).addClass("disabled");
             } else {
               var vote = 1;
@@ -47,8 +47,8 @@
               $(this).removeClass("double");
               $(this).removeClass("enabled");
               $(this).closest(".disabled").addClass("enabled");
-              $(this).closest(".enabled").removeClass("disabled");
               $(this).closest(".enabled").addClass("double");
+              $(this).closest(".enabled").removeClass("disabled");
               $(this).addClass("disabled");
             } else {
               var vote = -1;

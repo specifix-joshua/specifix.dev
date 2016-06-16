@@ -34,7 +34,7 @@ class VotesController extends \BaseController {
 		if (Input::get('answer_voted')) {
 			$vote = Vote::find(Input::get('answer_vote_id'));
 		} else if (Input::get('question_voted')) {
-			$vote = Vote::find(Input::get('answer_vote_id'));
+			$vote = Vote::find(Input::get('question_vote_id'));
 		} else {
 			$vote = new Vote();
 		}
