@@ -24,7 +24,7 @@
 			<div class="vote roundrect">
 				@if($vote_value == 1) 
 				<!-- VOTING APPARATUS - UP DISABLED -->
-					<div class="increment up disabled" data-question-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}'data-question-voted='{{{$voted}}}' data-question-vote-id='{{{$vote_id}}}'></div>
+					<div class="increment up disabled" data-question-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}' data-question-voted='{{{$voted}}}' data-question-vote-id='{{{$vote_id}}}'></div>
 				    <div class="increment down enabled double" data-question-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}'
 				    data-question-voted='{{{$voted}}}' data-question-vote-id='{{{$vote_id}}}'></div>
 				    <div class="count">{{{$votes}}}</div>

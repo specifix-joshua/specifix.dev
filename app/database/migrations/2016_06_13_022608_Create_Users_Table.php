@@ -20,9 +20,6 @@ class CreateUsersTable extends Migration {
 			$table->string('password');
 			$table->string('first_name');
 			$table->string('last_name');
-			//not necessary??
-			$table->string('languages')->nullable();
-			
 			$table->integer('score')->unsigned()->default(0);
 			$table->string('is_admin');
 			$table->rememberToken();
