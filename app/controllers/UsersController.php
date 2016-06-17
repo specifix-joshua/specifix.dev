@@ -107,6 +107,7 @@ class UsersController extends \BaseController {
 	{
 		$user = User::find($id);
 		$languages = Language::all();
+		dd($user);
 		$username = $user->username;
 		$questions = $user->questions;
 		$answers = $user->answers;
@@ -138,15 +139,18 @@ class UsersController extends \BaseController {
 
 		$user = User::find($id);
 		$userLanguages = Input::get('language');//array ids from input
+
 		foreach ($userLanguages as $userLanguage) {
+			$userLanguage = $userLanguage;
 			$dontDupe = DB::table('language_user')
 					->select(DB::raw('id'))
 					->where('user_id', '=', $user->id)->where('language_id', '=', $userLanguage)
 					->get();
 			if (empty($dontDupe)) {
-				$user->languages()->attach($userLanguages);
+				$user->languages()->attach($userLanguage);
 			}
 		}
+
 		return Redirect::back()->withInput();
 	}
 

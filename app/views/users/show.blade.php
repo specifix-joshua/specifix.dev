@@ -27,7 +27,7 @@
                 {{ Form::open(array('action' => array('UsersController@update', $user->id), 'method' => 'PATCH')) }}
 		        {{ Form::label('languages', 'My Languages:', array('class' => 'control-label')) }}
 			        @foreach ($languages as $language)
-			            {{ Form::checkbox('language[]', $language->id) }} {{ $language->language }}
+			            <label>{{ Form::checkbox('language[]', $language->id, true) }} {{ $language->language }} </label>
 			        @endforeach
 			        {{ Form::submit('Save', array('class' => 'btn btn-default')) }}
 			        {{ Form::close() }}
