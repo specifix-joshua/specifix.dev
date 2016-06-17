@@ -24,7 +24,7 @@
 			<div class="vote chev">
 				@if($vote_value == 1) 
 				<!-- VOTING APPARATUS - UP DISABLED -->
-					<div class="increment up disabled" data-question-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}'data-question-voted='{{{$voted}}}' data-question-vote-id='{{{$vote_id}}}'></div>
+					<div class="increment up disabled" data-question-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}' data-question-voted='{{{$voted}}}' data-question-vote-id='{{{$vote_id}}}'></div>
 				    <div class="increment down enabled double" data-question-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}'
 				    data-question-voted='{{{$voted}}}' data-question-vote-id='{{{$vote_id}}}'></div>
 				    <div class="count">{{{$votes}}}</div>
@@ -43,7 +43,7 @@
 		</div>
 		<div class="panel col-xs-10"> 
 			<div class="panel-body"> 
-				<p>{{{$question->content}}}</p>
+				<p>{{$question->content}}</p>
 			</div> 
 		</div>
 	</div>
@@ -74,8 +74,8 @@
 			</div>
 		</div>
 		<div class="panel col-xs-8"> 
-			<div class="panel-body"> 
-				<p>{{{$answer->content}}}</p>
+			<div class="panel-body" id="answer"> 
+				<p>{{$answer->content}}</p>
 				<p><small>Answered by: {{{ $answer->user->username }}}</small></p>
 
 				@if (Auth::check())
