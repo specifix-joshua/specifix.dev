@@ -14,10 +14,6 @@
     Your Messages
 @stop
 
-@section('top-links')
-    <link rel="stylesheet" type="text/css" href="/css/inbox.css">
-@stop
-
 @section('content')
 
 <div class="container">
@@ -65,16 +61,13 @@
 								@else
 									<tr class="">
 								@endif
-										<div>
-				              <td class="inbox-small-cells">
-				                <input type="checkbox" class="mail-checkbox">
-				              </td>
-				              <td class="inbox-small-cells"><i class="fa fa-star"></i></td>
-				              <td class="view-message  dont-show"><a href="{{{action('QuestionsController@show', $notification->object_id) }}}">{{{$notification->type}}}</a></td>
-				              <td class="view-message "><a href="{{{action('QuestionsController@show', $notification->object_id) }}}">{{{$notification->subject}}}</a></td>
-				              <td class="view-message  inbox-small-cells"><i class="fa fa-paperclip"></i></td>
-				              <td class="view-message  text-right">{{{$notification->sent_at}}}</td>
-			              </div>
+			              <td class="inbox-small-cells">
+			                <div class="inbox_circle"></div>
+			              </td>
+			              <td class="view-message  dont-show"><a href="{{{action('QuestionsController@show', $notification->object_id) }}}">{{{$notification->type}}}</a></td>
+			              <td class="view-message "><a href="{{{action('QuestionsController@show', $notification->object_id) }}}">{{{$notification->subject}}}</a></td>
+			              <td class="view-message  inbox-small-cells"></td>
+			              <td class="view-message  text-right">{{{$notification->sent_at}}}</td>
 				          </tr>
 							@endforeach
 						@else
