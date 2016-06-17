@@ -6,7 +6,6 @@
 
 @section('content')
     @foreach($questions as $question)
-    {{var_dump($question)}}
         <div class="container">
             <h2><a href="{{{action('QuestionsController@show', $question->id) }}}">{{{ $question->title }}}</a></h2>
                 <p>Asked by: {{{ $question->user->username }}}</p>
