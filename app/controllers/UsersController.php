@@ -144,7 +144,6 @@ class UsersController extends \BaseController {
 					->select(DB::raw('id'))
 					->where('user_id', '=', $user->id)->where('language_id', '=', $userLanguage)
 					->get();
-			dd($dontDupe);
 			if (empty($dontDupe)) {
 				$user->languages()->attach($userLanguage);
 			}
