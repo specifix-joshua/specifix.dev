@@ -1,6 +1,6 @@
 <?php
 
-class VotesController extends \BaseController {
+class NotificationsController extends \BaseController {
 
 	/**
 	 * Display a listing of the resource.
@@ -31,20 +31,11 @@ class VotesController extends \BaseController {
 	 */
 	public function store()
 	{
-		if (Input::get('answer_voted')) {
-			$vote = Vote::find(Input::get('answer_vote_id'));
-		} else if (Input::get('question_voted')) {
-			$vote = Vote::find(Input::get('question_vote_id'));
-		} else {
-			$vote = new Vote();
-		}
-		$vote->question_id = Input::get('question_id');
-		$vote->answer_id = Input::get('answer_id');
-		$vote->count = Input::get('count');
-		$vote->user_id = Auth::id();
-		
-		$vote->save();
-		Log::info("New Vote Created: id= $vote->id");
+		$notification = Notification::find(Input::get('notif_id'));
+		$notification->id = Input::get('notif_id');
+		$notification->is_read = Input::get('is_read');
+		$notification->save();
+		Log::info("Notif Created: id= $notification->id");
 		// return Response::json(array('status' => 'OK', 'data' => ['id' => $vote->id, ]));
 	}
 
@@ -95,4 +86,6 @@ class VotesController extends \BaseController {
 	{
 		//
 	}
+
+
 }

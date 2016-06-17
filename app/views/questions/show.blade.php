@@ -16,15 +16,20 @@
 	<div class="col-xs-12"> 
 		<h1>{{{$question->title}}}</h1>
     	<p>Posted by {{{$question->user->username}}} on {{$question->created_at->setTimezone('America/New_York')->format('F jS Y @ h:i A')}}</p>
-		<p>Tagged: {{{$question->language}}}</p>
+		<p>Tagged: @foreach ($question->languages()->get() as $language)
+                    {{ Form::open(['action' =>['QuestionsController@index', $language->language], 'method' => 'GET']) }}
+                    {{ Form::hidden('language', $language->language) }}
+                    {{ Form::submit($language->language) }}
+                    {{ Form::close() }}
+                @endforeach
 	</div>
 	<!-- END OPENING INFO -->
 	<div class="row">
 		<div id="vote-apparatus" class="col-xs-2">
-			<div class="vote roundrect">
+			<div class="vote chev">
 				@if($vote_value == 1) 
 				<!-- VOTING APPARATUS - UP DISABLED -->
-					<div class="increment up disabled" data-question-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}'data-question-voted='{{{$voted}}}' data-question-vote-id='{{{$vote_id}}}'></div>
+					<div class="increment up disabled" data-question-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}' data-question-voted='{{{$voted}}}' data-question-vote-id='{{{$vote_id}}}'></div>
 				    <div class="increment down enabled double" data-question-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}'
 				    data-question-voted='{{{$voted}}}' data-question-vote-id='{{{$vote_id}}}'></div>
 				    <div class="count">{{{$votes}}}</div>
@@ -53,7 +58,7 @@
 	@foreach ($answers as $answer)
 	<div class="row">
 		<div id="vote-apparatus" class="col-xs-2 col-xs-offset-2">
-			<div class="vote roundrect">
+			<div class="vote chev">
 				@if($answer->vote_value == 1) 
 				<!-- VOTING APPARATUS - UP DISABLED -->
 					<div class="increment up disabled" data-answer-id='{{{$answer->id}}}' data-user-id='{{{$question->user->id}}}' data-answer-voted='{{{$answer->voted}}}' data-answer-vote-id='{{{$answer->vote_id}}}'></div>

@@ -25,6 +25,7 @@ Route::resource('questions', 'QuestionsController');
 Route::resource('answers', 'AnswersController');
 Route::resource('users', 'UsersController');
 Route::resource('/votes', 'VotesController');
+Route::resource('/notifications', 'NotificationsController');
 
 Route::post('/login', 'UsersController@doLogin');
 Route::get('/logout', 'UsersController@logout');

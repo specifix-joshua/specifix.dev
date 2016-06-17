@@ -34,19 +34,22 @@
                 @endif
            </div>
            <div class="row col-xs-12">
-            @if ($user->id == Auth::id())
-                {{ Form::open(array('action' => array('UsersController@update', $user->id), 'method' => 'PATCH')) }}
-		        {{ Form::label('languages', 'My Languages:', array('class' => 'control-label')) }}
+                @if ($user->id == Auth::id())
+                    {{ Form::open(array('action' => array('UsersController@update', $user->id), 'method' => 'PATCH')) }}
+    		        {{ Form::label('languages', 'My Languages:', array('class' => 'control-label')) }}
 			        @foreach ($languages as $language)
                     <!-- ajax req if feeling lucky -->
 			            <label>{{ Form::checkbox('language[]', $language->id, $userLanguagesIds->search($language->id) !== false) }} {{ $language->language }} </label>
 			        @endforeach
 			        {{ Form::submit('Save', array('class' => 'btn btn-default')) }}
 			        {{ Form::close() }}
-		        </div>
-			   @else 
-			   	<p>Languages: </p>
-			   	@endif
+               @else 
+                <p>Languages: @foreach($user->languages()->get() as $language)
+                    {{ $language->language }}
+                    @endforeach
+                </p>
+                @endif
+	        </div>
         	</div>             
             <div id="writeQuotes" class="col-xs-6 text-right">
                 <p id="quote"> </p>
