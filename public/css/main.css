@@ -230,9 +230,16 @@ ul.inbox-nav li a span.label {
 .table-inbox tr td .fa-star {
     color: #d5d5d5;
 }
-.table-inbox tr.unread td {
+.table-inbox tr td {
     background: none repeat scroll 0 0 #f7f7f7;
+}
+
+.table-inbox tr.unread td {
     font-weight: 600;
+}
+
+.inbox_circle {
+  margin-top: 6px;
 }
 
 .read .inbox_circle {
@@ -248,5 +255,9 @@ ul.inbox-nav li a span.label {
     height: 10px;
     width:10px;
     background-color: green
+}
+
+.view-message .text-right {
+  padding-left: 0px
 }
 /*END NOTIFICATIONS PAGE*/
