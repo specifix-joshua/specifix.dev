@@ -21,7 +21,7 @@
 	<!-- END OPENING INFO -->
 	<div class="row">
 		<div id="vote-apparatus" class="col-xs-2">
-			<div class="vote roundrect">
+			<div class="vote chev">
 				@if($vote_value == 1) 
 				<!-- VOTING APPARATUS - UP DISABLED -->
 					<div class="increment up disabled" data-question-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}'data-question-voted='{{{$voted}}}' data-question-vote-id='{{{$vote_id}}}'></div>
@@ -53,7 +53,7 @@
 	@foreach ($answers as $answer)
 	<div class="row">
 		<div id="vote-apparatus" class="col-xs-2 col-xs-offset-2">
-			<div class="vote roundrect">
+			<div class="vote chev">
 				@if($answer->vote_value == 1) 
 				<!-- VOTING APPARATUS - UP DISABLED -->
 					<div class="increment up disabled" data-answer-id='{{{$answer->id}}}' data-user-id='{{{$question->user->id}}}' data-answer-voted='{{{$answer->voted}}}' data-answer-vote-id='{{{$answer->vote_id}}}'></div>

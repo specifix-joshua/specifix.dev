@@ -14,18 +14,77 @@
     Your Messages
 @stop
 
+@section('top-links')
+    <link rel="stylesheet" type="text/css" href="/css/inbox.css">
+@stop
+
 @section('content')
+
 <div class="container">
-	<h1>You have {{{$unreadCount}}} unread messages in your inbox!</h1>
-	@if ($user)
-		@foreach($notifications as $notification)
-			<div class="notification {{ $notification->type }}">    
-			    <p class="subject">{{ $notification->subject }}</p>
-			    <p class="body">{{ $notification->body }}</p>
-			</div>
-		@endforeach
-	@else
-		<p> You need to log in, stupid.</p>
-	@endif
+<link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
+ 	<div class="mail-box">
+  <aside class="sm-side">
+      <div class="user-head">
+          
+      </div>
+      <ul class="inbox-nav inbox-divider">
+          <li class="active">
+              <a href="#"><i class="fa fa-inbox"></i> All Mail <span class="label label-danger pull-right">{{{$notifications->count()}}}</span></a>
+
+          </li>
+          <li>
+              <a href="#"><i class="fa fa-envelope-o"></i> Unread <span class="label label-danger pull-right">{{{$unreadCount}}}</span></a>
+          </li>
+          <li>
+              <a href="#"><i class="fa fa-envelope-o"></i> Answers</a>
+          </li>
+          <!-- lis for each of the user's subscribed languages -->
+          <!-- <li>
+              <a href="#"><i class="fa fa-bookmark-o"></i> Important</a>
+          </li>
+          <li>
+              <a href="#"><i class=" fa fa-external-link"></i> Drafts <span class="label label-info pull-right">30</span></a>
+          </li>
+          <li>
+              <a href="#"><i class=" fa fa-trash-o"></i> Trash</a>
+          </li> -->
+      </ul>
+
+  </aside>
+  <aside class="lg-side">
+      <div class="inbox-head">
+        <h3>Inbox | {{{$unreadCount}}} unread notifications</h3>
+      </div>
+      <div class="inbox-body">
+	      <table class="table table-inbox table-hover">
+	        <tbody>
+	        	@if ($user)
+							@foreach($notifications as $notification)
+								@if ($notification->is_read == 0)
+									<tr class="unread">
+								@else
+									<tr class="">
+								@endif
+										<div>
+				              <td class="inbox-small-cells">
+				                <input type="checkbox" class="mail-checkbox">
+				              </td>
+				              <td class="inbox-small-cells"><i class="fa fa-star"></i></td>
+				              <td class="view-message  dont-show"><a href="{{{action('QuestionsController@show', $notification->object_id) }}}">{{{$notification->type}}}</a></td>
+				              <td class="view-message "><a href="{{{action('QuestionsController@show', $notification->object_id) }}}">{{{$notification->subject}}}</a></td>
+				              <td class="view-message  inbox-small-cells"><i class="fa fa-paperclip"></i></td>
+				              <td class="view-message  text-right">{{{$notification->sent_at}}}</td>
+			              </div>
+				          </tr>
+							@endforeach
+						@else
+							<p> You need to log in, stupid.</p>
+						@endif
+	      	</tbody>
+	      </table>
+      </div>
+  </aside>
+	</div>
+</div>
 @stop
 </div>

@@ -59,6 +59,9 @@
                      "question_vote_id" : question_vote_id,
                      "answer_vote_id" : answer_vote_id},
               success: function (msg) {//On Successfull service call   
+                  // if (msg.status == "OK") {
+                  // msg.data
+                  // }
                   console.log('success');
                   location.reload();
                   // CREATE AN AJAX REQUEST IF YOU WANT TO IN WEEK 2

@@ -45,7 +45,7 @@ class VotesController extends \BaseController {
 		
 		$vote->save();
 		Log::info("New Vote Created: id= $vote->id");
-		
+		// return Response::json(array('status' => 'OK', 'data' => ['id' => $vote->id, ]));
 	}
 
 
