@@ -59,7 +59,7 @@
 								@if ($notification->is_read == 0)
 									<tr class="unread">
 								@else
-									<tr class="">
+									<tr class="read">
 								@endif
 			              <td class="inbox-small-cells">
 			                <div class="inbox_circle"></div>
