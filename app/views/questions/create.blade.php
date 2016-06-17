@@ -23,7 +23,7 @@
     <div class="form-group row">
         {{ Form::label('languages', 'Languages', array('class' => 'control-label')) }}
         @foreach ($languages as $language)
-            {{ Form::checkbox('language[]', $language->id) }} {{ $language->language }}
+            <label>{{ Form::checkbox('language[]', $language->id) }} {{ $language->language }}</label>
         @endforeach
     </div>
 <!--SUBMIT-->

@@ -42,7 +42,6 @@ class UsersController extends \BaseController {
 		foreach ($users as $user) {
 			$score[] =  $this->getScore($user->id);
 		}
-
 		return View::make('users.index')->with(['users' => $users, 'score' => $score]);
 	}
 
@@ -135,7 +134,7 @@ class UsersController extends \BaseController {
 	 */
 	public function update($id)
 	{
-
+		//update to remove when saved
 		$user = User::find($id);
 		$userLanguages = Input::get('language');//array ids from input
 		foreach ($userLanguages as $userLanguage) {
