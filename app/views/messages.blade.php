@@ -35,15 +35,16 @@
               <a href="#"><i class="fa fa-envelope-o"></i> Answers</a>
           </li>
           <!-- lis for each of the user's subscribed languages -->
-          <!-- <li>
-              <a href="#"><i class="fa fa-bookmark-o"></i> Important</a>
+
+          <li>
+              <a href="#"><i class="fa fa-envelope-o"></i> Important</a>
           </li>
           <li>
-              <a href="#"><i class=" fa fa-external-link"></i> Drafts <span class="label label-info pull-right">30</span></a>
+              <a href="#"><i class="fa fa-envelope-o"></i> Drafts <span class="label label-info pull-right">30</span></a>
           </li>
           <li>
-              <a href="#"><i class=" fa fa-trash-o"></i> Trash</a>
-          </li> -->
+              <a href="#"><i class="fa fa-envelope-o"></i> Trash</a>
+          </li>
       </ul>
 
   </aside>
@@ -64,10 +65,10 @@
 			              <td class="inbox-small-cells">
 			                <div class="inbox_circle"></div>
 			              </td>
-			              <td class="view-message  dont-show"><a href="{{{action('QuestionsController@show', $notification->object_id) }}}">{{{$notification->type}}}</a></td>
-			              <td class="view-message "><a href="{{{action('QuestionsController@show', $notification->object_id) }}}">{{{$notification->subject}}}</a></td>
-			              <td class="view-message  inbox-small-cells"></td>
-			              <td class="view-message  text-right">{{{$notification->sent_at}}}</td>
+			              <td class="view-message  dont-show" data-notif-id='{{{$notification->id}}}'><a href="{{{action('QuestionsController@show', $notification->object_id) }}}">{{{$notification->type}}}</a></td>
+			              <td class="view-message " data-notif-id='{{{$notification->id}}}'><a href="{{{action('QuestionsController@show', $notification->object_id) }}}">{{{$notification->subject}}}</a></td>
+			              <td class="view-message  inbox-small-cells" data-notif-id='{{{$notification->id}}}'><a href="{{{action('QuestionsController@show', $notification->object_id) }}}"></td>
+			              <td class="view-message  text-right" data-notif-id='{{{$notification->id}}}'>{{{$notification->sent_at->format('F jS')}}}</td>
 				          </tr>
 							@endforeach
 						@else

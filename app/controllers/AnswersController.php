@@ -65,7 +65,7 @@ class AnswersController extends \BaseController {
 			$question_user = $question->user_id;
 			$user = User::find($question_user);
 			$user->newNotification()
-			    ->withType('New Answer')
+			    ->withType('Answer')
 			    ->withSubject('Answer for: "' . substr($question->title, 0, 25) . "...")
 			    ->withBody("$newAnswer->content")
 			    ->regarding($question)

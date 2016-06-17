@@ -3,7 +3,31 @@
       
     $(document).ready(function() {
 
-
+      // MARK NOTIFICATION AS READ
+      $(function(){
+        $(".view-message").click(function(){
+          var notif_id = $(this).data("notif-id");
+          $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
+          $.ajax({        
+              type: "POST", 
+              url: "/notifications", // Location of the service      
+              data: {"notif_id" : notif_id,
+                     "is_read" : '1'},
+              success: function (msg) {//On Successfull service call   
+                  // if (msg.status == "OK") {
+                  // msg.data
+                  // }
+                  console.log('success');
+                  // CREATE AN AJAX REQUEST IF YOU WANT TO IN WEEK 2
+              },
+              error: function (xhr) { console.log(xhr); } // When Service call fails             
+          });
+        });
+      });
 
       // VOTING APPARATUS
       $(function(){
