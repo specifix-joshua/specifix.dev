@@ -15,6 +15,16 @@ class QuestionsController extends \BaseController {
         ));
     }
 
+    public function getScore($id)
+	{
+		$questionScore = DB::table('votes')
+			->select(DB::raw('SUM(count) as vote_count'))
+			->where('question_id', '=', $id)
+			->get();
+		
+		return $score = $questionScore[0]->vote_count;
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -22,9 +32,21 @@ class QuestionsController extends \BaseController {
 	 */
 	public function index()
 	{
-		$questions = Question::paginate(10);
+		if (Input::get('language')) {
+			$language = Input::get('language');
+			$languageId = DB::table('languages')
+				->select(DB::raw('id'))
+				->where('language', '=', $language)
+				->get()[0];
+			$questions = Language::find($languageId->id)->questions()->paginate(10);
+		} else {
+			$questions = Question::paginate(10);
+		}
 		$languages = Language::all();
-		return View::make('questions.index')->with(['questions' => $questions, 'languages' => $languages]);
+		foreach ($questions as $question) {
+			$score[] =  $this->getScore($question->id);
+		}
+		return View::make('questions.index')->with(['questions' => $questions, 'languages' => $languages, 'score' => $score]);
 	}
 
 
