@@ -59,6 +59,18 @@ class AnswersController extends \BaseController {
 			$newAnswer->save();
 			Session::flash('successMessage', 'Answer has been saved');
 			Log::info("New Answer Created: id= $newAnswer->id, author= $newAnswer->author");
+	    	$answerer = Auth::user();
+	    	$answererUsername = $answerer->username;
+			$question = Question::find($newAnswer->question_id);
+			$question_user = $question->user_id;
+			$user = User::find($question_user);
+			$user->newNotification()
+			    ->withType('QuestionAnswered')
+			    ->withSubject("$answererUsername" . " answered your question " . "$newAnswer->title")
+			    ->withBody("$newAnswer->content")
+			    ->regarding($question)
+			    ->deliver();
+			Log::info("New Notification Created!");
 			return Redirect::back()->with('answers', $newAnswer);
 		}
 	}

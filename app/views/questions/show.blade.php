@@ -106,6 +106,8 @@
 			    <div class="form-group">
 			        {{ Form::label('content', 'Content', array('class' => 'control-label')) }}
 			        {{ Form::hidden('question_id', $question->id) }}
+			        {{ Form::hidden('question_user', $question->user_id) }}
+			        {{ Form::hidden('question', $question) }}
 			        {{ Form::textarea('content', null, array('placeholder' => 'Question Details', 'class' => 'form-control')) }}
 			        {{ $errors->first('content', '<span class="help-block">:message</span>') }}
 			    </div>
