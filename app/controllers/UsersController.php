@@ -181,6 +181,19 @@ class UsersController extends \BaseController {
 	{
 		Auth::logout();
 		return Redirect::to('/');
+	}
+
+	public function subscription()
+	{
+		return View::make('users.subscription');
+	}
+
+	public function cancelSubscription()
+	{
+		if(Auth::user() && Auth::user()->subscribed())
+		{
+			$user->subscription()->cancel();
+		}
 	}	
 
 }
