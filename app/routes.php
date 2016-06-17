@@ -29,3 +29,15 @@ Route::resource('/votes', 'VotesController');
 Route::post('/login', 'UsersController@doLogin');
 Route::get('/logout', 'UsersController@logout');
 
+#Subscription
+Route::get('/subscription', 'UsersController@subscription');
+
+Route::post('/subscription/', function(){
+
+    $token = Input::get('stripeToken');
+    Auth::user()->subscription('monthly')->create($token);
+    return 'Done';
+
+});
+
+
