@@ -18,8 +18,8 @@
                 <h1>Welcome, {{{ $user['first_name'] }}}!</h1>
             @endif
                 <h3>Username: {{{$user['username']}}}</h3>
-                <p>Questions: {{{$questions->count()}}}</p>
-                <p>Answers: {{{$answers->count()}}}</p>
+                <p>Questions: {{{$user->questions->count()}}}</p>
+                <p>Answers: {{{$user->answers->count()}}}</p>
                 <p>Score: {{ $score }}</p>
            </div>
            <div class="row col-xs-12">
@@ -27,7 +27,8 @@
                 {{ Form::open(array('action' => array('UsersController@update', $user->id), 'method' => 'PATCH')) }}
 		        {{ Form::label('languages', 'My Languages:', array('class' => 'control-label')) }}
 			        @foreach ($languages as $language)
-			            {{ Form::checkbox('language[]', $language->id) }} {{ $language->language }}
+                    <!-- ajax req if feeling lucky -->
+			            <label>{{ Form::checkbox('language[]', $language->id, $userLanguagesIds->search($language->id) !== false) }} {{ $language->language }} </label>
 			        @endforeach
 			        {{ Form::submit('Save', array('class' => 'btn btn-default')) }}
 			        {{ Form::close() }}
@@ -49,12 +50,12 @@
 <div class="profile-ads">
 	<div class="container">
 		<hr class="ad-divider">
-        @if (!$questions->isEmpty())
-	        <?php $questionNum = 1 ?>
-	        <h2 class="row text-center recent-ads-header">Your Latest questions</h2>
-	        <div class="container">
-				<div id="question-holder-normal" class="container col-md-10 col-xs-12 col-md-offset-1">
-	        	@foreach($questions as $question)
+        <!-- forelse loop?? -->
+        @if (!$user->questions->isEmpty())
+            <h2 class="row text-center recent-ads-header">Your Latest questions</h2>
+            <div class="container">
+                <div id="question-holder-normal" class="container col-md-10 col-xs-12 col-md-offset-1">
+	        	@foreach($user->questions as $questionNum => $question)
 			    	<div class="row question-preview">
 				    	<div class="col-xs-10 col-xs-offset-1 info">
 						    <div class="pull-right">
@@ -68,7 +69,7 @@
 				    </div>
 
 		            <!-- DELETE MODAL -->
-					<div class="modal fade delete-modal-<?=$questionNum?>" tabindex="-1" role="dialog" aria-hidden="true">
+					<div class="modal fade delete-modal-{{$questionNum}}" tabindex="-1" role="dialog" aria-hidden="true">
 						<div class="modal-dialog modal-sm">
 						  <div class="modal-content">
 						    <div class="modal-header">
@@ -88,7 +89,6 @@
 						</div>
 					</div>
 					<!-- END DELETE MODAL -->
-	        	<?php $questionNum++ ?>
 	        	@endforeach
 	        	</div>
 	        </div>
