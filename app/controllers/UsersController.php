@@ -138,11 +138,13 @@ class UsersController extends \BaseController {
 		$user = User::find($id);
 		$userLanguages = Input::get('language');//array ids from input
 		foreach ($userLanguages as $userLanguage) {
-			$userLanguage = $userLanguage;
+			//check if the lang selected exists in db
 			$dontDupe = DB::table('language_user')
 					->select(DB::raw('id'))
 					->where('user_id', '=', $user->id)->where('language_id', '=', $userLanguage)
 					->get();
+
+					//if query  exists do not attach
 			if (empty($dontDupe)) {
 				$user->languages()->attach($userLanguage);
 			}
