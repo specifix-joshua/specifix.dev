@@ -136,19 +136,42 @@ class UsersController extends \BaseController {
 	{
 		//update to remove when saved
 		$user = User::find($id);
-		$userLanguages = Input::get('language');//array ids from input
-		foreach ($userLanguages as $userLanguage) {
-			//check if the lang selected exists in db
-			$dontDupe = DB::table('language_user')
-					->select(DB::raw('id'))
-					->where('user_id', '=', $user->id)->where('language_id', '=', $userLanguage)
-					->get();
+		$getUserLang = Input::get('language');//array ids from input
+		$languages = Language::all()->toArray();		
+		
+		$allUserLang = DB::table('language_user')
+		->select(DB::raw('language_id'))
+		->where('user_id', '=', $user->id)
+		->get();
+		if (!empty($allUserLang)) {
+			
+			foreach ($allUserLang as $language) {
+				$allUserLanguages[] = $language;
+			}
 
-					//if query  exists do not attach
-			if (empty($dontDupe)) {
-				$user->languages()->attach($userLanguage);
+			foreach ($languages as $language) {
+				if (!array_search($language, $allUserLanguages)) {
+					$user->languages()->detach($language);
+				}
+			}			
+		}
+
+		if ($getUserLang) {
+
+			foreach ($getUserLang as $userLanguage) {
+				//check if the lang selected exists in db
+				$dontDupe = DB::table('language_user')
+						->select(DB::raw('language_id'))
+						->where('user_id', '=', $user->id)->where('language_id', '=', $userLanguage)
+						->get();
+						//if query  exists do not attach
+				if (empty($dontDupe)) {
+					$user->languages()->attach($userLanguage);
+				} 
 			}
 		}
+
+		
 
 		return Redirect::back()->withInput();
 	}
