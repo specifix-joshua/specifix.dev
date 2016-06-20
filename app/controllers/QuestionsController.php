@@ -86,6 +86,25 @@ class QuestionsController extends \BaseController {
 			$languages = Input::get('language');
 			$newQuestion->languages()->attach($languages);
 			Session::flash('successMessage', 'Question has been saved');
+			
+			$users = DB::table('language_user')
+				->select(DB::raw('user_id'))
+				->whereIn('language_id', $languages)
+				->distinct()
+				->get();
+
+			
+			foreach ($users as $user) {
+				$user = User::find($user->user_id);
+				$user->newNotification()
+				    ->withType('Question')
+				    ->withSubject('Someone asked a question you might want to answer!')
+				    ->withBody("$newQuestion->content")
+				    ->regarding($newQuestion)
+				    ->deliver();
+			}
+			Log::info("New Notifications Created!");
+
 			Log::info("New Question Created: id= $newQuestion->id, title= $newQuestion->title, author= $newQuestion->author, categories= $newQuestion->categories");
 			return Redirect::action("QuestionsController@index");
 		}
