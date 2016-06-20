@@ -208,17 +208,19 @@ class UsersController extends \BaseController {
 		return Redirect::to('/');
 	}
 
-	public function subscription()
+	public function subscribe()
 	{
 		return View::make('users.subscription');
-	}
-
-	public function cancelSubscription()
-	{
-		if(Auth::user() && Auth::user()->subscribed())
-		{
-			$user->subscription()->cancel();
-		}
 	}	
 
+	public function cancelSubscription($id)
+	{
+		$user = User::find($id);
+        if(Auth::user() && Auth::id() == $id && Auth::user()->subscribed())
+        {
+            $user->subscription()->cancel();
+            Session::flash('successMessage', 'You are now unsubscribed');
+            return View::make('users.cancel');
+        }
+	}
 }
