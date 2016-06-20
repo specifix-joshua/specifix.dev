@@ -1,5 +1,7 @@
 <?php
 
+use Faker\Factory as Faker;
+
 class UserTableSeeder extends Seeder {
     
     public function run() {
@@ -30,5 +32,18 @@ class UserTableSeeder extends Seeder {
         $user->last_name = 'javascript';
         $user->is_admin = 'no';
         $user->save();
+
+        foreach(range(1, 50) as $index) {
+            $faker = Faker::create();
+            User::create([
+                'username' => $faker->userName,
+                'email' => $faker->email,
+                'password' => $_ENV['USER_PASSWORD'],
+                'first_name' => $faker->firstName($gender = null|'male'|'female'),
+                'last_name' => $faker->lastName,
+                'is_admin' => 'no'
+
+            ]);
+        }
     }
 }
