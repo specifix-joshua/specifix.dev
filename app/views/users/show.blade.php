@@ -40,6 +40,7 @@
 			        @foreach ($languages as $language)
                     <!-- ajax req if feeling lucky -->
 			            <label>{{ Form::checkbox('language[]', $language->id, $userLanguagesIds->search($language->id) !== false) }} {{ $language->language }} </label>
+                        
 			        @endforeach
 			        {{ Form::submit('Save', array('class' => 'btn btn-default')) }}
 			        {{ Form::close() }}
