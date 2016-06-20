@@ -17,19 +17,14 @@ class UsersController extends \BaseController {
         ));
     }
 
-	public function getScore($id)
+	public function getUserScore($id)
 	{
-		$questionScore = DB::table('votes')
-			->select(DB::raw('SUM(count) as vote_count'))
-			->where('question_id', '=', $id)
-			->get();
 		$answerScore = DB::table('votes')
 			->select(DB::raw('SUM(count) as vote_count'))
 			->where('answer_id', '=', $id)
 			->get();
 		
-
-		return $score = $questionScore[0]->vote_count + $answerScore[0]->vote_count;
+		return $score = $answerScore[0]->vote_count;
 	}
 	/**
 	 * Display a listing of the resource.
@@ -40,7 +35,7 @@ class UsersController extends \BaseController {
 	{
 		$users = User::paginate(20);
 		foreach ($users as $user) {
-			$score[] =  $this->getScore($user->id);
+			$score[] =  $this->getUserScore($user->id);
 		}
 		return View::make('users.index')->with(['users' => $users, 'score' => $score]);
 	}
@@ -109,7 +104,7 @@ class UsersController extends \BaseController {
 		$userLanguagesIds = $user->languages()->get()->map(function($language) {
 			return $language->id;
 		});
-		$score = $this->getScore($id);
+		$score = $this->getUserScore($id);
 		return View::make("users.show")->with(['user' => $user, 'score' => $score, 'languages' => $languages, 'userLanguagesIds' => $userLanguagesIds]);
 	}
 
