@@ -21,16 +21,13 @@
                 <p>Questions: {{{$user->questions->count()}}}</p>
                 <p>Answers: {{{$user->answers->count()}}}</p>
                 <p>Score: {{ $score }}</p>
-                @if($user->subscribed())
-                    <p>You are a premium user!</p>
-                    {{ Form::open([
-                        'action' => ['QuestionsController@cancelSubscription'],
-                        'id'     => 'cancelSub',
-                        'method' => 'DELETE',
-                        ]) 
-                    }}
-                    <p><button type="button" class="btn btn-danger btn-small" id="cancelSub">Cancel Subscription</button></p>
-                    {{ Form::close() }}
+                @if (Auth::user() && Auth::id() == $user->id && Auth::user()->subscribed())
+                    <p>You are currently a premium user!</p>
+                    @if ($user->cancelled())
+                        <p><small>You have already canceled your subscription</small></p>
+                    @else
+                        <p><a href="{{{ action('UsersController@cancelSubscription', $user->id) }}}">Cancel your subscription</a></p>
+                    @endif
                 @endif
            </div>
            <div class="row col-xs-12">
