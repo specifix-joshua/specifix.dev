@@ -315,3 +315,9 @@ ul.inbox-nav li a span.label {
   padding-left: 0px
 }
 /*END NOTIFICATIONS PAGE*/
+
+/* LANGUAGE FORM STYLING*/
+
+div.inline form {
+  display: inline;
+}

@@ -11,14 +11,14 @@
                 <p>Asked by: {{{ $question->user->username }}}</p>
                 <p>Current rating: {{ $score[$key] }} </p>
                 <p>Language(s): </p>
+                <div class="inline">
                 @foreach ($question->languages()->get() as $language)
-                    <div class="col-xs-1">
-                        {{ Form::open(['action' =>['QuestionsController@index', $language->language], 'method' => 'GET']) }}
+                        {{ Form::open(['action' => ['QuestionsController@index', $language->language], 'method' => 'GET']) }}
                         {{ Form::hidden('language', $language->language) }}
                         {{ Form::submit($language->language) }}
                         {{ Form::close() }}
-                    </div>
                 @endforeach
+                </div>
         </div>
     @endforeach
     {{ $questions->links() }}
