@@ -90,6 +90,7 @@ class QuestionsController extends \BaseController {
 			$users = DB::table('language_user')
 				->select(DB::raw('user_id'))
 				->whereIn('language_id', $languages)
+				->where('user_id', '!=', Auth::id())
 				->distinct()
 				->get();
 
