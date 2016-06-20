@@ -32,15 +32,14 @@
       // VOTING APPARATUS
       $(function(){
         
-        $(".increment").click(function(){
+        $(".increment").on('click', function(){
+          var self = this;
           var count = parseInt($("~ .count", this).text());
-          var question_id = $(this).data("question-id");
-          var answer_id = $(this).data("answer-id");
+          var type = $(this).data("type");
+          var object_id = $(this).data("object-id");
           var user_id = $(this).data("user-id");
-          var question_voted = $(this).data("question-voted");
-          var answer_voted = $(this).data("answer-voted");
-          var question_vote_id = $(this).data("question-vote-id");
-          var answer_vote_id = $(this).data("answer-vote-id");
+          var voted = $(this).attr("data-voted");
+          var vote_id = $(this).attr("data-vote-id");
           var id = $(this).attr("id");
 
           if ($(this).hasClass("disabled")){
@@ -54,13 +53,12 @@
             var count = count + (vote*2)
             $(this).removeClass("double");
             $(this).removeClass("enabled");
-            $(this).closest(".disabled").addClass("enabled");
-            $(this).closest(".enabled").addClass("double");
-            $(this).closest(".enabled").removeClass("disabled");
+            $(this).siblings(".disabled").addClass("enabled").addClass("double").removeClass("disabled").attr("data-voted", "1");
             $(this).addClass("disabled");
           } else {
             var count = count + vote;
-            $(this).data("voted", "true")
+            $(this).attr("data-voted", "1")
+            $(this).siblings(".increment").attr("data-voted", "1")
             $(this).removeClass("enabled");
             $(".enabled").addClass("double");
             $(this).addClass("disabled");
@@ -71,27 +69,32 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
           });
-          $.ajax({        
+          $.ajax({      
+
               type: "POST", 
               url: "/votes", // Location of the service      
               data: {"count" : vote,
+                     "type" : type,
                      "user_id" : user_id,
-                     "question_id" : question_id,
-                     "answer_id" : answer_id,
-                     "answer_voted" : answer_voted,
-                     "question_voted" : question_voted,
-                     "question_vote_id" : question_vote_id,
-                     "answer_vote_id" : answer_vote_id},
+                     "object_id" : object_id,
+                     "voted" : voted,
+                     "vote_id" : vote_id},
               success: function (msg) {//On Successfull service call   
-                  // if (msg.status == "OK") {
-                  // msg.data
-                  // }
-                  console.log('success');
-                  location.reload();
-                  // CREATE AN AJAX REQUEST IF YOU WANT TO IN WEEK 2
+                  if (msg.status == "OK") {
+                    var newId = msg.data['id'];
+                    updateThing(newId);
+                  }
+
               },
-              error: function (xhr) { console.log(xhr); } // When Service call fails             
+              error: function (xhr) { console.log(xhr); console.log(voted); } // When Service call fails             
           });
+          function updateThing(newId){
+            // console.log(newId);
+            // console.log(self);
+            $(self).attr('data-vote-id', newId);
+            // console.log(self);
+            $(self).siblings('.increment').attr('data-vote-id', newId);
+          }
           $(this).parent().addClass("bump");
           
           setTimeout(function(){
