@@ -16,11 +16,14 @@
 	<div class="col-xs-12"> 
 		<h1>{{{$question->title}}}</h1>
     	<p>Posted by {{{$question->user->username}}} on {{$question->created_at->setTimezone('America/New_York')->format('F jS Y @ h:i A')}}</p>
-		<p>Tagged: @foreach ($question->languages()->get() as $language)
-                    {{ Form::open(['action' =>['QuestionsController@index', $language->language], 'method' => 'GET']) }}
-                    {{ Form::hidden('language', $language->language) }}
-                    {{ Form::submit($language->language) }}
-                    {{ Form::close() }}
+    	<p>Tagged:</p>
+		 @foreach ($question->languages()->get() as $language)
+			<div class="col-xs-1">
+                {{ Form::open(['action' =>['QuestionsController@index', $language->language], 'method' => 'GET']) }}
+                {{ Form::hidden('language', $language->language) }}
+                {{ Form::submit($language->language) }}
+                {{ Form::close() }}
+            </div>
                 @endforeach
 	</div>
 	<!-- END OPENING INFO -->
