@@ -15,7 +15,7 @@ class QuestionsController extends \BaseController {
         ));
     }
 
-    public function getScore($id)
+    public function getQuestionScore($id)
 	{
 		$questionScore = DB::table('votes')
 			->select(DB::raw('SUM(count) as vote_count'))
@@ -23,6 +23,37 @@ class QuestionsController extends \BaseController {
 			->get();
 		
 		return $score = $questionScore[0]->vote_count;
+	}
+
+    public function getPremiumQuestions ()
+    {	
+    	$premiumQuestions = DB::table('questions')
+    		->select(DB::raw('id'))
+    		->where('Premium', '=', 'Yes')
+    		->get();
+		$questions = Question::where('Premium', '=', 'Yes')->paginate(10);
+		
+		if (!empty($premiumQuestions)) {
+
+	    	foreach ($questions as $question) {
+				$score[] =  $this->getQuestionScore($question->id);
+			} 
+		} else {
+				$score = 0;
+		}
+
+    	return View::make('questions.index')->with(['questions' => $questions, 'score' => $score]);
+    }
+
+
+	public function getUserScore($id)
+	{
+		$answerScore = DB::table('votes')
+			->select(DB::raw('SUM(count) as vote_count'))
+			->where('answer_id', '=', $id)
+			->get();
+		
+		return $score = $answerScore[0]->vote_count;
 	}
 
 	/**
@@ -42,12 +73,16 @@ class QuestionsController extends \BaseController {
 		} else {
 			$questions = Question::paginate(10);
 		}
+
 		$languages = Language::all();
+
 		foreach ($questions as $question) {
-			$score[] =  $this->getScore($question->id);
+			$score[] =  $this->getQuestionScore($question->id);
 		}
+
 		return View::make('questions.index')->with(['questions' => $questions, 'languages' => $languages, 'score' => $score]);
 	}
+
 
 
 	/**
@@ -82,10 +117,33 @@ class QuestionsController extends \BaseController {
 			$newQuestion->title = Input::get('title');
 			$newQuestion->content = Input::get('content');
 			$newQuestion->user_id = Auth::id();
+	        if (Auth::user()->subscribed()) {
+	        	$newQuestion->premium = 'Yes';
+	        }
 			$newQuestion->save();
 			$languages = Input::get('language');
 			$newQuestion->languages()->attach($languages);
 			Session::flash('successMessage', 'Question has been saved');
+			
+			$users = DB::table('language_user')
+				->select(DB::raw('user_id'))
+				->whereIn('language_id', $languages)
+				->where('user_id', '!=', Auth::id())
+				->distinct()
+				->get();
+
+			
+			foreach ($users as $user) {
+				$user = User::find($user->user_id);
+				$user->newNotification()
+				    ->withType('Question')
+				    ->withSubject('Someone asked a question you might want to answer!')
+				    ->withBody("$newQuestion->content")
+				    ->regarding($newQuestion)
+				    ->deliver();
+			}
+			Log::info("New Notifications Created!");
+
 			Log::info("New Question Created: id= $newQuestion->id, title= $newQuestion->title, author= $newQuestion->author, categories= $newQuestion->categories");
 			return Redirect::action("QuestionsController@index");
 		}

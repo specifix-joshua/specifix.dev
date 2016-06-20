@@ -31,21 +31,24 @@ class VotesController extends \BaseController {
 	 */
 	public function store()
 	{
-		if (Input::get('answer_voted')) {
-			$vote = Vote::find(Input::get('answer_vote_id'));
-		} else if (Input::get('question_voted')) {
-			$vote = Vote::find(Input::get('question_vote_id'));
+		if (Input::get('voted') == 1) {
+			$vote = Vote::find(Input::get('vote_id'));
 		} else {
 			$vote = new Vote();
 		}
-		$vote->question_id = Input::get('question_id');
-		$vote->answer_id = Input::get('answer_id');
+
+		if (Input::get('type') == 'answer') {
+			$vote->answer_id = Input::get('object_id');
+		} else {
+			$vote->question_id = Input::get('object_id');
+		}
+
 		$vote->count = Input::get('count');
 		$vote->user_id = Auth::id();
 		
 		$vote->save();
 		Log::info("New Vote Created: id= $vote->id");
-		// return Response::json(array('status' => 'OK', 'data' => ['id' => $vote->id, ]));
+		return Response::json(['status' => 'OK', 'data' => ['id' => $vote->id, 'count' => $vote->count]]);
 	}
 
 
