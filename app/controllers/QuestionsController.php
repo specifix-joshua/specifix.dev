@@ -27,10 +27,19 @@ class QuestionsController extends \BaseController {
 
     public function getPremiumQuestions ()
     {	
-
+    	$premiumQuestions = DB::table('questions')
+    		->select(DB::raw('id'))
+    		->where('Premium', '=', 'Yes')
+    		->get();
 		$questions = Question::where('Premium', '=', 'Yes')->paginate(10);
-    	foreach ($questions as $question) {
-			$score[] =  $this->getQuestionScore($question->id);
+		
+		if (!empty($premiumQuestions)) {
+
+	    	foreach ($questions as $question) {
+				$score[] =  $this->getQuestionScore($question->id);
+			} 
+		} else {
+				$score = 0;
 		}
 
     	return View::make('questions.index')->with(['questions' => $questions, 'score' => $score]);
