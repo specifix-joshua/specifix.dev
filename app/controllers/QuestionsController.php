@@ -15,7 +15,7 @@ class QuestionsController extends \BaseController {
         ));
     }
 
-    public function getScore($id)
+    public function getQuestionScore($id)
 	{
 		$questionScore = DB::table('votes')
 			->select(DB::raw('SUM(count) as vote_count'))
@@ -23,6 +23,28 @@ class QuestionsController extends \BaseController {
 			->get();
 		
 		return $score = $questionScore[0]->vote_count;
+	}
+
+    public function getPremiumQuestions ()
+    {	
+
+		$questions = Question::where('Premium', '=', 'Yes')->paginate(10);
+    	foreach ($questions as $question) {
+			$score[] =  $this->getQuestionScore($question->id);
+		}
+
+    	return View::make('questions.index')->with(['questions' => $questions, 'score' => $score]);
+    }
+
+
+	public function getUserScore($id)
+	{
+		$answerScore = DB::table('votes')
+			->select(DB::raw('SUM(count) as vote_count'))
+			->where('answer_id', '=', $id)
+			->get();
+		
+		return $score = $answerScore[0]->vote_count;
 	}
 
 	/**
@@ -42,12 +64,16 @@ class QuestionsController extends \BaseController {
 		} else {
 			$questions = Question::paginate(10);
 		}
+
 		$languages = Language::all();
+
 		foreach ($questions as $question) {
-			$score[] =  $this->getScore($question->id);
+			$score[] =  $this->getQuestionScore($question->id);
 		}
+
 		return View::make('questions.index')->with(['questions' => $questions, 'languages' => $languages, 'score' => $score]);
 	}
+
 
 
 	/**
@@ -82,6 +108,9 @@ class QuestionsController extends \BaseController {
 			$newQuestion->title = Input::get('title');
 			$newQuestion->content = Input::get('content');
 			$newQuestion->user_id = Auth::id();
+	        if (Auth::user()->subscribed()) {
+	        	$newQuestion->premium = 'Yes';
+	        }
 			$newQuestion->save();
 			$languages = Input::get('language');
 			$newQuestion->languages()->attach($languages);
