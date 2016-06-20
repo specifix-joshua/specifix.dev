@@ -32,13 +32,14 @@
       // VOTING APPARATUS
       $(function(){
         
-        $(".increment").click(function(){
+        $(".increment").on('click', function(){
+          var self = this;
           var count = parseInt($("~ .count", this).text());
           var type = $(this).data("type");
           var object_id = $(this).data("object-id");
           var user_id = $(this).data("user-id");
-          var voted = $(this).data("voted");
-          var vote_id = $(this).data("vote-id");
+          var voted = $(this).attr("data-voted");
+          var vote_id = $(this).attr("data-vote-id");
           var id = $(this).attr("id");
 
           if ($(this).hasClass("disabled")){
@@ -52,11 +53,12 @@
             var count = count + (vote*2)
             $(this).removeClass("double");
             $(this).removeClass("enabled");
-            $(this).siblings(".disabled").addClass("enabled").addClass("double").removeClass("disabled");
+            $(this).siblings(".disabled").addClass("enabled").addClass("double").removeClass("disabled").attr("data-voted", "1");
             $(this).addClass("disabled");
           } else {
             var count = count + vote;
-            $(this).data("voted", "1")
+            $(this).attr("data-voted", "1")
+            $(this).siblings(".increment").attr("data-voted", "1")
             $(this).removeClass("enabled");
             $(".enabled").addClass("double");
             $(this).addClass("disabled");
@@ -67,7 +69,8 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
           });
-          $.ajax({        
+          $.ajax({      
+
               type: "POST", 
               url: "/votes", // Location of the service      
               data: {"count" : vote,
@@ -78,18 +81,19 @@
                      "vote_id" : vote_id},
               success: function (msg) {//On Successfull service call   
                   if (msg.status == "OK") {
-                    console.log('success');
                     var newId = msg.data['id'];
                     updateThing(newId);
                   }
 
               },
-              error: function (xhr) { console.log(xhr); } // When Service call fails             
+              error: function (xhr) { console.log(xhr); console.log(voted); } // When Service call fails             
           });
           function updateThing(newId){
-            console.log(newId)
-            $(this).data('vote-id', newId);
-            $(this).siblings('.increment').data('vote-id', newId);
+            // console.log(newId);
+            // console.log(self);
+            $(self).attr('data-vote-id', newId);
+            // console.log(self);
+            $(self).siblings('.increment').attr('data-vote-id', newId);
           }
           $(this).parent().addClass("bump");
           

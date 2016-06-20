@@ -31,7 +31,7 @@ class VotesController extends \BaseController {
 	 */
 	public function store()
 	{
-		if (Input::get('voted')) {
+		if (Input::get('voted') == 1) {
 			$vote = Vote::find(Input::get('vote_id'));
 		} else {
 			$vote = new Vote();
