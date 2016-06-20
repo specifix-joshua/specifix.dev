@@ -11,13 +11,13 @@
         <div class="thumbnail">
             <div class="caption">
                 <h2>Monthly Subscription</h2>
-                <h3>$8.99/month</h3>
+                <h3>$4.99/month</h3>
                 <p>Want to improve your specifix experience? How about signing up for a premium membership, where you will have access to expert knowledge, and your questions will always be featured at the top of the list. Try it out!</p>
                 <form action="/subscription" method="POST">
                   <script
                     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                     data-key="pk_test_q0cXMhVKaYM4JB8Y8ao1mU3o"
-                    data-amount="899"
+                    data-amount="499"
                     data-name="Specifix"
                     data-description="Monthly Subscription"
                     data-image="/img/documentation/checkout/marketplace.png"

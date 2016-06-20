@@ -18,6 +18,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Billa
 	 * @var string
 	 */
 	protected $table = 'users';
+	protected $dates = ['trial_ends_at', 'subscription_ends_at'];
 	
 	public static $rules = array (
 		'username' => 'max:20|unique:users',

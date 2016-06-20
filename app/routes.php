@@ -11,11 +11,13 @@
 |
 */
 
+#Homepage
 Route::get('/', function()
 {
 	return View::make('home');
 });
 
+#notifications
 Route::get('/messages', function()
 {
 	return View::make('messages');
@@ -27,11 +29,9 @@ Route::resource('users', 'UsersController');
 Route::resource('/votes', 'VotesController');
 Route::resource('/notifications', 'NotificationsController');
 
+#Login and Logout
 Route::post('/login', 'UsersController@doLogin');
 Route::get('/logout', 'UsersController@logout');
-
-#Subscription
-Route::get('/subscription', 'UsersController@subscription');
 
 Route::post('/subscription/', function(){
 
@@ -40,5 +40,9 @@ Route::post('/subscription/', function(){
     return 'Done';
 
 });
+
+Route::get('/subscription', 'UsersController@subscribe');
+
+Route::get('/subscription/{id}/cancel', 'UsersController@cancelSubscription');
 
 
