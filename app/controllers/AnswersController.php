@@ -64,12 +64,14 @@ class AnswersController extends \BaseController {
 			$question = Question::find($newAnswer->question_id);
 			$question_user = $question->user_id;
 			$user = User::find($question_user);
-			$user->newNotification()
-			    ->withType('Answer')
-			    ->withSubject('Answer for: "' . substr($question->title, 0, 25) . "...")
-			    ->withBody("$newAnswer->content")
-			    ->regarding($question)
-			    ->deliver();
+			if($user != Auth::user()){
+				$user->newNotification()
+				    ->withType('Answer')
+				    ->withSubject('Answer for: "' . substr($question->title, 0, 25) . "...")
+				    ->withBody("$newAnswer->content")
+				    ->regarding($question)
+				    ->deliver();
+			}	
 			Log::info("New Notification Created!");
 			return Redirect::back()->with('answers', $newAnswer);
 		}
