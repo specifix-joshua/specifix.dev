@@ -23,6 +23,8 @@ Route::get('/messages', function()
 	return View::make('messages');
 });
 
+Route::get('/premium', 'QuestionsController@getPremiumQuestions');
+
 Route::resource('questions', 'QuestionsController');
 Route::resource('answers', 'AnswersController');
 Route::resource('users', 'UsersController');

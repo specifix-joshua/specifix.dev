@@ -18,6 +18,7 @@ class CreateQuestionsTable extends Migration {
 			$table->string('title');
 			$table->longText('content');
 			$table->longText('code_content')->nullable();
+			$table->string('Premium')->nullable();
 			$table->integer('user_id')->unsigned();
 		    $table->foreign('user_id')->references('id')->on('users');
 			$table->timestamps();

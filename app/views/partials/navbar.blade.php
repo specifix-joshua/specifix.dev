@@ -37,7 +37,10 @@
 	      <!-- These buttons only show if the user is logged IN -->
 	      
 	      @if (Auth::check())
-	        <li><a href="/questions/create">Ask a Question</a></li>
+          <li><a href="/questions/create">Ask a Question</a></li>
+	        <li>{{ Form::open(['action' =>'QuestionsController@getPremiumQuestions', 'method' => 'GET']) }}
+              {{ Form::submit('Premium Questions', ['class' => 'btn btn-default']) }}
+              {{ Form::close() }}</li>
 	      @else
 	      	<li><a type="button" class="btn btn-default" id="login-modal-button" data-toggle="modal" data-target=".login-modal">Ask a Question</a>
 	      @endif
