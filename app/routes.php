@@ -33,16 +33,14 @@ Route::resource('/notifications', 'NotificationsController');
 Route::post('/login', 'UsersController@doLogin');
 Route::get('/logout', 'UsersController@logout');
 
-Route::post('/subscription/', function(){
-
-    $token = Input::get('stripeToken');
-    Auth::user()->subscription('monthly')->create($token);
-    return 'Done';
-
-});
-
+#Display Subscription Page
 Route::get('/subscription', 'UsersController@subscribe');
 
+#Create a subscription
+Route::post('/subscription', 'UsersController@createSubscription');
+
+#Cancel Subscription
 Route::get('/subscription/{id}/cancel', 'UsersController@cancelSubscription');
+
 
 

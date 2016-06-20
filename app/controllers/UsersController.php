@@ -211,6 +211,14 @@ class UsersController extends \BaseController {
 	public function subscribe()
 	{
 		return View::make('users.subscription');
+	}
+
+	public function createSubscription()
+	{
+		$token = Input::get('stripeToken');
+	    Auth::user()->subscription('monthly')->create($token);
+	    Session::flash('successMessage', 'Subscription Successful! You are now a premium user');
+	    return Redirect::back();
 	}	
 
 	public function cancelSubscription($id)
