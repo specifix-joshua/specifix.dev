@@ -1,5 +1,7 @@
 <?php
 
+use Faker\Factory as Faker;
+
 class AnswerTableSeeder extends Seeder {
     
     public function run() {
@@ -23,5 +25,15 @@ class AnswerTableSeeder extends Seeder {
         $answer->question_id = 3;
         $answer->save();
 
+        $faker = Faker::create();
+
+        foreach(range (1, 100) as $index) {
+            $faker = Faker::create();
+            Answer::create([
+                'content' => $faker->paragraph(4),
+                'user_id' => $faker->unique()->numberBetween($min = 1, $max = 50),
+                'question_id' => $faker->unique()->numberBetween($min = 4, $max = 50)
+            ]);
+        }
     }
 }

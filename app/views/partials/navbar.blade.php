@@ -16,31 +16,27 @@
         <span class="icon-bar"></span>
       </button>
       <a href="/">
-      	<img src="/img/specifix-mark.png" href="/" class="navbar-brand">
+      	<img src="/img/specifix-bounty.png" href="/" id="specifix-mark" class="navbar-brand">
       </a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
 	  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	    <ul class="nav navbar-nav">
-          <ul class="dropdown-menu">
-            <li>View Questions by Language</li>
-            <li><a href="/categories/html">HTML</a></li>
-    		<li><a href="/categories/css">CSS</a></li>
-    		<li><a href="/categories/js">JavaScript</a></li>
-    		<li><a href="/categories/php">PHP</a></li>
-    		<li><a href="/categories/mysql">MySQL</a></li>
-
-          </ul>
-        </li>
-
-	      <!-- These buttons only show if the user is logged IN -->
-	      
-	      @if (Auth::check())
+          <li><a href="/questions">Latest Questions</a></li>
+          <!-- These buttons only show if the user is logged IN -->
+          @if (Auth::check())
           <li><a href="/questions/create">Ask a Question</a></li>
-	        <li>{{ Form::open(['action' =>'QuestionsController@getPremiumQuestions', 'method' => 'GET']) }}
-              {{ Form::submit('Premium Questions', ['class' => 'btn btn-default']) }}
-              {{ Form::close() }}</li>
+          <li><a href="/subscription">Premium Membership</a></li>
+            @if ($notifications > 0)
+              <li>
+              <a href="/messages"><button id="nav-inbox">{{{$notifications}}}</button></a></li>
+            @else
+              <li><a href="/messages"><span class="glyphicon glyphicon-inbox" aria-hidden="true"></span></a></li>
+            @endif
+          {{-- <li>{{ Form::open(['action' =>'QuestionsController@getPremiumQuestions', 'method' => 'GET']) }} --}}
+              {{-- {{ Form::submit('Premium Questions', ['class' => 'btn btn-default nav-buttons']) }} --}}
+              {{-- {{ Form::close() }}</li> --}}
 	      @else
 	      	<li><a type="button" class="btn btn-default" id="login-modal-button" data-toggle="modal" data-target=".login-modal">Ask a Question</a>
 	      @endif
@@ -51,12 +47,8 @@
         <!-- Logout & Profile Buttons -->
         <!-- These buttons only show if the user is logged IN -->
         @if (Auth::check())
-        <a href="/messages" type="button" class="btn btn-default" id="messages-button"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-          @if ($notifications > 0)
-          <span class="button__badge">({{{$notifications}}})</span></a>
-          @endif
-        <a href="/logout" type="button" class="btn btn-default" id="logout-button">Logout</a>
-        <a href="/users/{{{ Auth::user()->id }}}" type="button" class="btn btn-default" id="profile-button">Profile{{--{{{$user->firstname . ' ' . $user->lastname}}}--}}</a>
+        <a href="/logout" type="button" class="btn btn-default nav-buttons" id="logout-button">Logout</a>
+        <a href="/users/{{{ Auth::user()->id }}}" type="button" class="btn btn-default nav-buttons" id="profile-button">Profile{{--{{{$user->firstname . ' ' . $user->lastname}}}--}}</a>
         @else
 
         <!-- Login & Signup Buttons -->

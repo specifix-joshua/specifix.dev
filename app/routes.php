@@ -32,19 +32,17 @@ Route::resource('/votes', 'VotesController');
 Route::resource('/notifications', 'NotificationsController');
 
 #Login and Logout
-Route::post('/login', 'UsersController@doLogin');
+Route::post('/doLogin', 'UsersController@doLogin');
 Route::get('/logout', 'UsersController@logout');
 
-Route::post('/subscription/', function(){
-
-    $token = Input::get('stripeToken');
-    Auth::user()->subscription('monthly')->create($token);
-    return 'Done';
-
-});
-
+#Display Subscription Page
 Route::get('/subscription', 'UsersController@subscribe');
 
+#Create a subscription
+Route::post('/subscription', 'UsersController@createSubscription');
+
+#Cancel Subscription
 Route::get('/subscription/{id}/cancel', 'UsersController@cancelSubscription');
+
 
 
