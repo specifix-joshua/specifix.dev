@@ -1,3 +1,4 @@
+
 @extends('layouts.master')
 
 @section('title-tag')
@@ -12,10 +13,27 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-lg-3">
-			<h3>Specifix Top 100</h3>
+		<div class="col-lg-2">
+			<h3>Top 20 Users</h3>
 		</div>
-		<h3>Today's Top Questions</h3>
+		<div class="col-lg-7">
+			<h3>Today's Top Questions</h3>
+		</div>
+		<div class="col-lg-3">
+			<h3>Questions by Language</h3>
+			<div id="home-lang-holder">
+				@foreach($languageQs as $languageQ)
+				<a id="language-link" href="/messages">
+					<div id="language-container">
+						<div id="ranked-language">
+							<p><strong>{{{$languageQ->language}}}</strong>  <button class="pull-right question-module">{{{$languageQ->count}}} Questions</button></p>
+						</div>
+						<hr id="lang-divide">
+					</div>
+				</a>
+				@endforeach
+			</div>
+		</div>
 	</div>
 </div>
 

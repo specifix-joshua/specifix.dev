@@ -17,7 +17,29 @@ class HomeController extends BaseController {
 
 	public function showWelcome()
 	{
-		return View::make('hello');
+		$languages = Language::all();
+		$questions = Question::all();
+		$votes = Vote::all();
+		$users = User::all();
+
+		// Question Language Count
+		$languageQs = DB::table('language_question')
+				->select(DB::raw('language_id, COUNT(*) as count'))
+				->orderBy('count', 'desc')
+				->groupBy('language_id')
+				->get();
+
+
+		foreach ($languageQs as $languageQ) {
+			foreach($languages as $language) {
+				if ($languageQ->language_id == $language->id) {
+					$languageQ->language = $language->language;
+				}
+			}
+		}
+		
+
+		return View::make('home')->with(['languageQs' => $languageQs]);;
 	}
 
 }
