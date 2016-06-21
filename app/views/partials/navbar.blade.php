@@ -39,7 +39,7 @@
               {{-- {{ Form::submit('Premium Questions', ['class' => 'btn btn-default nav-buttons']) }} --}}
               {{-- {{ Form::close() }}</li> --}}
 	      @else
-	      	<li><a type="button" class="btn btn-default" id="login-modal-button" data-toggle="modal" data-target=".login-modal">Ask a Question</a>
+	      	<li><a data-toggle="modal" data-target=".login-modal">Ask a Question</a>
 	      @endif
 	    </ul>
 
@@ -55,8 +55,8 @@
         <!-- Login & Signup Buttons -->
         <!-- These only show if the user is logged OUT -->
 
-        <button type="button" class="btn btn-default" id="login-modal-button" data-toggle="modal" data-target=".login-modal">Login</button>
-        <button type="button" class="btn btn-default" id="signup-modal-button" data-toggle="modal" data-target=".signup-modal">Sign Up</button>
+        <button type="button" class="btn btn-default nav-buttons" id="login-modal-button" data-toggle="modal" data-target=".login-modal">Login</button>
+        <button type="button" class="btn btn-default nav-buttons" id="signup-modal-button" data-toggle="modal" data-target=".signup-modal">Sign Up</button>
         @endif
       </div>
 
