@@ -5,9 +5,9 @@
 @stop
 
 @section('content')
-<div class="container">
+<div class="container userindex">
     <div class="page-header">
-        <h1>Top Users</h1>
+        <h1>All Users</h1>
     </div>
     @foreach($users as $key => $user)
         <div class="col-sm-12 col-md-6 col-lg-4">
@@ -23,5 +23,6 @@
             </div>
         </div>
     @endforeach
+    {{ $users->links() }}
 </div>
 @stop

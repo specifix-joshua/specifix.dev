@@ -49,14 +49,4 @@ class HomeController extends BaseController {
 		return View::make('home')->with(['languageQs' => $languageQs, 'questions' => $questions, 'users' => $users]);;
 	}
 
-	public function getUserScore($id)
-	{
-		$userScore = DB::table('votes')
-			->select(DB::raw('SUM(count) as vote_count'))
-			->where('user_id', '=', $id)
-			->get();
-		
-		return $score = $userScore[0]->vote_count;
-	}
-
 }

@@ -30,7 +30,9 @@ ORANGE ACCENT = rgb(247,138,9)
 
 
 body {
-  font-family: 'Open Sans'
+  font-family: 'Open Sans';
+  /* Margin bottom by footer height */
+  margin-bottom: 126px;
 }
 
 a {
@@ -40,6 +42,10 @@ a {
 a:hover, .item-head:hover {
   text-decoration:none;
   color: black;
+}
+html {
+  position: relative;
+  min-height: 100%;
 }
 
 .nav-buttons {
@@ -406,3 +412,44 @@ ul.inbox-nav li a span.label {
 div.inline form {
   display: inline;
 }
+
+/* FOOTER STYLE */
+.footer{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 126px;
+}
+
+.footer .container {
+  background-color: rgb(65,202,192);
+  color: white;
+  list-style-type: none;
+  min-height: 100%;
+  text-align: center;
+}
+
+/* USER INDEX */
+
+.userindex{
+  height: 100%;
+}
+
+.thumbnail {
+  height: 285px;
+}
+
+/*TinyMCE STYLING*/
+
+.mce-container {
+  max-height: 450px;
+}
+
+.mce-textbox {
+  max-height: 300px;
+}
+
+.mce-container-body.mce-abs-layout {
+  height: 410px !important;
+}
+

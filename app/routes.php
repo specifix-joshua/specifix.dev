@@ -14,12 +14,10 @@
 #Homepage
 Route::get('/', 'HomeController@showWelcome');
 
-#notifications
-Route::get('/messages', function()
-{
-	return View::make('messages');
-});
+#Notifications
+Route::get('/messages', 'NotificationsController@index');
 
+#Premium Questions
 Route::get('/premium', 'QuestionsController@getPremiumQuestions');
 
 Route::resource('questions', 'QuestionsController');
@@ -29,7 +27,7 @@ Route::resource('/votes', 'VotesController');
 Route::resource('/notifications', 'NotificationsController');
 
 #Login and Logout
-Route::post('/login', 'UsersController@doLogin');
+Route::post('/doLogin', 'UsersController@doLogin');
 Route::get('/logout', 'UsersController@logout');
 
 #Display Subscription Page
@@ -40,6 +38,9 @@ Route::post('/subscription', 'UsersController@createSubscription');
 
 #Cancel Subscription
 Route::get('/subscription/{id}/cancel', 'UsersController@cancelSubscription');
+
+#Resume Subscription
+Route::get('/subscription/{id}/resume', 'UsersController@resumeSubscription');
 
 
 
