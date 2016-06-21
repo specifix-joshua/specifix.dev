@@ -357,3 +357,17 @@ div.inline form {
   height: 285px;
 }
 
+/*TinyMCE STYLING*/
+
+.mce-container {
+  max-height: 450px;
+}
+
+.mce-textbox {
+  max-height: 300px;
+}
+
+.mce-container-body.mce-abs-layout {
+  height: 410px !important;
+}
+
