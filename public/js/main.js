@@ -58,9 +58,8 @@
           } else {
             var count = count + vote;
             $(this).attr("data-voted", "1")
-            $(this).siblings(".increment").attr("data-voted", "1")
+            $(this).siblings(".enabled").attr("data-voted", "1").addClass("double");
             $(this).removeClass("enabled");
-            $(".enabled").addClass("double");
             $(this).addClass("disabled");
           }
           $("~ .count", this).text(count);     

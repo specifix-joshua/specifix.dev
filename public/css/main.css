@@ -53,6 +53,21 @@ ORANGE ACCENT = rgb(247,138,9)
   margin-top:5px;
 }
 
+.roboto-slab {
+  font-family: 'Roboto Slab';
+}
+
+.open-sans {
+  font-family: 'Open Sans';
+}
+
+h1, h2, h3, h4 {
+  color: rgb(0,168,179)
+}
+
+
+
+
 /*VOTING APPARATUS*/
 
 .roundrect .up { 
