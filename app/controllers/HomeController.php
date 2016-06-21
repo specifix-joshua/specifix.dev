@@ -18,9 +18,16 @@ class HomeController extends BaseController {
 	public function showWelcome()
 	{
 		$languages = Language::all();
-		$questions = Question::all();
+		$questions = Question::orderBy('created_at', 'desc')
+               ->take(10)
+               ->get();
 		$votes = Vote::all();
-		$users = User::all();
+		$users = DB::table('users')
+            ->join('votes', 'users.id', '=', 'votes.user_id')
+            ->select(DB::raw('users.username, count(votes.user_id) as count'))
+			->orderBy('count', 'desc')
+			->groupBy('users.username')
+            ->get();
 
 		// Question Language Count
 		$languageQs = DB::table('language_question')
@@ -39,7 +46,17 @@ class HomeController extends BaseController {
 		}
 		
 
-		return View::make('home')->with(['languageQs' => $languageQs]);;
+		return View::make('home')->with(['languageQs' => $languageQs, 'questions' => $questions, 'users' => $users]);;
+	}
+
+	public function getUserScore($id)
+	{
+		$userScore = DB::table('votes')
+			->select(DB::raw('SUM(count) as vote_count'))
+			->where('user_id', '=', $id)
+			->get();
+		
+		return $score = $userScore[0]->vote_count;
 	}
 
 }

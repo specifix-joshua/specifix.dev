@@ -15,20 +15,46 @@
 	<div class="row">
 		<div class="col-lg-2">
 			<h3>Top 20 Users</h3>
+			<div class="home-column-holder">
+				@foreach($users as $user)
+					<div class="items-container">
+				    	<div class="item">
+				    		<p>{{{$user->username}}} - {{{$user->count}}}</p>
+					    </div>
+				    </div>
+				@endforeach
+			</div>
 		</div>
 		<div class="col-lg-7">
 			<h3>Today's Top Questions</h3>
+			<div class="home-column-holder">
+				@foreach($questions as $question)
+					<div class="items-container">
+				    	<div class="item">
+						    <a class="question-link" href="{{{action('QuestionsController@show', $question->id) }}}"><h3 class="item-head">{{$question->title}}</h3></a>
+						    <p> 
+							    <div class="inline">
+							    	@foreach ($question->languages()->get() as $language)
+						                <a class="language-button" method="GET" href="{{{action('QuestionsController@index', 'language='.$language->language)}}}"> {{{$language->language}}}</a><span>&nbsp&nbsp</span>
+							        @endforeach
+							    </div>
+						    </p>
+						    <p class="question-date">Added by: {{{$question->user->username}}}</p>
+						    <p>{{$question->created_at->setTimezone('America/New_York')->format('F jS Y')}} EST</p>
+					    </div>
+				    </div>
+				@endforeach
+			</div>
 		</div>
 		<div class="col-lg-3">
 			<h3>Questions by Language</h3>
-			<div id="home-lang-holder">
+			<div class="home-column-holder">
 				@foreach($languageQs as $languageQ)
-				<a id="language-link" href="/messages">
-					<div id="language-container">
-						<div id="ranked-language">
-							<p><strong>{{{$languageQ->language}}}</strong>  <button class="pull-right question-module">{{{$languageQ->count}}} Questions</button></p>
+				<a id="language-link" href="{{{action('QuestionsController@index', 'language='.$language->language)}}}">
+					<div class="items-container">
+						<div class="item">
+							<p><span class="by-lang-links">{{{$languageQ->language}}}</span> <button class="pull-right question-module">{{{$languageQ->count}}} Questions</button></p>
 						</div>
-						<hr id="lang-divide">
 					</div>
 				</a>
 				@endforeach
