@@ -347,6 +347,16 @@ div.inline form {
   text-align: center;
 }
 
+/* USER INDEX */
+
+.userindex{
+  height: 100%;
+}
+
+.thumbnail {
+  height: 285px;
+}
+
 /*TinyMCE STYLING*/
 
 .mce-container {
@@ -360,3 +370,4 @@ div.inline form {
 .mce-container-body.mce-abs-layout {
   height: 410px !important;
 }
+

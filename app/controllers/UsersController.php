@@ -33,7 +33,7 @@ class UsersController extends \BaseController {
 	 */
 	public function index()
 	{
-		$users = User::paginate(20);
+		$users = User::paginate(18);
 		foreach ($users as $user) {
 			$score[] =  $this->getUserScore($user->id);
 		}
@@ -82,7 +82,7 @@ class UsersController extends \BaseController {
 		}
 		else if ($user->save()) 
 		{
-			Session::flash('successMessage', 'User has been saved');
+			Session::flash('successMessage', 'You have successfully signed up!');
 			Log::info("New User Created: id= $user->id, title= $user->name, email= $user->email");
 			return Redirect::back();
         
@@ -190,7 +190,7 @@ class UsersController extends \BaseController {
 
 		if(Auth::attempt(array('email' => $email, 'password' => $password)))
 		{
-			return Redirect::to('/users');
+			return Redirect::action('UsersController@show', Auth::id());
 		} else {
 			Session::flash('errorMessage', 'There was an error with your login!');
 			return Redirect::back()->withInput();
@@ -225,5 +225,16 @@ class UsersController extends \BaseController {
             Session::flash('successMessage', 'You are now unsubscribed');
             return View::make('users.cancel');
         }
+	}
+
+	public function resumeSubscription($id)
+	{
+		$user = User::find($id);
+		if(Auth::user() && Auth::id() == $id && Auth::user()->cancelled()) 
+		{
+			$user->subscription('monthly')->resume($user->token);
+			Session::flash('successMessage', 'You have successfully resumed your premium services!');
+			return Redirect::back();
+		}
 	}
 }

@@ -101,7 +101,7 @@
 	</div>
 	@endforeach
 	<!-- END POSTED ANSWERS -->
-
+	@if (Auth::check())
 	<!-- SUBMIT ANSWER -->
 	<div class='col-xs-10 col-xs-offset-2'>
 		<div class="row">
@@ -125,6 +125,7 @@
 			{{ Form::close() }}
 		</div>
 	</div>
+	@endif
 	<!-- END SUBMIT ANSWER -->
 </div>
 @stop
