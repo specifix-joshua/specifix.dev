@@ -346,3 +346,14 @@ div.inline form {
   min-height: 100%;
   text-align: center;
 }
+
+/* USER INDEX */
+
+.userindex{
+  height: 100%;
+}
+
+.thumbnail {
+  height: 285px;
+}
+
