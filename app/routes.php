@@ -32,7 +32,7 @@ Route::resource('/votes', 'VotesController');
 Route::resource('/notifications', 'NotificationsController');
 
 #Login and Logout
-Route::post('/login', 'UsersController@doLogin');
+Route::post('/doLogin', 'UsersController@doLogin');
 Route::get('/logout', 'UsersController@logout');
 
 #Display Subscription Page
