@@ -23,10 +23,11 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
 	  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	    <ul class="nav navbar-nav">
-	      <!-- These buttons only show if the user is logged IN -->
-	      @if (Auth::check())
-          <li><a href="/questions/create">Ask a Question</a></li>
           <li><a href="/questions">Latest Questions</a></li>
+          <!-- These buttons only show if the user is logged IN -->
+          @if (Auth::check())
+          <li><a href="/questions/create">Ask a Question</a></li>
+          <li><a href="/subscription">Premium Membership</a></li>
             @if ($notifications > 0)
               <li>
               <a href="/messages"><button id="nav-inbox">{{{$notifications}}}</button></a></li>
