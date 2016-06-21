@@ -267,3 +267,11 @@ ul.inbox-nav li a span.label {
 div.inline form {
   display: inline;
 }
+
+input.btn, a.btn {
+  height: 50px;
+}
+
+a.btn {
+  padding-top: 10px;
+}
