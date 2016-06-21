@@ -54,6 +54,7 @@
             selector:'textarea',
             plugins: "codesample",
             toolbar: "codesample",
+            content_css : "/css/PrismContent.css", 
         });
     </script>
   </body>
