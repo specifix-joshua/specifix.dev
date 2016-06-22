@@ -2,14 +2,14 @@
 
 Class Vote extends BaseModel {
 
-    public static function up() 
+    public function setCountAttribute($value)
     {
-        //grab info from table and return plus 1
-    }
-    
-    public static function down() 
-    {
-        //grab info from table and return minus 1
+        if ($value > 1) {
+            $value = 1;
+        } elseif ($value < 1) {
+            $value = -1;
+        }
+        $this->attributes['count'] = $value;
     }
 
     public function question()
