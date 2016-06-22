@@ -49,4 +49,9 @@ class HomeController extends BaseController {
 		return View::make('home')->with(['languageQs' => $languageQs, 'questions' => $questions, 'users' => $users]);;
 	}
 
+	public function showFaq()
+	{
+		return View::make('faq');
+	}
+
 }

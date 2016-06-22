@@ -42,5 +42,7 @@ Route::get('/subscription/{id}/cancel', 'UsersController@cancelSubscription');
 #Resume Subscription
 Route::get('/subscription/{id}/resume', 'UsersController@resumeSubscription');
 
+#Faq
+Route::get('/faq', 'HomeController@showFaq');
 
 
