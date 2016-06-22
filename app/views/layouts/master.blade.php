@@ -54,7 +54,8 @@
             selector:'textarea',
             plugins: "codesample",
             toolbar: "codesample",
-            content_css : "/css/PrismContent.css", 
+            content_css : "/css/PrismContent.css",
+            skin_url: "/css/tinymceSkin"
         });
     </script>
   </body>
