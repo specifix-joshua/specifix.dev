@@ -53,13 +53,8 @@
             selector: "textarea",
             plugins: "codesample",
             toolbar: "codesample",
-<<<<<<< HEAD
             content_css : "/css/PrismContent.css",
             skin_url: "/css/tinymceSkin"
-=======
-            content_css : "/css/prismContent.css", 
-            }
->>>>>>> master
         });
     </script>
   </body>
