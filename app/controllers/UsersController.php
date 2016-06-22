@@ -17,17 +17,6 @@ class UsersController extends \BaseController {
         ));
     }
 
-	public function getUserScore($id)
-	{
-		$answerScore = DB::table('votes')
-			->join('answers', 'votes.answer_id', '=', 'answers.id')
-			->select(DB::raw('SUM(count) as vote_count'))
-			->where('answers.user_id', '=', $id)
-			->get();
-		
-		return $score = $answerScore[0]->vote_count;
-	}
-
 	/**
 	 * Display a listing of the resource.
 	 *
