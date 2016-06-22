@@ -101,11 +101,34 @@ class UsersController extends \BaseController {
 	{
 		$user = User::find($id);
 		$languages = Language::all();
+		
 		$userLanguagesIds = $user->languages()->get()->map(function($language) {
 			return $language->id;
 		});
+		$questions = Question::all();
+		$relevantQs = [];
+		
+		foreach ($questions as $question) {
+			if ($question->user_id != $id){
+				$questionLanguagesIds = $question->languages()->get()->map(function($language) {
+				return $language->id;
+				});
+				foreach($questionLanguagesIds as $qlangId){
+					foreach ($userLanguagesIds as $ulangId) {
+						if ($qlangId == $ulangId) {
+							$relevantQs[] = $question;
+						}
+					}
+				}
+			}
+		};
+
+		$relevantMax = $user->questions()->count();
+		
+		$relevantQs = array_slice($relevantQs, 0, $relevantMax);
+
 		$score = $this->getUserScore($id);
-		return View::make("users.show")->with(['user' => $user, 'score' => $score, 'languages' => $languages, 'userLanguagesIds' => $userLanguagesIds]);
+		return View::make("users.show")->with(['user' => $user, 'score' => $score, 'languages' => $languages, 'userLanguagesIds' => $userLanguagesIds, 'relevantQs' => $relevantQs]);
 	}
 
 
