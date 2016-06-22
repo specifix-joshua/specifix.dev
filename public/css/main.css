@@ -465,7 +465,9 @@ div.inline form {
 }
 
 /*TinyMCE STYLING*/
-
+.mce-tinymce {
+  opacity: .3;
+}
 .mce-container {
   max-height: 450px;
 }

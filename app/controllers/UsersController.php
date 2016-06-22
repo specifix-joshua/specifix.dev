@@ -109,7 +109,9 @@ class UsersController extends \BaseController {
 			return $language->id;
 		});
 		$questions = Question::all();
+		$questions->sortByDesc('created_at');
 		$relevantQs = [];
+		$userQs = [];
 		
 		foreach ($questions as $question) {
 			if ($question->user_id != $id){
@@ -125,13 +127,13 @@ class UsersController extends \BaseController {
 				}
 			}
 		};
-
-		$relevantMax = $user->questions()->count();
 		
+		
+		$relevantMax = $user->questions()->count();
 		$relevantQs = array_slice($relevantQs, 0, $relevantMax);
 
 		$score = $this->getUserScore($id);
-		return View::make("users.show")->with(['user' => $user, 'score' => $score, 'languages' => $languages, 'userLanguagesIds' => $userLanguagesIds, 'relevantQs' => $relevantQs]);
+		return View::make("users.show")->with(['user' => $user, 'score' => $score, 'languages' => $languages, 'userLanguagesIds' => $userLanguagesIds, 'relevantQs' => $relevantQs, 'userQs' => $userQs ]);
 	}
 
 

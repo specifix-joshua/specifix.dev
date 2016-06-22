@@ -27,7 +27,7 @@ class HomeController extends BaseController {
 		foreach ($users as $user) {
 			$user->score =  $this->getUserScore($user->id);
 		}
-
+		$users->sortByDesc('score');
 		// Question Language Count
 		$languageQs = DB::table('language_question')
 				->select(DB::raw('language_id, COUNT(*) as count'))
@@ -55,12 +55,13 @@ class HomeController extends BaseController {
 
 	public function getUserScore($id)
 	{
-		$answerScore = DB::table('votes')
+		$userScore = DB::table('votes')
+			->join('answers', 'votes.answer_id', '=', 'answers.id')
 			->select(DB::raw('SUM(count) as vote_count'))
-			->where('answer_id', '=', $id)
+			->where('answers.user_id', '=', $id)
 			->get();
 		
-		return $score = $answerScore[0]->vote_count;
+		return $score = $userScore[0]->vote_count;
 	}
 
 }

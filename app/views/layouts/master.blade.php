@@ -14,7 +14,6 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,800,700,600,400,300' rel='stylesheet' type='text/css'>
 
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="/css/main.css">
     <link rel="sylesheet" type="text/css" href="/css/prism.css">
     <link rel="stylesheet" data-mce-href="http://cdn.tinymce.com/4/plugins/codesample/css/prism.css" href="http://cdn.tinymce.com/4/plugins/codesample/css/prism.css">
     <link rel="stylesheet" type="text/css" href="/css/main.css">
@@ -51,10 +50,18 @@
     @yield('bottom-script')
     <script>
         tinymce.init({ 
-            selector:'textarea',
+            selector: "textarea",
             plugins: "codesample",
             toolbar: "codesample",
-            content_css : "/css/PrismContent.css", 
+            content_css : "/css/PrismContent.css",
+            skin_url: "/css/tinymceSkin",
+            setup: function(editor) {
+                editor.on('click', function(e) {
+                    $(".mce-tinymce").animate({
+                        opacity: "1"
+                    }, 500)
+                });
+            }
         });
     </script>
   </body>
