@@ -82,27 +82,6 @@
 				    </div>
 			    </div>
 				
-				<div class="container col-lg-6">
-			    	<h2>Questions For You</h2>
-			        <div class="column-holder">
-			        	@foreach($relevantQs as $relevantQ)
-						<div class="items-container">
-					    	<div class="item">
-							    <a class="question-link" href="{{{action('QuestionsController@show', $relevantQ->id) }}}"><h3 class="item-head">{{$relevantQ->title}}</h3></a>
-							    <p> 
-								    <div class="inline">
-								    	@foreach ($relevantQ->languages()->get() as $language)
-							                <a class="language-button" method="GET" href="{{{action('QuestionsController@index', 'language='.$language->language)}}}"> {{{$language->language}}}</a><span>&nbsp&nbsp</span>
-								        @endforeach
-								    </div>
-							    </p>
-							    <p class="question-date">Added by: {{{$relevantQ->user->username}}}</p>
-							    <p>{{$relevantQ->created_at->setTimezone('America/New_York')->format('F jS Y')}}</p>
-						    </div>
-					    </div>
-			        	@endforeach
-			    	</div>
-				</div>
 	            <!-- DELETE MODAL -->
 				<div class="modal fade delete-modal-{{$questionNum}}" tabindex="-1" role="dialog" aria-hidden="true">
 					<div class="modal-dialog modal-sm">
@@ -124,6 +103,27 @@
 					</div>
 				</div>
 				<!-- END DELETE MODAL -->
+	        	@endforeach
+	    	</div>
+		</div>
+		<div class="container col-lg-6">
+	    	<h2>Questions For You</h2>
+	        <div class="column-holder">
+	        	@foreach($relevantQs as $relevantQ)
+				<div class="items-container">
+			    	<div class="item">
+					    <a class="question-link" href="{{{action('QuestionsController@show', $relevantQ->id) }}}"><h3 class="item-head">{{$relevantQ->title}}</h3></a>
+					    <p> 
+						    <div class="inline">
+						    	@foreach ($relevantQ->languages()->get() as $language)
+					                <a class="language-button" method="GET" href="{{{action('QuestionsController@index', 'language='.$language->language)}}}"> {{{$language->language}}}</a><span>&nbsp&nbsp</span>
+						        @endforeach
+						    </div>
+					    </p>
+					    <p class="question-date">Added by: {{{$relevantQ->user->username}}}</p>
+					    <p>{{$relevantQ->created_at->setTimezone('America/New_York')->format('F jS Y')}}</p>
+				    </div>
+			    </div>
 	        	@endforeach
 	    	</div>
 		</div>
