@@ -102,6 +102,12 @@
         });
       });
       //END VOTING APPARATUS
+
+      $(".form-group").on('click', function() {
+        $(".mce-tinymce").animate({
+          opacity: "1"
+        }, 500)
+      });
     })
 })();
 
