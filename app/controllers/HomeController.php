@@ -28,6 +28,8 @@ class HomeController extends BaseController {
 			$user->score =  $this->getUserScore($user->id);
 		}
 		$users->sortByDesc('score');
+		$users = $users->take(20);
+
 		// Question Language Count
 		$languageQs = DB::table('language_question')
 				->select(DB::raw('language_id, COUNT(*) as count'))

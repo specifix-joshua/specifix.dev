@@ -19,7 +19,7 @@
 				@foreach($users as $user)
 					<div class="items-container">
 				    	<div class="item">
-				    		<p></span> {{{$user->username}}} ({{{$user->score}}})</button></p>
+				    		<p></span> {{{$user->username}}} - <button class="score-icon">{{{$user->score}}}</button></p>
 					    </div>
 				    </div>
 				@endforeach
