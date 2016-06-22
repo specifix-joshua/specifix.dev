@@ -51,6 +51,7 @@ class HomeController extends BaseController {
 	public function showFaq()
 	{
 		return View::make('faq');
+	}
 
 	public function getUserScore($id)
 	{
