@@ -19,11 +19,8 @@
     	<p>Tagged:</p>
 		 <div class="inline">
             @foreach ($question->languages()->get() as $language)
-                    {{ Form::open(['action' => ['QuestionsController@index', $language->language], 'method' => 'GET']) }}
-                    {{ Form::hidden('language', $language->language) }}
-                    {{ Form::submit($language->language) }}
-                    {{ Form::close() }}
-            @endforeach
+                <a class="language-button" method="GET" href="{{{action('QuestionsController@index', 'language='.$language->language)}}}"> {{{$language->language}}}</a><span>&nbsp&nbsp</span>
+	        @endforeach
         </div>
 	</div>
 	<!-- END OPENING INFO -->
