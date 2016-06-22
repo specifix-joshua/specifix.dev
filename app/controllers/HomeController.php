@@ -27,7 +27,7 @@ class HomeController extends BaseController {
 		foreach ($users as $user) {
 			$score[] =  $this->getUserScore($user->id);
 		}
-
+		$users->sortByDesc('score');
 		// Question Language Count
 		$languageQs = DB::table('language_question')
 				->select(DB::raw('language_id, COUNT(*) as count'))
@@ -52,6 +52,5 @@ class HomeController extends BaseController {
 	{
 		return View::make('faq');
 	}
-
 
 }

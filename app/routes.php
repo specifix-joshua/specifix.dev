@@ -28,6 +28,7 @@ Route::resource('/notifications', 'NotificationsController');
 
 #Login and Logout
 Route::post('/doLogin', 'UsersController@doLogin');
+Route::get('doLogin', 'UsersController@doLogin');
 Route::get('/logout', 'UsersController@logout');
 
 #Display Subscription Page
