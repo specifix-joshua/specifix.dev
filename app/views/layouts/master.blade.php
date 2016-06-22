@@ -54,7 +54,14 @@
             plugins: "codesample",
             toolbar: "codesample",
             content_css : "/css/PrismContent.css",
-            skin_url: "/css/tinymceSkin"
+            skin_url: "/css/tinymceSkin",
+            setup: function(editor) {
+                editor.on('click', function(e) {
+                    $(".mce-tinymce").animate({
+                        opacity: "1"
+                    }, 500)
+                });
+            }
         });
     </script>
   </body>
