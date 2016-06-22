@@ -65,10 +65,6 @@
 	        	@foreach($user->questions as $questionNum => $question)
 				<div class="items-container">
 			    	<div class="item">
-					    <div class="pull-right">
-				    	
-	                    <button type="button" class="btn btn-danger btn-small" id="delete-modal-button" data-toggle="modal" data-target=".delete-modal-<?=$questionNum?>">Delete</button>
-	                	</div>
 					    <a class="question-link" href="{{{action('QuestionsController@show', $question->id) }}}"><h3 class="item-head">{{$question->title}}</h3></a>
 					    <p> 
 						    <div class="inline">
@@ -78,6 +74,10 @@
 						    </div>
 					    </p>
 					    <p class="question-date">Added by: {{{$question->user->username}}}</p>
+					    <div class="pull-right">
+				    	
+	                    <button type="button" class="btn btn-danger btn-small" id="delete-modal-button" data-toggle="modal" data-target=".delete-modal-<?=$questionNum?>">Delete</button>
+	                	</div>
 					    <p>{{$question->created_at->setTimezone('America/New_York')->format('F jS Y')}}</p>
 				    </div>
 			    </div>
