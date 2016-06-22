@@ -19,7 +19,7 @@
 				@foreach($users as $user)
 					<div class="items-container">
 				    	<div class="item">
-				    		<p>{{{$user->username}}} - {{{$user->count}}}</p>
+				    		<p></span> {{{$user->username}}} - <button class="score-icon">{{{$user->count}}}</button></p>
 					    </div>
 				    </div>
 				@endforeach
@@ -50,13 +50,11 @@
 			<h3>Questions by Language</h3>
 			<div class="home-column-holder">
 				@foreach($languageQs as $languageQ)
-				<a id="language-link" href="{{{action('QuestionsController@index', 'language='.$language->language)}}}">
 					<div class="items-container">
 						<div class="item">
-							<p><span class="by-lang-links">{{{$languageQ->language}}}</span> <button class="pull-right question-module">{{{$languageQ->count}}} Questions</button></p>
+							<a class="item-head by-lang-links" href="{{{action('QuestionsController@index', 'language='.$languageQ->language)}}}"><span class='black'>{{{$languageQ->language}}}</span> ({{{$languageQ->count}}} Questions)</a>
 						</div>
 					</div>
-				</a>
 				@endforeach
 			</div>
 		</div>
