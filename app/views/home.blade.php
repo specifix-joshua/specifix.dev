@@ -16,10 +16,10 @@
 		<div class="col-lg-2">
 			<h3>Top 20 Users</h3>
 			<div class="column-holder">
-				@foreach($users as $user)
+				@foreach($users as $key => $user)
 					<div class="items-container">
 				    	<div class="item">
-				    		<p></span> {{{$user->username}}} - <button class="score-icon">{{{$user->score}}}</button></p>
+				    		<p></span> {{{$user->username}}} - <button class="score-icon">{{{$score[$key]}}}</button></p>
 					    </div>
 				    </div>
 				@endforeach
