@@ -68,14 +68,23 @@ class QuestionsController extends \BaseController {
 			$languageId = DB::table('languages')
 				->select(DB::raw('id'))
 				->where('language', '=', $language)
-				->get()[0];
-			$questions = Language::find($languageId->id)->questions()->paginate(10);
+				->get();
+			if($languageId == null) {
+				App::abort(404);
+			}
+			foreach($languageId as $lang) {
+				$language = $lang->id;
+			}
+			$questions = Language::find($language)->questions()->paginate(10);
+			if(empty($questions)) {
+				App::abort(404);
+			}
 		} else {
 			$questions = Question::paginate(10);
 		}
 
 		$languages = Language::all();
-
+		$score = [];
 		foreach ($questions as $question) {
 			$score[] =  $this->getQuestionScore($question->id);
 		}
