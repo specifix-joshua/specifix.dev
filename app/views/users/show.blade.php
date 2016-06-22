@@ -65,10 +65,6 @@
 	        	@foreach($user->questions as $questionNum => $question)
 				<div class="items-container">
 			    	<div class="item">
-					    <div class="pull-right">
-				    	
-	                    <button type="button" class="btn btn-danger btn-small" id="delete-modal-button" data-toggle="modal" data-target=".delete-modal-<?=$questionNum?>">Delete</button>
-	                	</div>
 					    <a class="question-link" href="{{{action('QuestionsController@show', $question->id) }}}"><h3 class="item-head">{{$question->title}}</h3></a>
 					    <p> 
 						    <div class="inline">
@@ -78,10 +74,35 @@
 						    </div>
 					    </p>
 					    <p class="question-date">Added by: {{{$question->user->username}}}</p>
+					    <div class="pull-right">
+				    	
+	                    <button type="button" class="btn btn-danger btn-small" id="delete-modal-button" data-toggle="modal" data-target=".delete-modal-<?=$questionNum?>">Delete</button>
+	                	</div>
 					    <p>{{$question->created_at->setTimezone('America/New_York')->format('F jS Y')}}</p>
 				    </div>
 			    </div>
 				
+				<div class="container col-lg-6">
+			    	<h2>Questions For You</h2>
+			        <div class="column-holder">
+			        	@foreach($relevantQs as $relevantQ)
+						<div class="items-container">
+					    	<div class="item">
+							    <a class="question-link" href="{{{action('QuestionsController@show', $relevantQ->id) }}}"><h3 class="item-head">{{$relevantQ->title}}</h3></a>
+							    <p> 
+								    <div class="inline">
+								    	@foreach ($relevantQ->languages()->get() as $language)
+							                <a class="language-button" method="GET" href="{{{action('QuestionsController@index', 'language='.$language->language)}}}"> {{{$language->language}}}</a><span>&nbsp&nbsp</span>
+								        @endforeach
+								    </div>
+							    </p>
+							    <p class="question-date">Added by: {{{$relevantQ->user->username}}}</p>
+							    <p>{{$relevantQ->created_at->setTimezone('America/New_York')->format('F jS Y')}}</p>
+						    </div>
+					    </div>
+			        	@endforeach
+			    	</div>
+				</div>
 	            <!-- DELETE MODAL -->
 				<div class="modal fade delete-modal-{{$questionNum}}" tabindex="-1" role="dialog" aria-hidden="true">
 					<div class="modal-dialog modal-sm">
@@ -110,27 +131,6 @@
 	    	<h2 class="text-center">Slackin'! You haven't written any questions yet.</h2>
 	    	<p class="text-center">(Let's fix that.)</p>
 		@endif
-		<div class="container col-lg-6">
-	    	<h2>Questions For You</h2>
-	        <div class="column-holder">
-	        	@foreach($relevantQs as $relevantQ)
-				<div class="items-container">
-			    	<div class="item">
-					    <a class="question-link" href="{{{action('QuestionsController@show', $relevantQ->id) }}}"><h3 class="item-head">{{$relevantQ->title}}</h3></a>
-					    <p> 
-						    <div class="inline">
-						    	@foreach ($relevantQ->languages()->get() as $language)
-					                <a class="language-button" method="GET" href="{{{action('QuestionsController@index', 'language='.$language->language)}}}"> {{{$language->language}}}</a><span>&nbsp&nbsp</span>
-						        @endforeach
-						    </div>
-					    </p>
-					    <p class="question-date">Added by: {{{$relevantQ->user->username}}}</p>
-					    <p>{{$relevantQ->created_at->setTimezone('America/New_York')->format('F jS Y')}}</p>
-				    </div>
-			    </div>
-	        	@endforeach
-	    	</div>
-		</div>
 	</div>
 </div>
 
