@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Subscribe
+    Subscribe to Premium
 @stop
 
 @section('content')
@@ -27,7 +27,7 @@
                             data-zip-code="true"
                           </script>
                         {{ Form::close() }}
-                    @else
+                    @elseif(Auth::check() && Auth::user()->subscribed())
                     <p><small>You are already subscribed to this service!</small></p>
                 @endif
             </div>

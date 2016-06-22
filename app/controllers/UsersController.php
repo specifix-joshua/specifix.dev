@@ -12,7 +12,8 @@ class UsersController extends \BaseController {
                 'index', 
                 'show',
                 'store',
-                'doLogin'
+                'doLogin',
+                'subscribe'
             )
         ));
     }
@@ -216,9 +217,12 @@ class UsersController extends \BaseController {
 		if(Auth::attempt(array('email' => $email, 'password' => $password)))
 		{
 			return Redirect::action('UsersController@show', Auth::id());
-		} else {
+		} else if (Auth::attempt(array('email' => $email, 'password' => $password))) 
+		{
 			Session::flash('errorMessage', 'There was an error with your login!');
 			return Redirect::back()->withInput();
+		} else {
+			return Redirect::to('/');
 		}
 	}
 
