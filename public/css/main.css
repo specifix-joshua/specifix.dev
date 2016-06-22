@@ -20,6 +20,10 @@ CTA RED = rgb(255,108,96)
 ORANGE ACCENT = rgb(247,138,9)
 
 */
+.cta {
+  background-color: rgb(255,108,96);
+  border:1px solid rgb(255,108,96);
+}
 
 .by-lang-links{
   color:rgb(0,168,179);
@@ -138,6 +142,19 @@ html {
   border-radius: 25px;
   margin-top:-2px;
   margin-bottom:0px;
+}
+
+.control-label{
+  font-size: 20px;
+}
+
+.form-sub {
+  color:rgb(150,150,150);
+  font-style: italic;
+}
+
+.lang-check {
+  margin-right:10px;
 }
 
 
