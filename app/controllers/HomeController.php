@@ -22,12 +22,11 @@ class HomeController extends BaseController {
                ->take(10)
                ->get();
 		$votes = Vote::all();
-		$users = DB::table('users')
-            ->join('votes', 'users.id', '=', 'votes.user_id')
-            ->select(DB::raw('users.username, count(votes.user_id) as count'))
-			->orderBy('count', 'desc')
-			->groupBy('users.username')
-            ->get();
+		$users = User::all();
+
+		foreach ($users as $user) {
+			$user->score =  $this->getUserScore($user->id);
+		}
 
 		// Question Language Count
 		$languageQs = DB::table('language_question')
@@ -52,6 +51,15 @@ class HomeController extends BaseController {
 	public function showFaq()
 	{
 		return View::make('faq');
+
+	public function getUserScore($id)
+	{
+		$answerScore = DB::table('votes')
+			->select(DB::raw('SUM(count) as vote_count'))
+			->where('answer_id', '=', $id)
+			->get();
+		
+		return $score = $answerScore[0]->vote_count;
 	}
 
 }

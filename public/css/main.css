@@ -1,25 +1,39 @@
-/*COLOR PALETTE
-MAIN TEAL = rgb(65,202,192)
-DARKER TEAL ACCENT = rgb(0,168,179)
- ~~~USE WHITE TO WRITE ON ABOVE~~~
+/*
+COLOR PALETTE
 
-NOTHING ALERT = rgb(91,192,222)
-BAD ALERT = rgb(217,83,79)
+DARK TEAL = rgb(0,168,179)
+
+LIGHT TEAL = rgb(65,202,192)
+
+BLUE MESSAGE = rgb(91,192,222)
+
+RED ALERT = rgb(217,83,79)
+
+CTA RED = rgb(255,108,96)
+
+ORANGE ACCENT = rgb(247,138,9)
+
+PURPLE ACCENT = rgb(152,71,246)
+
 ~~~USE WHITE TO WRITE ON ABOVE~~~
 
 LIGHTEST GRAY = rgb(247,247,247)
 ~~~USE BLACK TO WRITE ON ABOVE~~~
 
 DARKEST GRAY = rgb(213,215,222)
+
 BLUISH GRAY = rgb(229,232,239)
+
 ~~~USE rgb(106,106,109) TO WRITE ON ABOVE~~~
-
-CTA RED = rgb(255,108,96)
-~~~USE WHITE TO WRITE ON ABOVE~~~
-
-ORANGE ACCENT = rgb(247,138,9)
-
 */
+
+#mceu_15 {
+  top:100px;
+}
+.cta {
+  background-color: rgb(255,108,96);
+  border:1px solid rgb(255,108,96);
+}
 
 .by-lang-links{
   color:rgb(0,168,179);
@@ -83,7 +97,9 @@ html {
 .roboto-slab {
   font-family: 'Roboto Slab';
 }
-
+.black {
+  color:black;
+}
 .open-sans {
   font-family: 'Open Sans';
 }
@@ -94,23 +110,18 @@ html {
 
 .items-container{
   background-color: rgb(247,247,247);
-  padding:20px 10px 0px 10px;
+  padding:10px 10px 10px 10px;
   margin-bottom: 0px;
   border:1px solid rgb(213,215,222);
 }
 
-.items-container:hover{
+/*.items-container:hover{
   background-color: rgb(229,232,239);
-  padding:20px 10px 0px 10px;
-}
+}*/
 
 .item-head{
   margin-top: 0px;
   color: rgb(0,168,179);
-}
-
-#language-link{
-  color:black;
 }
 
 .item-divide {
@@ -124,7 +135,7 @@ html {
   color:rgb(255,108,96);
 }
 
-.home-column-holder{
+.column-holder{
   border:3px solid rgb(213,215,222);
   border-radius: 5px
 }
@@ -132,15 +143,28 @@ html {
 
 
 
-.question-module {
-  background-color: rgb(255,108,96);
+.score-icon {
+  background-color: rgb(247,138,9);
   color: white;
   height: 23px;
   padding:0px 6px 2px 6px;
-  border: 2px solid white;
+  border: 1px solid transparent;
   border-radius: 25px;
   margin-top:-2px;
   margin-bottom:0px;
+}
+
+.control-label{
+  font-size: 20px;
+}
+
+.form-sub {
+  color:rgb(150,150,150);
+  font-style: italic;
+}
+
+.lang-check {
+  margin-right:10px;
 }
 
 

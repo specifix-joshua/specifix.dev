@@ -15,11 +15,11 @@
 	<div class="row">
 		<div class="col-lg-2">
 			<h3>Top 20 Users</h3>
-			<div class="home-column-holder">
+			<div class="column-holder">
 				@foreach($users as $user)
 					<div class="items-container">
 				    	<div class="item">
-				    		<p>{{{$user->username}}} - {{{$user->count}}}</p>
+				    		<p></span> {{{$user->username}}} - <button class="score-icon">{{{$user->score}}}</button></p>
 					    </div>
 				    </div>
 				@endforeach
@@ -27,7 +27,7 @@
 		</div>
 		<div class="col-lg-7">
 			<h3>Today's Top Questions</h3>
-			<div class="home-column-holder">
+			<div class="column-holder">
 				@foreach($questions as $question)
 					<div class="items-container">
 				    	<div class="item">
@@ -40,7 +40,7 @@
 							    </div>
 						    </p>
 						    <p class="question-date">Added by: {{{$question->user->username}}}</p>
-						    <p>{{$question->created_at->setTimezone('America/New_York')->format('F jS Y')}} EST</p>
+						    <p>{{$question->created_at->setTimezone('America/New_York')->format('F jS Y')}}</p>
 					    </div>
 				    </div>
 				@endforeach
@@ -48,15 +48,13 @@
 		</div>
 		<div class="col-lg-3">
 			<h3>Questions by Language</h3>
-			<div class="home-column-holder">
+			<div class="column-holder">
 				@foreach($languageQs as $languageQ)
-				<a id="language-link" href="{{{action('QuestionsController@index', 'language='.$languageQ->language)}}}">
 					<div class="items-container">
 						<div class="item">
-							<p><span class="by-lang-links">{{{$languageQ->language}}}</span> <button class="pull-right question-module">{{{$languageQ->count}}} Questions</button></p>
+							<a class="item-head by-lang-links" href="{{{action('QuestionsController@index', 'language='.$languageQ->language)}}}"><span class='black'>{{{$languageQ->language}}}</span> ({{{$languageQ->count}}} Questions)</a>
 						</div>
 					</div>
-				</a>
 				@endforeach
 			</div>
 		</div>

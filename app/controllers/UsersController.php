@@ -20,12 +20,14 @@ class UsersController extends \BaseController {
 	public function getUserScore($id)
 	{
 		$answerScore = DB::table('votes')
+			->join('answers', 'votes.answer_id', '=', 'answers.id')
 			->select(DB::raw('SUM(count) as vote_count'))
-			->where('answer_id', '=', $id)
+			->where('answers.user_id', '=', $id)
 			->get();
 		
 		return $score = $answerScore[0]->vote_count;
 	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -101,11 +103,34 @@ class UsersController extends \BaseController {
 	{
 		$user = User::find($id);
 		$languages = Language::all();
+		
 		$userLanguagesIds = $user->languages()->get()->map(function($language) {
 			return $language->id;
 		});
+		$questions = Question::all();
+		$relevantQs = [];
+		
+		foreach ($questions as $question) {
+			if ($question->user_id != $id){
+				$questionLanguagesIds = $question->languages()->get()->map(function($language) {
+				return $language->id;
+				});
+				foreach($questionLanguagesIds as $qlangId){
+					foreach ($userLanguagesIds as $ulangId) {
+						if ($qlangId == $ulangId) {
+							$relevantQs[] = $question;
+						}
+					}
+				}
+			}
+		};
+
+		$relevantMax = $user->questions()->count();
+		
+		$relevantQs = array_slice($relevantQs, 0, $relevantMax);
+
 		$score = $this->getUserScore($id);
-		return View::make("users.show")->with(['user' => $user, 'score' => $score, 'languages' => $languages, 'userLanguagesIds' => $userLanguagesIds]);
+		return View::make("users.show")->with(['user' => $user, 'score' => $score, 'languages' => $languages, 'userLanguagesIds' => $userLanguagesIds, 'relevantQs' => $relevantQs]);
 	}
 
 
