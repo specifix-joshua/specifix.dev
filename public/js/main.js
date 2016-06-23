@@ -103,6 +103,15 @@
       });
       //END VOTING APPARATUS
 
+      // LOGIN FOR VOTING
+
+      $('.loginNow').on('click', function () {
+        $('.loginTitle').html('Login to Vote');
+          $('.login-modal').modal('show');
+      })
+      $("#login-modal-button").on('click', function () {
+        $('.loginTitle').html('Welcome Back');
+      })
       // TINYMCE FADE
       $(".form-group").on('click', function() {
         $(".mce-tinymce").animate({

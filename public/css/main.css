@@ -26,7 +26,14 @@ BLUISH GRAY = rgb(229,232,239)
 
 ~~~USE rgb(106,106,109) TO WRITE ON ABOVE~~~
 */
+.hard-to-see {
+  color:rgb(213,215,222)
+}
 
+#cancel-link {
+  margin-bottom: 10px;
+  border: 1px solid #d43F3a;
+}
 .flashbar {
   margin-top:-20px;
 }
@@ -42,6 +49,7 @@ BLUISH GRAY = rgb(229,232,239)
 .modal-link {
   margin-top: 10px;
   color:rgb(152,71,246);
+  cursor: pointer;
 }
 
 .modal-links {
