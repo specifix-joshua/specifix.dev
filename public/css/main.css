@@ -26,6 +26,10 @@ BLUISH GRAY = rgb(229,232,239)
 
 ~~~USE rgb(106,106,109) TO WRITE ON ABOVE~~~
 */
+
+.flashbar {
+  margin-top:-20px;
+}
 .prem-star {
   color:rgb(247,138,9);
 }

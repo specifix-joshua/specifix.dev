@@ -108,10 +108,10 @@ class UsersController extends \BaseController {
 		$userLanguagesIds = $user->languages()->get()->map(function($language) {
 			return $language->id;
 		});
-		$questions = Question::all();
-		$questions->sortByDesc('created_at');
+		$questions = Question::orderBy('created_at', 'desc')->get();;
 		$relevantQs = [];
-		$userQs = [];
+		$userQs = $user->questions;
+		$userQs->sortByDesc('created_at');
 		
 		foreach ($questions as $question) {
 			if ($question->user_id != $id){
@@ -127,7 +127,9 @@ class UsersController extends \BaseController {
 				}
 			}
 		};
-		
+
+		// $userQs->sortByDesc('created_at');
+		// $relevantQs->sortByDesc('created_at');
 		
 		$relevantMax = $user->questions()->count();
 		$relevantQs = array_slice($relevantQs, 0, $relevantMax);

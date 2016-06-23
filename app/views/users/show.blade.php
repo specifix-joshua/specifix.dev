@@ -62,7 +62,7 @@
 	    <div class="container col-lg-6">
 	    	<h2>Your Latest Questions</h2>
 	        <div class="column-holder">
-	        	@foreach($user->questions as $questionNum => $question)
+	        	@foreach($userQs as $questionNum => $question)
 				<div class="items-container">
 			    	<div class="item">
 					    <a class="question-link" href="{{{action('QuestionsController@show', $question->id) }}}"><h3 class="item-head">{{$question->title}}
