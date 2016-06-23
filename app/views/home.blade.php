@@ -19,7 +19,7 @@
 				@foreach($users as $user)
 					<div class="items-container">
 				    	<div class="item">
-				    		<p></span> {{{$user->username}}} - <button class="score-icon">{{{$user->score}}}</button></p>
+				    		<p><a href="{{action('UsersController@show', $user->id)}}"></span> {{{$user->username}}} - <button class="score-icon">{{{$user->score}}}</button></a></p>
 					    </div>
 				    </div>
 				@endforeach
