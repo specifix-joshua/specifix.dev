@@ -103,12 +103,18 @@
       });
       //END VOTING APPARATUS
 
+      // TINYMCE FADE
       $(".form-group").on('click', function() {
         $(".mce-tinymce").animate({
           opacity: "1"
         }, 500)
       });
-    })
+
+      //MODAL FOCUS
+      $('#myModal').on('shown.bs.modal', function () {
+        $('#email').focus();
+      })
+    });
 })();
 
 
