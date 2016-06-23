@@ -49,6 +49,7 @@ BLUISH GRAY = rgb(229,232,239)
 .modal-link {
   margin-top: 10px;
   color:rgb(152,71,246);
+  cursor: pointer;
 }
 
 .modal-links {
