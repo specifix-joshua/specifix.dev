@@ -24,6 +24,7 @@
 	  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	    <ul class="nav navbar-nav">
           <li><a href="/questions">All Questions</a></li>
+          <li><a href="/premium">Premium Questions</a></li>
           <li><a href="/users"><span class="glyphicon glyphicon-user"></span> All Users</a></li>
           <!-- These buttons only show if the user is logged IN -->
           @if (Auth::check())
@@ -39,7 +40,7 @@
               {{-- {{ Form::submit('Premium Questions', ['class' => 'btn btn-default nav-buttons']) }} --}}
               {{-- {{ Form::close() }}</li> --}}
 	      @else
-	      	<li><a data-toggle="modal" data-target=".login-modal">Ask a Question</a>
+	      	<li><a data-toggle="modal" data-target=".permission-modal">Ask a Question</a>
 	      @endif
 	    </ul>
 
@@ -56,8 +57,24 @@
         <!-- These only show if the user is logged OUT -->
 
         <button type="button" class="btn btn-default nav-buttons" id="login-modal-button" data-toggle="modal" data-target=".login-modal">Login</button>
-        <button type="button" class="btn btn-default nav-buttons" id="signup-modal-button" data-toggle="modal" data-target=".signup-modal">Sign Up</button>
+        <button type="button" class="btn btn-default nav-buttons purp-button" id="signup-modal-button" data-toggle="modal" data-target=".signup-modal">Sign Up</button>
         @endif
+      </div>
+
+      <!-- Permission Modal -->
+      <div class="modal fade permission-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+              <h4 class="modal-title text-center" id="mySmallModalLabel">You need to be logged in to do that!</h4>
+              <div class="text-center">
+                <a type="button" class="btn btn-default nav-buttons center" id="login-modal-button" data-toggle="modal" data-target=".login-modal">Login</a>
+                <a type="button" class="btn btn-default nav-buttons purp-button" id="signup-modal-button" data-toggle="modal" data-target=".signup-modal">Sign Up</a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
     
@@ -85,8 +102,8 @@
 								</fieldset>
 								<button type="submit" class="btn btn-success center-block">CLICK TO LOG IN</button>
 							{{ Form::close() }}
-              <div class="text-center">
-                  <a href="#" id="forgotPasswordLink">Forgot your password?</a>
+              <div class="text-center modal-links">
+                  <a class="modal-link" data-toggle="modal" data-target=".signup-modal" data-dismiss="modal">Don't Have An Account? >></a>
               </div>
             </div>
           </div>
@@ -133,19 +150,22 @@
 								<div class="alert alert-danger">{{ $errors->first('password', '<span class="help-block">:message</span>') }}</div>
 								@endif
 								<fieldset class="form-group">
-                                    {{ Form::label('password', 'Password') }}
-                                    {{ Form::password('password', ['class' => 'form-control', 'placeholder' => 'Create a Password']) }}
-                                </fieldset>
-                                <fieldset class="form-group">
+                    {{ Form::label('password', 'Password') }}
+                    {{ Form::password('password', ['class' => 'form-control', 'placeholder' => 'Create a Password']) }}
+                </fieldset>
+                <fieldset class="form-group">
 									{{ Form::label('confirmPassword', 'Confirm Password') }}
 									{{ Form::password('confirmPassword', ['class' => 'form-control', 'placeholder' => 'Confirm Password']) }}
 								</fieldset>
 								<button type="submit" class="btn btn-success center-block">CLICK TO SIGN UP</button>
 							{{ Form::close() }}
+              <div class="text-center modal-links">
+                  <a class= "modal-link" data-toggle="modal" data-target=".login-modal" data-dismiss="modal">Already Have An Account? >></a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </div> <!-- End signup modal -->
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
