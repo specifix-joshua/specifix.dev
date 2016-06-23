@@ -67,7 +67,7 @@ class AnswersController extends \BaseController {
 			if($user != Auth::user()){
 				$user->newNotification()
 				    ->withType('Answer')
-				    ->withSubject('Answer for: "' . substr($question->title, 0, 25) . "...")
+				    ->withSubject('Answer for: "' . substr($question->title, 0, 25) . '..."')
 				    ->withBody("$newAnswer->content")
 				    ->regarding($question)
 				    ->deliver();
