@@ -174,6 +174,8 @@ class QuestionsController extends \BaseController {
 		$user = $question->user;
 		$answers = $question->answers;
 		$languages = $question->languages;
+		$ansVoteClassUp = null;
+		$ansVoteClassDown = null;
 		
 		foreach($answers as $answer)	{
 			$answerVotes = DB::table('votes')
@@ -196,6 +198,23 @@ class QuestionsController extends \BaseController {
 			$answer->voted = $voted;
 			$answer->vote_id = $vote_id;
 			$answer->vote_value = $vote_value;
+
+			if (Auth::check()) {
+
+				if ($answer->vote_value == 1) {
+					$ansVoteClassUp = "increment up disabled";
+					$ansVoteClassDown = "increment down enabled double";
+				} elseif ($answer->vote_value == -1) {
+					$ansVoteClassUp = "increment up enabled double";
+					$ansVoteClassDown = "increment down disabled";
+				} else {
+					$ansVoteClassUp = "increment up enabled";
+					$ansVoteClassDown = "increment down enabled";
+				}
+			} else {
+				$ansVoteClassUp = "increment up disabled";
+				$ansVoteClassDown = "increment down disabled";
+			}
 		}
 
 		$votes = DB::table('votes')
@@ -217,10 +236,28 @@ class QuestionsController extends \BaseController {
 				}
 			}
 		}
+		if (Auth::check()) {
+
+			if ($vote_value == 1) {
+				$voteClassUp = "increment up disabled";
+				$voteClassDown = "increment down enabled double";
+			} elseif ($vote_value == -1) {
+				$voteClassUp = "increment up enabled double";
+				$voteClassDown = "increment down disabled";
+			} else {
+				$voteClassUp = "increment up enabled";
+				$voteClassDown = "increment down enabled";
+			}
+		} else {
+			$voteClassUp = "increment up disabled";
+			$voteClassDown = "increment down disabled";
+		}
+
+		
 		
 		$votes = $vote_count;
 		
-		return View::make("questions.show")->with(['question' => $question,'user' => $user, 'answers' => $answers, 'languages' => $languages, 'votes' => $votes,'vote_value' => $vote_value, 'voted' => $voted, 'vote_id' => $vote_id]);
+		return View::make("questions.show")->with(['question' => $question,'user' => $user, 'answers' => $answers, 'languages' => $languages, 'votes' => $votes,'vote_value' => $vote_value, 'voted' => $voted, 'vote_id' => $vote_id, 'voteClassUp' => $voteClassUp, 'voteClassDown' => $voteClassDown, 'ansVoteClassUp' => $ansVoteClassUp, 'ansVoteClassDown' => $ansVoteClassDown]);
 	}
 
 
