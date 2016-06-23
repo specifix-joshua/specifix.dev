@@ -24,6 +24,7 @@
 	  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	    <ul class="nav navbar-nav">
           <li><a href="/questions">All Questions</a></li>
+          <li><a href="/premium">Premium Questions</a></li>
           <li><a href="/users"><span class="glyphicon glyphicon-user"></span> All Users</a></li>
           <!-- These buttons only show if the user is logged IN -->
           @if (Auth::check())
