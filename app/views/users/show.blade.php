@@ -65,7 +65,11 @@
 	        	@foreach($user->questions as $questionNum => $question)
 				<div class="items-container">
 			    	<div class="item">
-					    <a class="question-link" href="{{{action('QuestionsController@show', $question->id) }}}"><h3 class="item-head">{{$question->title}}</h3></a>
+					    <a class="question-link" href="{{{action('QuestionsController@show', $question->id) }}}"><h3 class="item-head">{{$question->title}}
+					    	@if($question->Premium == 'Yes')
+				    		<span class="glyphicon glyphicon-star prem-star" aria-hidden="true"></span>
+				    		@endif
+			    		</h3></a>
 					    <p> 
 						    <div class="inline">
 						    	@foreach ($question->languages()->get() as $language)
@@ -112,7 +116,11 @@
 	        	@foreach($relevantQs as $relevantQ)
 				<div class="items-container">
 			    	<div class="item">
-					    <a class="question-link" href="{{{action('QuestionsController@show', $relevantQ->id) }}}"><h3 class="item-head">{{$relevantQ->title}}</h3></a>
+					    <a class="question-link" href="{{{action('QuestionsController@show', $relevantQ->id) }}}"><h3 class="item-head">{{$relevantQ->title}}
+					    	@if($relevantQ->Premium == 'Yes')
+				    		<span class="glyphicon glyphicon-star prem-star" aria-hidden="true"></span>
+				    		@endif
+				    	</h3></a>
 					    <p> 
 						    <div class="inline">
 						    	@foreach ($relevantQ->languages()->get() as $language)

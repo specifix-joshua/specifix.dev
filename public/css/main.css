@@ -26,7 +26,9 @@ BLUISH GRAY = rgb(229,232,239)
 
 ~~~USE rgb(106,106,109) TO WRITE ON ABOVE~~~
 */
-
+.prem-star {
+  color:rgb(247,138,9);
+}
 .purp-button {
   color:white;
   background-color: rgb(152,71,246);

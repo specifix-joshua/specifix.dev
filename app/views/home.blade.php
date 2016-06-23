@@ -20,7 +20,11 @@
 				@foreach($questions as $question)
 					<div class="items-container">
 				    	<div class="item">
-						    <a class="question-link" href="{{{action('QuestionsController@show', $question->id) }}}"><h3 class="item-head">{{$question->title}}</h3></a>
+						    <a class="question-link" href="{{{action('QuestionsController@show', $question->id) }}}"><h3 class="item-head">{{$question->title}}
+						    	@if($question->Premium == 'Yes')
+					    		<span class="glyphicon glyphicon-star prem-star" aria-hidden="true"></span>
+					    		@endif
+					    	</h3></a>
 						    <p> 
 							    <div class="inline">
 							    	@foreach ($question->languages()->get() as $language)
