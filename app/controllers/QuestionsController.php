@@ -75,12 +75,12 @@ class QuestionsController extends \BaseController {
 			foreach($languageId as $lang) {
 				$language = $lang->id;
 			}
-			$questions = Language::find($language)->questions()->paginate(10);
+			$questions = Language::find($language)->questions()->orderBy('created_at', 'desc')->paginate(10);
 			if(empty($questions)) {
 				App::abort(404);
 			}
 		} else {
-			$questions = Question::paginate(10);
+			$questions = Question::orderBy('created_at', 'desc')->paginate(10);
 		}
 
 		$languages = Language::all();
