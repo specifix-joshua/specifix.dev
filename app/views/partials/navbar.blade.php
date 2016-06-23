@@ -85,8 +85,8 @@
 								</fieldset>
 								<button type="submit" class="btn btn-success center-block">CLICK TO LOG IN</button>
 							{{ Form::close() }}
-              <div class="text-center">
-                  <a href="#" id="forgotPasswordLink">Forgot your password?</a>
+              <div class="text-center modal-links">
+                  <a class="modal-link" data-toggle="modal" data-target=".signup-modal" data-dismiss="modal">Don't Have An Account? >></a>
               </div>
             </div>
           </div>
@@ -142,6 +142,9 @@
 								</fieldset>
 								<button type="submit" class="btn btn-success center-block">CLICK TO SIGN UP</button>
 							{{ Form::close() }}
+              <div class="text-center modal-links">
+                  <a class= "modal-link" data-toggle="modal" data-target=".login-modal" data-dismiss="modal">Already Have An Account? >></a>
+              </div>
             </div>
           </div>
         </div>

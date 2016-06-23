@@ -27,9 +27,16 @@ BLUISH GRAY = rgb(229,232,239)
 ~~~USE rgb(106,106,109) TO WRITE ON ABOVE~~~
 */
 
-#mceu_15 {
-  top:100px;
+
+.modal-link {
+  margin-top: 10px;
+  color:rgb(152,71,246);
 }
+
+.modal-links {
+  margin-top: 10px;
+}
+
 .cta {
   background-color: rgb(255,108,96);
   border:1px solid rgb(255,108,96);
