@@ -122,6 +122,14 @@
 			{{ Form::close() }}
 		</div>
 	</div>
+	@else
+	<div class='col-xs-10 col-xs-offset-2'>
+		<div class="row">
+			<h2>Log in to answer this question!</h2>
+			<button type="button" class="btn btn-default nav-buttons" id="login-modal-button" data-toggle="modal" data-target=".login-modal">Login</button>
+		</div>
+		
+	</div>
 	@endif
 	<!-- END SUBMIT ANSWER -->
 </div>
