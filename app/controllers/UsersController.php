@@ -85,6 +85,7 @@ class UsersController extends \BaseController {
 		}
 		else if ($user->save()) 
 		{
+			$this->doLogin();
 			Session::flash('successMessage', 'You have successfully signed up!');
 			Log::info("New User Created: id= $user->id, title= $user->name, email= $user->email");
 			return Redirect::back();
@@ -218,7 +219,7 @@ class UsersController extends \BaseController {
 
 		if(Auth::attempt(array('email' => $email, 'password' => $password)))
 		{
-			return Redirect::action('UsersController@show', Auth::id());
+			return Redirect::back();
 		} else if (!Auth::attempt(array('email' => $email, 'password' => $password))) 
 		{
 			Session::flash('errorMessage', 'There was an error with your login!');
