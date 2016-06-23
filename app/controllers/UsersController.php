@@ -12,7 +12,8 @@ class UsersController extends \BaseController {
                 'index', 
                 'show',
                 'store',
-                'doLogin'
+                'doLogin',
+                'subscribe'
             )
         ));
     }
@@ -20,12 +21,14 @@ class UsersController extends \BaseController {
 	public function getUserScore($id)
 	{
 		$answerScore = DB::table('votes')
+			->join('answers', 'votes.answer_id', '=', 'answers.id')
 			->select(DB::raw('SUM(count) as vote_count'))
-			->where('answer_id', '=', $id)
+			->where('answers.user_id', '=', $id)
 			->get();
 		
 		return $score = $answerScore[0]->vote_count;
 	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -33,7 +36,7 @@ class UsersController extends \BaseController {
 	 */
 	public function index()
 	{
-		$users = User::paginate(20);
+		$users = User::paginate(18);
 		foreach ($users as $user) {
 			$score[] =  $this->getUserScore($user->id);
 		}
@@ -82,7 +85,8 @@ class UsersController extends \BaseController {
 		}
 		else if ($user->save()) 
 		{
-			Session::flash('successMessage', 'User has been saved');
+			$this->doLogin();
+			Session::flash('successMessage', 'You have successfully signed up!');
 			Log::info("New User Created: id= $user->id, title= $user->name, email= $user->email");
 			return Redirect::back();
         
@@ -101,11 +105,38 @@ class UsersController extends \BaseController {
 	{
 		$user = User::find($id);
 		$languages = Language::all();
+		
 		$userLanguagesIds = $user->languages()->get()->map(function($language) {
 			return $language->id;
 		});
+		$questions = Question::orderBy('created_at', 'desc')->get();;
+		$relevantQs = [];
+		$userQs = $user->questions;
+		$userQs->sortByDesc('created_at');
+		
+		foreach ($questions as $question) {
+			if ($question->user_id != $id){
+				$questionLanguagesIds = $question->languages()->get()->map(function($language) {
+				return $language->id;
+				});
+				foreach($questionLanguagesIds as $qlangId){
+					foreach ($userLanguagesIds as $ulangId) {
+						if ($qlangId == $ulangId) {
+							$relevantQs[] = $question;
+						}
+					}
+				}
+			}
+		};
+
+		// $userQs->sortByDesc('created_at');
+		// $relevantQs->sortByDesc('created_at');
+		
+		$relevantMax = $user->questions()->count();
+		$relevantQs = array_slice($relevantQs, 0, $relevantMax);
+
 		$score = $this->getUserScore($id);
-		return View::make("users.show")->with(['user' => $user, 'score' => $score, 'languages' => $languages, 'userLanguagesIds' => $userLanguagesIds]);
+		return View::make("users.show")->with(['user' => $user, 'score' => $score, 'languages' => $languages, 'userLanguagesIds' => $userLanguagesIds, 'relevantQs' => $relevantQs, 'userQs' => $userQs ]);
 	}
 
 
@@ -190,10 +221,13 @@ class UsersController extends \BaseController {
 
 		if(Auth::attempt(array('email' => $email, 'password' => $password)))
 		{
-			return Redirect::to('/users');
-		} else {
+			return Redirect::back();
+		} else if (!Auth::attempt(array('email' => $email, 'password' => $password))) 
+		{
 			Session::flash('errorMessage', 'There was an error with your login!');
 			return Redirect::back()->withInput();
+		} else {
+			return Redirect::to('/');
 		}
 	}
 
@@ -225,5 +259,16 @@ class UsersController extends \BaseController {
             Session::flash('successMessage', 'You are now unsubscribed');
             return View::make('users.cancel');
         }
+	}
+
+	public function resumeSubscription($id)
+	{
+		$user = User::find($id);
+		if(Auth::user() && Auth::id() == $id && Auth::user()->cancelled()) 
+		{
+			$user->subscription('monthly')->resume($user->token);
+			Session::flash('successMessage', 'You have successfully resumed your premium services!');
+			return Redirect::back();
+		}
 	}
 }

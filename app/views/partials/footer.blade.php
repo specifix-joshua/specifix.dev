@@ -1,7 +1,7 @@
 <footer class="footer">
     <div class="container one col-lg-4 col-md-4 col-xs-12">
         <h3>Specifix</h3>
-        <p>Text here</p>
+        <p><a href="/faq">FAQ</a></p>
     </div>
 
     <div class="container two col-lg-4 col-md-4 col-xs-12">

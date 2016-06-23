@@ -58,9 +58,8 @@
           } else {
             var count = count + vote;
             $(this).attr("data-voted", "1")
-            $(this).siblings(".increment").attr("data-voted", "1")
+            $(this).siblings(".enabled").attr("data-voted", "1").addClass("double");
             $(this).removeClass("enabled");
-            $(".enabled").addClass("double");
             $(this).addClass("disabled");
           }
           $("~ .count", this).text(count);     
@@ -103,6 +102,28 @@
         });
       });
       //END VOTING APPARATUS
+
+      // LOGIN FOR VOTING
+
+      $('.loginNow').on('click', function () {
+        $('.loginTitle').html('Login to Vote');
+          $('.login-modal').modal('show');
+      })
+      $("#login-modal-button").on('click', function () {
+        $('.loginTitle').html('Welcome Back');
+      })
+      // TINYMCE FADE
+      $(".form-group").on('click', function() {
+        $(".mce-tinymce").animate({
+          opacity: "1"
+        }, 500)
+      });
+
+      //MODAL FOCUS
+      $('.modal').on('shown.bs.modal', function () {
+        $('#email').focus();
+        $('#username').focus();
+      })
     })
 })();
 
