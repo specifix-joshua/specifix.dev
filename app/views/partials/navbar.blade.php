@@ -84,7 +84,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-              <h4 class="modal-title" id="mySmallModalLabel">Welcome back!</h4>
+              <h4 class="modal-title loginTitle" id="mySmallModalLabel">Welcome back!</h4>
 			        {{ Form::open(array('action' => 'UsersController@doLogin')) }}
 								@if ($errors->has('email'))
 								<div class="alert alert-danger">{{ $errors->first('name', '<span class="help-block">:message</span>') }}</div>
