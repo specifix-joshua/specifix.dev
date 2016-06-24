@@ -27,7 +27,12 @@ BLUISH GRAY = rgb(229,232,239)
 ~~~USE rgb(106,106,109) TO WRITE ON ABOVE~~~
 */
 .hard-to-see {
+  cursor: pointer;
   color:rgb(213,215,222)
+}
+
+.pointer {
+  cursor: pointer;
 }
 
 #cancel-link {
