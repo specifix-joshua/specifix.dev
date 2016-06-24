@@ -89,6 +89,7 @@ class UsersController extends \BaseController {
 		}
 		else if ($user->save()) 
 		{
+			$this->doLogin();
 			Session::flash('successMessage', 'You have successfully signed up!');
 			Log::info("New User Created: id= $user->id, title= $user->name, email= $user->email");
 			return Redirect::back();
@@ -116,10 +117,10 @@ class UsersController extends \BaseController {
 		$userLanguagesIds = $user->languages()->get()->map(function($language) {
 			return $language->id;
 		});
-		$questions = Question::all();
-		$questions->sortByDesc('created_at');
+		$questions = Question::orderBy('created_at', 'desc')->get();;
 		$relevantQs = [];
-		$userQs = [];
+		$userQs = $user->questions;
+		$userQs->sortByDesc('created_at');
 		
 		foreach ($questions as $question) {
 			if ($question->user_id != $id){
@@ -135,7 +136,9 @@ class UsersController extends \BaseController {
 				}
 			}
 		};
-		
+
+		// $userQs->sortByDesc('created_at');
+		// $relevantQs->sortByDesc('created_at');
 		
 		$relevantMax = $user->questions()->count();
 		$relevantQs = array_slice($relevantQs, 0, $relevantMax);
@@ -226,7 +229,7 @@ class UsersController extends \BaseController {
 
 		if(Auth::attempt(array('email' => $email, 'password' => $password)))
 		{
-			return Redirect::action('UsersController@show', Auth::id());
+			return Redirect::back();
 		} else if (!Auth::attempt(array('email' => $email, 'password' => $password))) 
 		{
 			Session::flash('errorMessage', 'There was an error with your login!');

@@ -13,25 +13,18 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-lg-3">
-			<h3>Top 20 Users</h3>
-			<div class="column-holder">
-				@foreach($users as $user)
-					<div class="items-container">
-				    	<div class="item">
-				    		<p><a href="{{action('UsersController@show', $user->id)}}"></span> {{{$user->username}}} - <button class="score-icon">{{{$user->score}}}</button></a></p>
-					    </div>
-				    </div>
-				@endforeach
-			</div>
-		</div>
-		<div class="col-lg-6">
+		
+		<div class="col-lg-8">
 			<h3>Today's Top Questions</h3>
 			<div class="column-holder">
 				@foreach($questions as $question)
 					<div class="items-container">
 				    	<div class="item">
-						    <a class="question-link" href="{{{action('QuestionsController@show', $question->id) }}}"><h3 class="item-head">{{$question->title}}</h3></a>
+						    <a class="question-link" href="{{{action('QuestionsController@show', $question->id) }}}"><h3 class="item-head">{{$question->title}}
+						    	@if($question->Premium == 'Yes')
+					    		<span class="glyphicon glyphicon-star prem-star" aria-hidden="true"></span>
+					    		@endif
+					    	</h3></a>
 						    <p> 
 							    <div class="inline">
 							    	@foreach ($question->languages()->get() as $language)
@@ -46,7 +39,7 @@
 				@endforeach
 			</div>
 		</div>
-		<div class="col-lg-3">
+		<div class="col-lg-4">
 			<h3>Questions by Language</h3>
 			<div class="column-holder">
 				@foreach($languageQs as $languageQ)
@@ -55,6 +48,17 @@
 							<a class="item-head by-lang-links" href="{{{action('QuestionsController@index', 'language='.$languageQ->language)}}}"><span class='black'>{{{$languageQ->language}}}</span> ({{{$languageQ->count}}} Questions)</a>
 						</div>
 					</div>
+				@endforeach
+			</div>
+			<hr>
+			<h3>Top 20 Users</h3>
+			<div class="column-holder">
+				@foreach($users as $user)
+					<div class="items-container">
+				    	<div class="item">
+				    		<p><a href="{{action('UsersController@show', $user->id)}}"></span> {{{$user->username}}} - <button class="score-icon">{{{$user->score}}}</button></a></p>
+					    </div>
+				    </div>
 				@endforeach
 			</div>
 		</div>
