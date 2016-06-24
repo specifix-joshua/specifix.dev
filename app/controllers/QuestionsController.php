@@ -183,118 +183,123 @@ class QuestionsController extends \BaseController {
 	{
 		$user = Auth::user();
 		$question = Question::find($id);
-		$premiumQuestions = DB::table('questions')
-    		->select(DB::raw('id'))
-    		->where('Premium', '=', 'Yes')
-    		->get();
-    	$isPremium = null;
-    	foreach($premiumQuestions as $key => $premiumQuestion)
-    	{
-    		if($premiumQuestion->id == $question->id)
-    		{
-    			$isPremium = true;
-    		}
-    	}
-    	if(Auth::check())
-    	{
-			$userScore = intval($this->getUserScore($user->id));
-    	} else {
-    		$userScore = null;
-    	}
-		$question = Question::find($id);
-		if($question == null) {
-			App::abort(404);
-		}
-		$loggedInUser = Auth::user();
-		$user = $question->user;
-		$answers = $question->answers;
-		$languages = $question->languages;
-		$ansVoteClassUp = null;
-		$ansVoteClassDown = null;
-		
-		foreach($answers as $answer)	{
-			$answerVotes = DB::table('votes')
+		if ($question == null) {
+			return View::make("gone");
+		} else {
+			$premiumQuestions = DB::table('questions')
+	    		->select(DB::raw('id'))
+	    		->where('Premium', '=', 'Yes')
+	    		->get();
+	    	$isPremium = null;
+
+	    	foreach($premiumQuestions as $key => $premiumQuestion)
+	    	{
+	    		if($premiumQuestion->id == $question->id)
+	    		{
+	    			$isPremium = true;
+	    		}
+	    	}
+	    	if(Auth::check())
+	    	{
+				$userScore = intval($this->getUserScore($user->id));
+	    	} else {
+	    		$userScore = null;
+	    	}
+			$question = Question::find($id);
+			if($question == null) {
+				App::abort(404);
+			}
+			$loggedInUser = Auth::user();
+			$user = $question->user;
+			$answers = $question->answers;
+			$languages = $question->languages;
+			$ansVoteClassUp = null;
+			$ansVoteClassDown = null;
+			
+			foreach($answers as $answer)	{
+				$answerVotes = DB::table('votes')
+					->select(DB::raw('count as vote_count, user_id, id'))
+					->where('answer_id', '=', $answer->id)
+					->get();
+				$vote_count = 0;
+				$voted = false;
+				$vote_value = 0;
+				$vote_id = null;
+				foreach ($answerVotes as $vote) {
+					$vote_count += $vote->vote_count;
+						if (Auth::check() && $voted == false && $loggedInUser->id == $vote->user_id) {
+							$voted = true;
+							$vote_value = $vote->vote_count;
+							$vote_id = $vote->id;
+						}
+				}
+				$answer->vote_count = $vote_count;	
+				$answer->voted = $voted;
+				$answer->vote_id = $vote_id;
+				$answer->vote_value = $vote_value;
+
+				if (Auth::check()) {
+
+					if ($answer->vote_value == 1) {
+						$ansVoteClassUp = "increment up disabled";
+						$ansVoteClassDown = "increment down enabled double";
+					} elseif ($answer->vote_value == -1) {
+						$ansVoteClassUp = "increment up enabled double";
+						$ansVoteClassDown = "increment down disabled";
+					} else {
+						$ansVoteClassUp = "increment up enabled";
+						$ansVoteClassDown = "increment down enabled";
+					}
+				} else {
+					$ansVoteClassUp = "increment up disabled loginNow";
+					$ansVoteClassDown = "increment down disabled loginNow";
+				}
+			}
+
+			$answers->sortByDesc('vote_count');
+
+			$votes = DB::table('votes')
 				->select(DB::raw('count as vote_count, user_id, id'))
-				->where('answer_id', '=', $answer->id)
+				->where('question_id', '=', $id)
 				->get();
+			
 			$vote_count = 0;
 			$voted = false;
 			$vote_value = 0;
 			$vote_id = null;
-			foreach ($answerVotes as $vote) {
+			foreach ($votes as $vote) {
 				$vote_count += $vote->vote_count;
-					if (Auth::check() && $voted == false && $loggedInUser->id == $vote->user_id) {
+				if (Auth::check()) {
+					if ($voted == false && $loggedInUser->id == $vote->user_id) {
 						$voted = true;
 						$vote_value = $vote->vote_count;
 						$vote_id = $vote->id;
 					}
+				}
 			}
-			$answer->vote_count = $vote_count;	
-			$answer->voted = $voted;
-			$answer->vote_id = $vote_id;
-			$answer->vote_value = $vote_value;
-
 			if (Auth::check()) {
 
-				if ($answer->vote_value == 1) {
-					$ansVoteClassUp = "increment up disabled";
-					$ansVoteClassDown = "increment down enabled double";
-				} elseif ($answer->vote_value == -1) {
-					$ansVoteClassUp = "increment up enabled double";
-					$ansVoteClassDown = "increment down disabled";
+				if ($vote_value == 1) {
+					$voteClassUp = "increment up disabled";
+					$voteClassDown = "increment down enabled double";
+				} elseif ($vote_value == -1) {
+					$voteClassUp = "increment up enabled double";
+					$voteClassDown = "increment down disabled";
 				} else {
-					$ansVoteClassUp = "increment up enabled";
-					$ansVoteClassDown = "increment down enabled";
+					$voteClassUp = "increment up enabled";
+					$voteClassDown = "increment down enabled";
 				}
 			} else {
-				$ansVoteClassUp = "increment up disabled loginNow";
-				$ansVoteClassDown = "increment down disabled loginNow";
+				$voteClassUp = "increment up disabled loginNow";
+				$voteClassDown = "increment down disabled loginNow";
 			}
+
+			
+			
+			$votes = $vote_count;
+			
+			return View::make("questions.show")->with(['question' => $question,'user' => $user, 'answers' => $answers, 'languages' => $languages, 'votes' => $votes,'vote_value' => $vote_value, 'voted' => $voted, 'vote_id' => $vote_id, 'voteClassUp' => $voteClassUp, 'voteClassDown' => $voteClassDown, 'ansVoteClassUp' => $ansVoteClassUp, 'ansVoteClassDown' => $ansVoteClassDown, 'premiumQuestions' => $premiumQuestions, 'userScore' => $userScore, 'isPremium' => $isPremium]);
 		}
-
-		$answers->sortByDesc('vote_count');
-
-		$votes = DB::table('votes')
-			->select(DB::raw('count as vote_count, user_id, id'))
-			->where('question_id', '=', $id)
-			->get();
-		
-		$vote_count = 0;
-		$voted = false;
-		$vote_value = 0;
-		$vote_id = null;
-		foreach ($votes as $vote) {
-			$vote_count += $vote->vote_count;
-			if (Auth::check()) {
-				if ($voted == false && $loggedInUser->id == $vote->user_id) {
-					$voted = true;
-					$vote_value = $vote->vote_count;
-					$vote_id = $vote->id;
-				}
-			}
-		}
-		if (Auth::check()) {
-
-			if ($vote_value == 1) {
-				$voteClassUp = "increment up disabled";
-				$voteClassDown = "increment down enabled double";
-			} elseif ($vote_value == -1) {
-				$voteClassUp = "increment up enabled double";
-				$voteClassDown = "increment down disabled";
-			} else {
-				$voteClassUp = "increment up enabled";
-				$voteClassDown = "increment down enabled";
-			}
-		} else {
-			$voteClassUp = "increment up disabled loginNow";
-			$voteClassDown = "increment down disabled loginNow";
-		}
-
-		
-		
-		$votes = $vote_count;
-		
-		return View::make("questions.show")->with(['question' => $question,'user' => $user, 'answers' => $answers, 'languages' => $languages, 'votes' => $votes,'vote_value' => $vote_value, 'voted' => $voted, 'vote_id' => $vote_id, 'voteClassUp' => $voteClassUp, 'voteClassDown' => $voteClassDown, 'ansVoteClassUp' => $ansVoteClassUp, 'ansVoteClassDown' => $ansVoteClassDown, 'premiumQuestions' => $premiumQuestions, 'userScore' => $userScore, 'isPremium' => $isPremium]);
 	}
 
 
