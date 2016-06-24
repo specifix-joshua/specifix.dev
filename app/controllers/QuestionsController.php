@@ -195,7 +195,12 @@ class QuestionsController extends \BaseController {
     			$isPremium = true;
     		}
     	}
-		$userScore = intval($this->getUserScore($user->id));
+    	if(Auth::check())
+    	{
+			$userScore = intval($this->getUserScore($user->id));
+    	} else {
+    		$userScore = null;
+    	}
 		$question = Question::find($id);
 		if($question == null) {
 			App::abort(404);
@@ -287,8 +292,7 @@ class QuestionsController extends \BaseController {
 		
 		$votes = $vote_count;
 		
-		return View::make("questions.show")->with(['question' => $question, 'user' => $user, 'answers' => $answers, 'languages' => $languages, 'votes' => $votes,'vote_value' => $vote_value, 'voted' => $voted, 'vote_id' => $vote_id, 'premiumQuestions' => $premiumQuestions, 'userScore' => $userScore, 'isPremium' => $isPremium]);
-		return View::make("questions.show")->with(['question' => $question,'user' => $user, 'answers' => $answers, 'languages' => $languages, 'votes' => $votes,'vote_value' => $vote_value, 'voted' => $voted, 'vote_id' => $vote_id, 'voteClassUp' => $voteClassUp, 'voteClassDown' => $voteClassDown, 'ansVoteClassUp' => $ansVoteClassUp, 'ansVoteClassDown' => $ansVoteClassDown]);
+		return View::make("questions.show")->with(['question' => $question,'user' => $user, 'answers' => $answers, 'languages' => $languages, 'votes' => $votes,'vote_value' => $vote_value, 'voted' => $voted, 'vote_id' => $vote_id, 'voteClassUp' => $voteClassUp, 'voteClassDown' => $voteClassDown, 'ansVoteClassUp' => $ansVoteClassUp, 'ansVoteClassDown' => $ansVoteClassDown, 'premiumQuestions' => $premiumQuestions, 'userScore' => $userScore, 'isPremium' => $isPremium]);
 	}
 
 
