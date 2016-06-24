@@ -27,23 +27,12 @@
 	<div class="row">
 		<div id="vote-apparatus" class="col-xs-2">
 			<div class="vote chev">
-				@if($vote_value == 1) 
-				<!-- VOTING APPARATUS - UP DISABLED -->
-					<div class="increment up disabled" data-type='question' data-object-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}' data-voted='{{{$voted}}}' data-vote-id='{{{$vote_id}}}'></div>
-				    <div class="increment down enabled double" data-type='question'  data-object-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}'
-				    data-voted='{{{$voted}}}' data-vote-id='{{{$vote_id}}}'></div>
-				    <div class="count">{{{$votes}}}</div>
-				@elseif($vote_value == -1)
-				<!-- VOTING APPARATUS - DOWN DISABLED -->
-					<div class="increment up enabled double" data-type='question'  data-object-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}' data-voted='{{{$voted}}}' data-vote-id='{{{$vote_id}}}'></div>
-				    <div class="increment down disabled" data-type='question'  data-object-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}' data-voted='{{{$voted}}}' data-vote-id='{{{$vote_id}}}'></div>
-				    <div class="count">{{{$votes}}}</div>
-				@else
-				<!-- VOTING APPARATUS - ENABLED -->
-					<div class="increment up enabled" data-type='question'  data-object-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}' data-voted='{{{$voted}}}' data-vote-id='{{{$vote_id}}}'></div>
-				    <div class="increment down enabled" data-type='question'  data-object-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}' data-voted='{{{$voted}}}' data-vote-id='{{{$vote_id}}}'></div>
-				    <div class="count">{{{$votes}}}</div>
-				@endif			    
+
+				<div class='{{$voteClassUp}}' data-type='question' data-object-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}' data-voted='{{{$voted}}}' data-vote-id='{{{$vote_id}}}'></div>
+			    <div class='{{$voteClassDown}}' data-type='question'  data-object-id='{{{$question->id}}}' data-user-id='{{{$question->user->id}}}'
+			    data-voted='{{{$voted}}}' data-vote-id='{{{$vote_id}}}'></div>
+			    <div class="count">{{{$votes}}}</div>
+
 			</div>
 		</div>
 		<div class="panel col-xs-10"> 
@@ -59,22 +48,12 @@
 	<div class="row">
 		<div id="vote-apparatus" class="col-xs-2 col-xs-offset-2">
 			<div class="vote chev">
-				@if($answer->vote_value == 1) 
-				<!-- VOTING APPARATUS - UP DISABLED -->
-					<div class="increment up disabled" data-type='answer' data-object-id='{{{$answer->id}}}' data-user-id='{{{$question->user->id}}}' data-voted='{{{$answer->voted}}}' data-vote-id='{{{$answer->vote_id}}}'></div>
-				    <div class="increment down enabled double" data-type='answer' data-object-id='{{{$answer->id}}}' data-user-id='{{{$question->user->id}}}' data-voted='{{{$answer->voted}}}' data-vote-id='{{{$answer->vote_id}}}'></div>
-				    <div class="count">{{{$answer->vote_count}}}</div>
-				@elseif($answer->vote_value == -1)
-				<!-- VOTING APPARATUS - DOWN DISABLED -->
-					<div class="increment up enabled double" data-type='answer'  data-object-id='{{{$answer->id}}}' data-user-id='{{{$question->user->id}}}' data-voted='{{{$answer->voted}}}' data-vote-id='{{{$answer->vote_id}}}'></div>
-				    <div class="increment down disabled" data-type='answer'  data-object-id='{{{$answer->id}}}' data-user-id='{{{$question->user->id}}}' data-voted='{{{$answer->voted}}}' data-vote-id='{{{$answer->vote_id}}}'></div>
-				    <div class="count">{{{$answer->vote_count}}}</div>
-				@else
-				<!-- VOTING APPARATUS - ENABLED -->
-					<div class="increment up enabled" data-type='answer' data-object-id='{{{$answer->id}}}' data-user-id='{{{$question->user->id}}}' data-voted='{{{$answer->voted}}}' data-vote-id='{{{$answer->vote_id}}}'></div>
-				    <div class="increment down enabled" data-type='answer' data-object-id='{{{$answer->id}}}' data-user-id='{{{$question->user->id}}}' data-voted='{{{$answer->voted}}}' data-vote-id='{{{$answer->vote_id}}}'></div>
-				    <div class="count">{{{$answer->vote_count}}}</div>
-				@endif	
+
+
+				<div class="{{$ansVoteClassUp}}" data-type='answer' data-object-id='{{{$answer->id}}}' data-user-id='{{{$question->user->id}}}' data-voted='{{{$answer->voted}}}' data-vote-id='{{{$answer->vote_id}}}'></div>
+			    <div class="{{$ansVoteClassDown}}" data-type='answer' data-object-id='{{{$answer->id}}}' data-user-id='{{{$question->user->id}}}' data-voted='{{{$answer->voted}}}' data-vote-id='{{{$answer->vote_id}}}'></div>
+			    <div class="count">{{{$answer->vote_count}}}</div>
+			    
 			</div>
 		</div>
 		<div class="panel col-xs-8"> 
@@ -100,6 +79,7 @@
 	<!-- END POSTED ANSWERS -->
 	@if (Auth::check())
 	<!-- SUBMIT ANSWER -->
+	@if($isPremium && $userScore > 50)
 	<div class='col-xs-10 col-xs-offset-2'>
 		<div class="row">
 			<h2>Submit A New Answer:</h2>
@@ -121,6 +101,42 @@
 			    </div>
 			{{ Form::close() }}
 		</div>
+	</div>
+	@elseif($isPremium && $userScore < 50)
+	<h3>You need a higher score to answer this question!</h3>
+	@endif
+
+	@if(!$isPremium)
+		<div class='col-xs-10 col-xs-offset-2'>
+		<div class="row">
+			<h2>Submit A New Answer:</h2>
+		</div>
+		<div class="row answer-form">
+			{{Form::open(array('action' => array('AnswersController@store', $question->id))) }}
+			<!--Question Content-->
+			    <div class="form-group">
+			        {{ Form::label('content', 'Content', array('class' => 'control-label')) }}
+			        {{ Form::hidden('question_id', $question->id) }}
+			        {{ Form::hidden('question_user', $question->user_id) }}
+			        {{ Form::hidden('question', $question) }}
+			        {{ Form::textarea('content', null, array('placeholder' => 'Question Details', 'class' => 'form-control')) }}
+			        {{ $errors->first('content', '<span class="help-block">:message</span>') }}
+			    </div>
+			<!--SUBMIT-->
+			    <div class="form-group">
+			        <button class="btn btn-primary" name="submit" type="submit">Submit</button>
+			    </div>
+			{{ Form::close() }}
+		</div>
+	</div>
+	@endif
+	@else
+	<div class='col-xs-10 col-xs-offset-2'>
+		<div class="row">
+			<h2>Log in to answer this question!</h2>
+			<button type="button" class="btn btn-default nav-buttons" id="login-modal-button" data-toggle="modal" data-target=".login-modal">Login</button>
+		</div>
+		
 	</div>
 	@endif
 	<!-- END SUBMIT ANSWER -->

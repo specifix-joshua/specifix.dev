@@ -26,10 +26,36 @@ BLUISH GRAY = rgb(229,232,239)
 
 ~~~USE rgb(106,106,109) TO WRITE ON ABOVE~~~
 */
-
-#mceu_15 {
-  top:100px;
+.hard-to-see {
+  color:rgb(213,215,222)
 }
+
+#cancel-link {
+  margin-bottom: 10px;
+  border: 1px solid #d43F3a;
+}
+.flashbar {
+  margin-top:-20px;
+}
+.prem-star {
+  color:rgb(247,138,9);
+}
+.purp-button {
+  color:white;
+  background-color: rgb(152,71,246);
+  border: 1px solid rgb(152,71,246);;
+}
+
+.modal-link {
+  margin-top: 10px;
+  color:rgb(152,71,246);
+  cursor: pointer;
+}
+
+.modal-links {
+  margin-top: 10px;
+}
+
 .cta {
   background-color: rgb(255,108,96);
   border:1px solid rgb(255,108,96);

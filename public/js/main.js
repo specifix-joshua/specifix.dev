@@ -103,11 +103,27 @@
       });
       //END VOTING APPARATUS
 
+      // LOGIN FOR VOTING
+
+      $('.loginNow').on('click', function () {
+        $('.loginTitle').html('Login to Vote');
+          $('.login-modal').modal('show');
+      })
+      $("#login-modal-button").on('click', function () {
+        $('.loginTitle').html('Welcome Back');
+      })
+      // TINYMCE FADE
       $(".form-group").on('click', function() {
         $(".mce-tinymce").animate({
           opacity: "1"
         }, 500)
       });
+
+      //MODAL FOCUS
+      $('.modal').on('shown.bs.modal', function () {
+        $('#email').focus();
+        $('#username').focus();
+      })
     })
 })();
 

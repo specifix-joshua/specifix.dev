@@ -25,8 +25,12 @@ class UsersController extends \BaseController {
 	public function index()
 	{
 		$users = User::paginate(18);
+		$score = [];
 		foreach ($users as $user) {
 			$score[] =  $this->getUserScore($user->id);
+		}
+		if($score == null) {
+			App::abort(404);
 		}
 		return View::make('users.index')->with(['users' => $users, 'score' => $score]);
 	}
@@ -73,6 +77,7 @@ class UsersController extends \BaseController {
 		}
 		else if ($user->save()) 
 		{
+			$this->doLogin();
 			Session::flash('successMessage', 'You have successfully signed up!');
 			Log::info("New User Created: id= $user->id, title= $user->name, email= $user->email");
 			return Redirect::back();
@@ -92,12 +97,18 @@ class UsersController extends \BaseController {
 	{
 		$user = User::find($id);
 		$languages = Language::all();
+
+		if($user == null) {
+			App::abort(404);
+		}
 		
 		$userLanguagesIds = $user->languages()->get()->map(function($language) {
 			return $language->id;
 		});
-		$questions = Question::all();
+		$questions = Question::orderBy('created_at', 'desc')->get();;
 		$relevantQs = [];
+		$userQs = $user->questions;
+		$userQs->sortByDesc('created_at');
 		
 		foreach ($questions as $question) {
 			if ($question->user_id != $id){
@@ -114,6 +125,12 @@ class UsersController extends \BaseController {
 			}
 		};
 
+<<<<<<< HEAD
+=======
+		// $userQs->sortByDesc('created_at');
+		// $relevantQs->sortByDesc('created_at');
+		
+>>>>>>> master
 		$relevantMax = $user->questions()->count();
 		
 		$relevantQs = array_slice($relevantQs, 0, $relevantMax);
@@ -204,8 +221,14 @@ class UsersController extends \BaseController {
 
 		if(Auth::attempt(array('email' => $email, 'password' => $password)))
 		{
+<<<<<<< HEAD
 			return Redirect::action('UsersController@show', Auth::id());
 		} else {
+=======
+			return Redirect::back();
+		} else if (!Auth::attempt(array('email' => $email, 'password' => $password))) 
+		{
+>>>>>>> master
 			Session::flash('errorMessage', 'There was an error with your login!');
 			return Redirect::back()->withInput();
 		}

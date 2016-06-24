@@ -26,6 +26,11 @@ class LanguageUserTableSeeder extends Seeder {
                     'language_id' => 1,
                     ]
                 ];
-         DB::table('language_user')->insert($data);
+        for ($i=4; $i<53; $i++) {
+           $data[] = ['user_id' => $i, 'language_id' => mt_rand(1, 3),];
+           $data[] = ['user_id' => $i, 'language_id' => mt_rand(4, 7),];
+        };
+
+        DB::table('language_user')->insert($data);
     }
 }

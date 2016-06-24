@@ -7,7 +7,11 @@
 @section('content')
     @foreach($questions as $key => $question)
         <div class="container">
-            <h2><a href="{{{action('QuestionsController@show', $question->id) }}}">{{{ $question->title }}}</a></h2>
+            <h2><a href="{{{action('QuestionsController@show', $question->id) }}}">{{{ $question->title }}}
+                @if($question->Premium == 'Yes')
+                <span class="glyphicon glyphicon-star prem-star" aria-hidden="true"></span>
+                @endif
+            </a></h2>
                 <p>Asked by: {{{ $question->user->username }}}</p>
                 <p>Current rating: {{ $score[$key] }} </p>
                 <p>Language(s): </p>
