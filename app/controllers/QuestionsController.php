@@ -286,8 +286,8 @@ class QuestionsController extends \BaseController {
 				$voteClassDown = "increment down enabled";
 			}
 		} else {
-			$voteClassUp = "increment up disabled";
-			$voteClassDown = "increment down disabled";
+			$voteClassUp = "increment up disabled loginNow";
+			$voteClassDown = "increment down disabled loginNow";
 		}
 
 		
