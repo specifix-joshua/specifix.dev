@@ -161,8 +161,12 @@
 	    	@endif
 		</div>
 	    @else
+		    @if ($user->id == Auth::id())
 	    	<h2 class="text-center">Slackin'! You haven't written any questions yet.</h2>
 	    	<a href="{{{action('QuestionsController@create')}}}"><button class="center-block purp-button">Click here to ask your first question!</button></a>
+		    @else
+		    <h2 class="text-center">Slackin'! This user hasn't written any questions yet.</h2>
+		    @endif
 		@endif
 	</div>
 </div>
