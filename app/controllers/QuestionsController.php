@@ -252,6 +252,8 @@ class QuestionsController extends \BaseController {
 			}
 		}
 
+		$answers->sortByDesc('vote_count');
+
 		$votes = DB::table('votes')
 			->select(DB::raw('count as vote_count, user_id, id'))
 			->where('question_id', '=', $id)
