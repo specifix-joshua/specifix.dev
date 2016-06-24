@@ -31,6 +31,10 @@ BLUISH GRAY = rgb(229,232,239)
   color:rgb(213,215,222)
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 #cancel-link {
   margin-bottom: 10px;
   border: 1px solid #d43F3a;
