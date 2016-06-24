@@ -37,8 +37,12 @@ class UsersController extends \BaseController {
 	public function index()
 	{
 		$users = User::paginate(18);
+		$score = [];
 		foreach ($users as $user) {
 			$score[] =  $this->getUserScore($user->id);
+		}
+		if($score == null) {
+			App::abort(404);
 		}
 		return View::make('users.index')->with(['users' => $users, 'score' => $score]);
 	}
@@ -105,6 +109,10 @@ class UsersController extends \BaseController {
 	{
 		$user = User::find($id);
 		$languages = Language::all();
+
+		if($user == null) {
+			App::abort(404);
+		}
 		
 		$userLanguagesIds = $user->languages()->get()->map(function($language) {
 			return $language->id;
