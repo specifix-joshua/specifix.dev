@@ -33,17 +33,23 @@ class QuestionsController extends \BaseController {
     		->where('Premium', '=', 'Yes')
     		->orderBy('created_at', 'desc')
     		->get();
+		$questions = Question::where('Premium', '=', 'Yes')->paginate(10);
+		$score = [];
 		$questions = Question::where('Premium', '=', 'Yes')->orderBy('created_at', 'desc')->paginate(10);
 		
 		if (!empty($premiumQuestions)) {
 
-	    	foreach ($questions as $question) {
+	    	foreach ($questions as $question) 
+	    	{
 				$score[] =  $this->getQuestionScore($question->id);
+			}
+			if($score == null) 
+			{
+				App::abort(404);
 			} 
 		} else {
 				$score = 0;
 		}
-
     	return View::make('questions.index')->with(['questions' => $questions, 'score' => $score]);
     }
 
@@ -51,11 +57,12 @@ class QuestionsController extends \BaseController {
 	public function getUserScore($id)
 	{
 		$answerScore = DB::table('votes')
+			->join('answers', 'votes.answer_id', '=', 'answers.id')
 			->select(DB::raw('SUM(count) as vote_count'))
-			->where('answer_id', '=', $id)
+			->where('answers.user_id', '=', $id)
 			->get();
 		
-		return $score = $answerScore[0]->vote_count;
+		return $userScore = $answerScore[0]->vote_count;
 	}
 
 	/**
@@ -77,7 +84,10 @@ class QuestionsController extends \BaseController {
 			foreach($languageId as $lang) {
 				$language = $lang->id;
 			}
+			$questions = Language::find($language)->questions()->paginate(10);
+			if($questions == null) {
 			$questions = Language::find($language)->questions()->orderBy('created_at', 'desc')->paginate(10);
+			}
 			if(empty($questions)) {
 				App::abort(404);
 			}
@@ -89,6 +99,9 @@ class QuestionsController extends \BaseController {
 		$score = [];
 		foreach ($questions as $question) {
 			$score[] =  $this->getQuestionScore($question->id);
+		}
+		if($score == null) {
+			App::abort(404);
 		}
 
 		return View::make('questions.index')->with(['questions' => $questions, 'languages' => $languages, 'score' => $score]);
@@ -160,7 +173,6 @@ class QuestionsController extends \BaseController {
 		}
 	}
 
-
 	/**
 	 * Display the specified resource.
 	 *
@@ -169,7 +181,30 @@ class QuestionsController extends \BaseController {
 	 */
 	public function show($id)
 	{
+		$user = Auth::user();
 		$question = Question::find($id);
+		$premiumQuestions = DB::table('questions')
+    		->select(DB::raw('id'))
+    		->where('Premium', '=', 'Yes')
+    		->get();
+    	$isPremium = null;
+    	foreach($premiumQuestions as $key => $premiumQuestion)
+    	{
+    		if($premiumQuestion->id == $question->id)
+    		{
+    			$isPremium = true;
+    		}
+    	}
+    	if(Auth::check())
+    	{
+			$userScore = intval($this->getUserScore($user->id));
+    	} else {
+    		$userScore = null;
+    	}
+		$question = Question::find($id);
+		if($question == null) {
+			App::abort(404);
+		}
 		$loggedInUser = Auth::user();
 		$user = $question->user;
 		$answers = $question->answers;
@@ -257,7 +292,7 @@ class QuestionsController extends \BaseController {
 		
 		$votes = $vote_count;
 		
-		return View::make("questions.show")->with(['question' => $question,'user' => $user, 'answers' => $answers, 'languages' => $languages, 'votes' => $votes,'vote_value' => $vote_value, 'voted' => $voted, 'vote_id' => $vote_id, 'voteClassUp' => $voteClassUp, 'voteClassDown' => $voteClassDown, 'ansVoteClassUp' => $ansVoteClassUp, 'ansVoteClassDown' => $ansVoteClassDown]);
+		return View::make("questions.show")->with(['question' => $question,'user' => $user, 'answers' => $answers, 'languages' => $languages, 'votes' => $votes,'vote_value' => $vote_value, 'voted' => $voted, 'vote_id' => $vote_id, 'voteClassUp' => $voteClassUp, 'voteClassDown' => $voteClassDown, 'ansVoteClassUp' => $ansVoteClassUp, 'ansVoteClassDown' => $ansVoteClassDown, 'premiumQuestions' => $premiumQuestions, 'userScore' => $userScore, 'isPremium' => $isPremium]);
 	}
 
 

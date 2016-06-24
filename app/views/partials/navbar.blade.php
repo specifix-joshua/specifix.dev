@@ -32,7 +32,7 @@
           <li><a href="/subscription">Premium Membership</a></li>
             @if ($notifications > 0)
               <li>
-              <a href="/messages"><button id="nav-inbox">{{{$notifications}}}</button></a></li>
+              <a href="{{{ action('NotificationsController@show', $user->id) }}}"><button id="nav-inbox">{{{$notifications}}}</button></a></li>
             @else
               <li><a href="/messages"><span class="glyphicon glyphicon-inbox" aria-hidden="true"></span></a></li>
             @endif
@@ -50,7 +50,7 @@
         <!-- These buttons only show if the user is logged IN -->
         @if (Auth::check())
         <a href="/logout" type="button" class="btn btn-default nav-buttons" id="logout-button">Logout</a>
-        <a href="/users/{{{ Auth::user()->id }}}" type="button" class="btn btn-default nav-buttons" id="profile-button">Profile{{--{{{$user->firstname . ' ' . $user->lastname}}}--}}</a>
+        <a href="/users/{{{ Auth::user()->id }}}" type="button" class="btn btn-default nav-buttons purp-button" id="profile-button">Profile{{--{{{$user->firstname . ' ' . $user->lastname}}}--}}</a>
         @else
 
         <!-- Login & Signup Buttons -->
