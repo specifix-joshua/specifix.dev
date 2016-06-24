@@ -77,7 +77,6 @@ class AnswersController extends \BaseController {
 		}
 	}
 
-
 	/**
 	 * Display the specified resource.
 	 *

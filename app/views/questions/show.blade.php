@@ -100,6 +100,7 @@
 	<!-- END POSTED ANSWERS -->
 	@if (Auth::check())
 	<!-- SUBMIT ANSWER -->
+	@if($isPremium && $userScore > 50)
 	<div class='col-xs-10 col-xs-offset-2'>
 		<div class="row">
 			<h2>Submit A New Answer:</h2>
@@ -122,6 +123,34 @@
 			{{ Form::close() }}
 		</div>
 	</div>
+	@elseif($isPremium && $userScore < 50)
+	<h3>You need a higher score to answer this question!</h3>
+	@endif
+
+	@if(!$isPremium)
+		<div class='col-xs-10 col-xs-offset-2'>
+		<div class="row">
+			<h2>Submit A New Answer:</h2>
+		</div>
+		<div class="row answer-form">
+			{{Form::open(array('action' => array('AnswersController@store', $question->id))) }}
+			<!--Question Content-->
+			    <div class="form-group">
+			        {{ Form::label('content', 'Content', array('class' => 'control-label')) }}
+			        {{ Form::hidden('question_id', $question->id) }}
+			        {{ Form::hidden('question_user', $question->user_id) }}
+			        {{ Form::hidden('question', $question) }}
+			        {{ Form::textarea('content', null, array('placeholder' => 'Question Details', 'class' => 'form-control')) }}
+			        {{ $errors->first('content', '<span class="help-block">:message</span>') }}
+			    </div>
+			<!--SUBMIT-->
+			    <div class="form-group">
+			        <button class="btn btn-primary" name="submit" type="submit">Submit</button>
+			    </div>
+			{{ Form::close() }}
+		</div>
+	</div>
+	@endif
 	@endif
 	<!-- END SUBMIT ANSWER -->
 </div>
