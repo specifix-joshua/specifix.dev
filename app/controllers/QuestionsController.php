@@ -212,10 +212,12 @@ class QuestionsController extends \BaseController {
 					$ansVoteClassDown = "increment down enabled";
 				}
 			} else {
-				$ansVoteClassUp = "increment up disabled loginNow";
-				$ansVoteClassDown = "increment down disabled loginNow";
+				$ansVoteClassUp = "increment up disabled";
+				$ansVoteClassDown = "increment down disabled";
 			}
 		}
+
+		$answers->sortByDesc('vote_count');
 
 		$votes = DB::table('votes')
 			->select(DB::raw('count as vote_count, user_id, id'))
@@ -249,8 +251,8 @@ class QuestionsController extends \BaseController {
 				$voteClassDown = "increment down enabled";
 			}
 		} else {
-			$voteClassUp = "increment up disabled loginNow";
-			$voteClassDown = "increment down disabled loginNow";
+			$voteClassUp = "increment up disabled";
+			$voteClassDown = "increment down disabled";
 		}
 
 		
