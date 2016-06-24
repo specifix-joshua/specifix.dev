@@ -84,13 +84,10 @@ class QuestionsController extends \BaseController {
 			foreach($languageId as $lang) {
 				$language = $lang->id;
 			}
-<<<<<<< HEAD
 			$questions = Language::find($language)->questions()->paginate(10);
 			if($questions == null) {
-=======
 			$questions = Language::find($language)->questions()->orderBy('created_at', 'desc')->paginate(10);
 			if(empty($questions)) {
->>>>>>> master
 				App::abort(404);
 			}
 		} else {
