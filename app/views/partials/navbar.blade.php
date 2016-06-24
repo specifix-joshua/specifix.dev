@@ -34,7 +34,7 @@
               <li>
               <a href="{{{ action('NotificationsController@show', $user->id) }}}"><button id="nav-inbox">{{{$notifications}}}</button></a></li>
             @else
-              <li><a href="/messages"><span class="glyphicon glyphicon-inbox" aria-hidden="true"></span></a></li>
+              <li><a href="{{{ action('NotificationsController@show', $user->id) }}}"><span class="glyphicon glyphicon-inbox" aria-hidden="true"></span></a></li>
             @endif
           {{-- <li>{{ Form::open(['action' =>'QuestionsController@getPremiumQuestions', 'method' => 'GET']) }} --}}
               {{-- {{ Form::submit('Premium Questions', ['class' => 'btn btn-default nav-buttons']) }} --}}
