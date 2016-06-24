@@ -40,7 +40,7 @@
               {{-- {{ Form::submit('Premium Questions', ['class' => 'btn btn-default nav-buttons']) }} --}}
               {{-- {{ Form::close() }}</li> --}}
 	      @else
-	      	<li><a data-toggle="modal" data-target=".permission-modal">Ask a Question</a>
+	      	<li><a class="pointer" data-toggle="modal" data-target=".permission-modal">Ask a Question</a>
 	      @endif
 	    </ul>
 
