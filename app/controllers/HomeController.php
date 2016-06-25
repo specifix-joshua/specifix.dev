@@ -66,4 +66,9 @@ class HomeController extends BaseController {
 		return $score = $userScore[0]->vote_count;
 	}
 
+	public function showAbout()
+	{
+		return View::make('about');
+	}
+
 }

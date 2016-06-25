@@ -46,4 +46,7 @@ Route::get('/subscription/{id}/resume', 'UsersController@resumeSubscription');
 #Faq
 Route::get('/faq', 'HomeController@showFaq');
 
+#About Us
+Route::get('/about', 'HomeController@showAbout');
+
 
