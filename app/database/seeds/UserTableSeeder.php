@@ -6,6 +6,9 @@ class UserTableSeeder extends Seeder {
     
     public function run() {
 
+        $first_names = ['alan', 'alex', 'andrew', 'daniel', 'edric', 'james', 'jerod', 'kari', 'kristen', 'marcus', 'mauro', 'natalie', 'niki', 'will', 'bobbie', 'lorena', 'micah', 'melissa', 'raj', 'pancho'];
+        $last_names = ['lauritzen', 'garrido', 'powell-morse', 'curran', 'martinez', 'canning', 'west', 'palomino', 'cates', 'mondragon', 'cabrales', 'ortiz', 'williams', 'campbell', 'oconnor', 'villanueva', 'johnson', 'canales', 'mulji', 'escobedo'];
+
         $user = new User();
         $user->email = 'isaac@gmail.com';
         $user->username = 'iceman';
@@ -32,6 +35,17 @@ class UserTableSeeder extends Seeder {
         $user->last_name = 'javascript';
         $user->is_admin = 'no';
         $user->save();
+
+        foreach ($first_names as $key => $first_name) {
+            $user = new User();
+            $user->email = $first_name . '@gmail.com';
+            $user->username = $first_name;
+            $user->password = $_ENV['USER_PASSWORD'];
+            $user->first_name = $first_name;
+            $user->last_name = $last_names[$key];
+            $user->is_admin = 'no';
+            $user->save();
+        }
 
         foreach(range(1, 50) as $index) {
             $faker = Faker::create();
