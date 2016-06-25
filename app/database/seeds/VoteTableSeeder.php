@@ -8,9 +8,9 @@ class VoteTableSeeder extends Seeder {
     {
         
 
-        for ($i=0; $i < 1000; $i++) { 
+        for ($i=0; $i < 10000; $i++) { 
             $user_id = mt_rand(1, 70);
-            $question_id = mt_rand(1, 50);
+            $question_id = mt_rand(1, 113);
 
             $dupe = DB::table('votes')
             ->select(DB::raw('user_id, question_id'))
@@ -27,7 +27,7 @@ class VoteTableSeeder extends Seeder {
             }
         }
 
-        for ($i=0; $i < 1000; $i++) { 
+        for ($i=0; $i < 10000; $i++) { 
             $user_id = mt_rand(1, 70);
             $answer_id = mt_rand(1, 100);
 
