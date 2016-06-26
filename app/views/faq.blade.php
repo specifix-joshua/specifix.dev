@@ -6,7 +6,9 @@ FAQ
 
 @section('content')
 <div class="container faq-container">
+<div class="page-header">
   <h1 class="faq-title">FAQ</h1>
+</div>
   <div class="content">
   <h3 class="faq-subtitle">Subscriptions</h3>
   <div>
