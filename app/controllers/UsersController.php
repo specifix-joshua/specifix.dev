@@ -125,7 +125,7 @@ class UsersController extends \BaseController {
 		foreach ($questions as $question) {
 			if ($question->user_id != $id){
 				$questionLanguagesIds = $question->languages()->get()->map(function($language) {
-				return $language->id;
+					return $language->id;
 				});
 				foreach($questionLanguagesIds as $qlangId){
 					foreach ($userLanguagesIds as $ulangId) {

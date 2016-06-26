@@ -13,7 +13,6 @@
 
 <div class="container">
 	<div class="row">
-		
 		<div class="col-lg-8">
 			<h3>Today's Top Questions</h3>
 			<div class="column-holder">
