@@ -51,9 +51,8 @@
                     {{ Form::open(array('action' => array('UsersController@update', $user->id), 'method' => 'PATCH')) }}
     		        {{ Form::label('languages', 'My Languages:', array('class' => 'control-label')) }}
 			        @foreach ($languages as $language)
-                    <!-- ajax req if feeling lucky -->
-			            <label class="lang-check">{{ Form::checkbox('language[]', $language->id, $userLanguagesIds->search($language->id) !== false) }} {{ $language->language }} </label>
-                        
+			            
+                        <label class="lang-check">{{ Form::checkbox('language[]', $language->id, $userLanguagesIds->search($language->id) !== false) }} {{ $language->language }} </label>
 			        @endforeach
 			        {{ Form::submit('Save', array('class' => 'btn btn-default')) }}
 			        {{ Form::close() }}

@@ -115,7 +115,7 @@
       // TINYMCE FADE
       $(".form-group").on('click', function() {
         $(".mce-tinymce").animate({
-          opacity: "1"
+          opacity: 1
         }, 500)
       });
 
@@ -124,6 +124,11 @@
         $('#email').focus();
         $('#username').focus();
       })
+
+      //FLASH FADE
+      $('.alert').animate({
+        opacity: 0
+      }, 2000);
     })
 })();
 
