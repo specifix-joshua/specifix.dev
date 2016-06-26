@@ -33,9 +33,10 @@ class QuestionsController extends \BaseController {
     		->where('Premium', '=', 'Yes')
     		->orderBy('created_at', 'desc')
     		->get();
-		$questions = Question::where('Premium', '=', 'Yes')->paginate(10);
+    		
 		$score = [];
-		$questions = Question::where('Premium', '=', 'Yes')->orderBy('created_at', 'desc')->paginate(10);
+
+		$questions = Question::where('Premium', '=', 'Yes')->paginate(10);
 		
 		if (!empty($premiumQuestions)) {
 
@@ -78,16 +79,21 @@ class QuestionsController extends \BaseController {
 				->select(DB::raw('id'))
 				->where('language', '=', $language)
 				->get();
+
 			if($languageId == null) {
 				App::abort(404);
 			}
+
 			foreach($languageId as $lang) {
 				$language = $lang->id;
 			}
+
 			$questions = Language::find($language)->questions()->paginate(10);
+
 			if($questions == null) {
-			$questions = Language::find($language)->questions()->orderBy('created_at', 'desc')->paginate(10);
+				$questions = Language::find($language)->questions()->orderBy('created_at', 'desc')->paginate(10);
 			}
+
 			if(empty($questions)) {
 				App::abort(404);
 			}
