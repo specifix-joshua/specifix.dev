@@ -7,13 +7,22 @@
 @section('content')
 <div class="container">
 <div class="row">
-    <h1>Subscriptions</h1>
+    <div class="page-header">
+        <h1>Subscriptions</h1>
+    </div>
     <div class="col-sm-12 col-md-6 col-lg-6">
         <div class="thumbnail subsBox">
             <div class="caption">
                 <h2 class="subscriptionTitles">Monthly Subscription</h2>
                 <h3 class="subsPrice">$4.99/month</h3>
-                <p>Want to improve your specifix experience? How about signing up for a premium membership, where you will have access to expert knowledge, and your questions will always be featured in the premium question page. Try it out!</p>
+                <p>Want to improve your specifix experience? Then sign up for a premium membership!</p> 
+                <h4>As a premium member : </h4>
+                <ul class="subPerks">
+                    <li><span class="glyphicon glyphicon-star list-star" aria-hidden="true"></span> You will have access to expert knowledge</li>
+                    <li><span class="glyphicon glyphicon-star list-star" aria-hidden="true"></span> Your questions will be featured in our premium question page </li>
+                    <li><span class="glyphicon glyphicon-star list-star" aria-hidden="true"></span> You will recieve high quality answers</li>
+                </ul>
+
                 @if(Auth::check() && Auth::user() && Auth::id() == Auth::user()->id && !Auth::user()->subscribed())
                         {{Form::open(array('action' => 'UsersController@createSubscription')) }}
                           <script

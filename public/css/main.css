@@ -487,8 +487,38 @@ div.inline form {
 
 /* USER INDEX */
 
+.bold {
+  font-weight: bold;
+}
+
+.userindexBox {
+  text-align: center;
+}
+
+.userindexBox h3 {
+  margin: 15px;
+}
+
+.userindexButton {
+  background-color: rgb(152,71,246);
+  border-color: rgb(152,71,246);
+}
+
+.userindexButton:hover {
+  background-color: rgba(152,71,246,0.7);
+  border-color: rgb(152,71,246);
+}
+
 .userindex {
   height: 100%;
+}
+
+.username-index {
+  color: rgb(65,202,192);
+}
+
+.userScore-index {
+  color: rgb(255,108,96);
 }
 
 .thumbnail {
@@ -515,15 +545,14 @@ div.inline form {
 
 .subsBox {
   background-color: rgb(247,247,247);
-  border: 3px solid rgb(213,215,222);
+  border-top: 20px solid rgb(65,202,192);
+  border-left: none;
+  border-right: none;
+  border-bottom: 20px solid rgb(65,202,192);
   height: 500px;
   margin: 0 auto;
   margin-bottom: 10px;
   text-align: center;
-}
-
-.subsBox:hover {
-  background-color: rgb(229,232,239);
 }
 
 .subscriptionTitles {
@@ -534,7 +563,22 @@ div.inline form {
   color: rgb(255,108,96);
 }
 
+.subPerks {
+  list-style-type: none;
+  padding: 5px;
+}
+
+.subPerks li {
+  padding: 5px;
+  text-align: center;
+}
+
+.list-star {
+  color:rgb(247,138,9);
+}
+
 /* CREATING MARGIN BTW. PAGE AND FOOTER */
+
 .row {
   margin-bottom: 50px;
 }
@@ -549,13 +593,6 @@ div.inline form {
     width: 80%;
     padding: 20px;
     margin: 0 auto;
-}
-
-.faq-title {
-    color: black;
-    margin: 0;
-    text-align: center;
-    text-transform: uppercase;
 }
 
 .faq-subtitle {
@@ -601,6 +638,7 @@ div.inline form {
 }
 
 /* ABOUT US CSS */
+
 .profile-card {
     text-align: center;
     height: 800px;
@@ -608,25 +646,33 @@ div.inline form {
     margin-bottom: 10px;
     padding: 10px;
 }
+
 .image-pic {
     margin: 0 auto;
 }
+
 .profile-card img {
     max-height: 300px;
     border-radius: 50%;
     padding: 30px;
 }
+
 .profile-card p {
     font-size: 16px;
 }
+
 .profile-card h1 {
     margin: 0;
     color: rgb(65,202,192);
 }
+
 .profile-card h3 {
   color: rgb(247,138,9);
 }
+
 .profile-card i{
     color: rgb(0,168,179);
 }
+
+/* PAGINATION */
 
