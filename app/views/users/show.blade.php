@@ -49,7 +49,7 @@
            
                 @if ($user->id == Auth::id())
                     {{ Form::open(array('action' => array('UsersController@update', $user->id), 'method' => 'PATCH')) }}
-    		        {{ Form::label('languages', 'My Languages:', array('class' => 'control-label')) }}
+    		        {{ Form::label('languages', 'My Tags:', array('class' => 'control-label')) }}
 			        @foreach ($languages as $language)
 			            
                         <label class="lang-check">{{ Form::checkbox('language[]', $language->id, $userLanguagesIds->search($language->id) !== false) }} {{ $language->language }} </label>
