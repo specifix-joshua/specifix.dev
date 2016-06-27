@@ -18,7 +18,7 @@
                     </a></h2>
                         <p>Asked by: {{{ $question->user->username }}}</p>
                         <p>Current rating: {{ $score[$key] }} </p>
-                        <p>Language(s): </p>
+                        <p>Tag(s): </p>
                         <div class="inline">
                         @foreach ($question->languages()->get() as $language)
                             <a class="language-button" method="GET" href="{{{action('QuestionsController@index', 'language='.$language->language)}}}"> {{{$language->language}}}</a><span>&nbsp&nbsp</span>
