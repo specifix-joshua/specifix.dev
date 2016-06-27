@@ -7,7 +7,7 @@
 
     <div class="container two col-lg-4 col-md-4 col-xs-12">
         <h3>Premium</h3>
-            <a href="/subscriptions">Subscription</a>
+            <a href="/subscription">Subscription</a>
     </div>
 
     <div class="container three col-lg-4 col-md-4 col-xs-12">
