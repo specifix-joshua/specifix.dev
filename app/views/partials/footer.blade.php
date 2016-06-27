@@ -6,16 +6,14 @@
     </div>
 
     <div class="container two col-lg-4 col-md-4 col-xs-12">
-        <h3>Connect Socially</h3>
-            <!--Social media icons?-->
+        <h3>Premium</h3>
+            <a href="/subscriptions">Subscription</a>
     </div>
 
     <div class="container three col-lg-4 col-md-4 col-xs-12">
-        <h3>Contact Information</h3>
+        <h3>Privacy</h3>
         <ul class="list-unstyled">
-            <li>Specifix</li>
-            <li>Phone Number</li>
-            <li>Email</li>
+            <li>© 2016 Specifix All Rights Reserved</li>
         </ul>
     </div>
 </footer>
