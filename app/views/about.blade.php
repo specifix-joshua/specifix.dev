@@ -22,7 +22,7 @@
                 </div>
                 <h1>Andrew</h1>
                 <h3>Full-Stack Developer</h3>
-                <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.</p>
+                <p>Andrew is a full-stack web developer with 5 years of marketing and project management experience. Prior to coding, he worked as a marketer and project manager for ticket companies Best Tickets and SeatSmart. Andrew's love for product development and project management helps him write code efficiently and with purpose.</p>
                 <p>
                 <i class="fa fa-github-alt fa-2x" aria-hidden="true" id="githubIcon"></i>
                 <i class="fa fa-linkedin-square fa-2x" aria-hidden="true" id="linkedinIcon"></i>
