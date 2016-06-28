@@ -61,8 +61,8 @@
                 I learned to code by attending an intense 16-week program where I learned to build websites and web applications at a rapid pace. It has been one of the most rewarding things I have done for myself. I love to code, and I will continue learning and growing.
                 </p>
                 <p>
-                <i class="fa fa-github-alt fa-2x" aria-hidden="true" id="githubIcon"></i>
-                <i class="fa fa-linkedin-square fa-2x" aria-hidden="true" id="linkedinIcon"></i>
+                <a href="https://github.com/enyakarina"><i class="fa fa-github-alt fa-2x" aria-hidden="true" id="githubIcon"></i></a>
+                <a href="https://www.linkedin.com/in/enya-palomino"><i class="fa fa-linkedin-square fa-2x" aria-hidden="true" id="linkedinIcon"></i></a>
                 </p>
             </div>
         </div>
