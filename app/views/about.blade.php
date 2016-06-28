@@ -57,7 +57,8 @@
                 </div>
                 <h1>Kari</h1>
                 <h3>Full-stack Developer</h3>
-                <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.
+                <p>I am a 22 year old living in Texas who is looking to transition into the world of web development. I started my coding journey fairly recently, in March 2016. Prior to this I had been attending community college while working part time in the food service industry.
+                I learned to code by attending an intense 16-week program where I learned to build websites and web applications at a rapid pace. It has been one of the most rewarding things I have done for myself. I love to code, and I will continue learning and growing.
                 </p>
                 <p>
                 <i class="fa fa-github-alt fa-2x" aria-hidden="true" id="githubIcon"></i>
