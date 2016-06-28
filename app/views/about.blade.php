@@ -41,7 +41,7 @@
                 <h3>Full-Stack Developer</h3>
                 <p>Contrary to popular belief Alex is not some random programmer he has a family and he has roots in Texas and maybe Mexico maybe not. Alex is a 27 year old person of moderate interest with 3 daughters and very few hobbies other than coding.</p>
                 <p>
-                <i class="fa fa-github-alt fa-2x" aria-hidden="true" id="githubIcon"></i>
+                <a href="https://github.com/garridoalex77"><i class="fa fa-github-alt fa-2x" aria-hidden="true" id="githubIcon"></i></a>
                 <i class="fa fa-linkedin-square fa-2x" aria-hidden="true" id="linkedinIcon"></i>
                 </p>
 
