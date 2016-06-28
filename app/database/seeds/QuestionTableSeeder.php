@@ -9,11 +9,12 @@ class QuestionTableSeeder extends Seeder {
         $user_id = 1;
 
         $question = new Question();
+        $question->Premium = 'yes';
         $question->title = <<<'TITLE'
                 javascript - Android phonegap application having issues with SQlite and local storage on Samsung Galaxy devices 
 TITLE;
         $question->content = <<<'CONTENT'
-        I am having an issue with a PhoneGap app that has been built for both Android and iOS. On iOS and most Android devices, it's functioning perfectly, except for Samsung Galaxy S3 and S4.;On the first page load, the app creates a local SQL database. This database is used to store values from questions and answers throughout the app.<p>The issue I am having on the Samsung devices is that the database will not load properly the first time the app is run, however if a user closes the app completely and reopens it, the database is created with no errors. Because the first page requires a user to enter their age and then stores the value in a SQL database, users are getting the impression that the app has frozen at this point.</p> <pre class="language-javascript"><code>Initialization code for database;index.html;document.addEventListener("deviceready", onDeviceReady, false);
+        <p>I am having an issue with a PhoneGap app that has been built for both Android and iOS. On iOS and most Android devices, it's functioning perfectly, except for Samsung Galaxy S3 and S4.</p><p>On the first page load, the app creates a local SQL database. This database is used to store values from questions and answers throughout the app.</p><p>The issue I am having on the Samsung devices is that the database will not load properly the first time the app is run, however if a user closes the app completely and reopens it, the database is created with no errors. Because the first page requires a user to enter their age and then stores the value in a SQL database, users are getting the impression that the app has frozen at this point.</p> <pre class="language-javascript"><code>Initialization code for database;index.html;document.addEventListener("deviceready", onDeviceReady, false);
             function onDeviceReady();
             populateDB();
             main_js.js;
@@ -58,7 +59,18 @@ CONTENT;
         javascript - Ember.js: Reloading a .hasMany relationship given through &quot;links&quot; in payload 
 TITLE;
         $question->content = <<<'CONTENT'
-        Say I have two models, Topic and Post;App.Topic = DS.Model.extend;posts: DS.hasMany('post', { async: true, inverse: 'post' });App.Post = DS.Model.extend;topic: DS.belongsTo('topic', { async: true });Topic hasMany Posts, and a Post belongsTo a Topic.;To load the data from the API, one initial call is made (which fetches a topic... topic ID 2 for example);GET /topics/2;After receiving the payload for this GET request, the serializer then appends a links key to the payload. This has the route to load the Posts associated with the topic;topic;id": 2;links;posts": "/topics/2/posts;This second request (to /topics/2/posts) is how the Posts are loaded and attached to the topic.;This all works fine when the page is first loaded.;The problem occurs when a Post is created during a page session. While I can get the topic itself to reload (by calling.reload() on the model object that represents the topic), the Posts associated with the topic are not reloaded. The second API call (to get the posts) is never even made, while the first call (to get just the topic) is made. If I refresh the page, the posts I created on the previous page load will load (but of course, if I then go and make some more posts, they won't show up until the next page load).;Looking for a solution, I came across this question;How to reload an async with links hasMany relationship?;However, it appears that the solution no longer works for the current versions of Ember/Ember-Data. The JSFiddle provided does not function.;So, how can I reload this sort of hasMany relationship? Any help is greatly appreciated.
+        <p>Say I have two models, Topic and Post:</p>
+
+        <pre class="language-javascript"><code>
+        App.Topic = DS.Model.extend;
+        posts: DS.hasMany('post', { async: true, inverse: 'post' });
+        App.Post = DS.Model.extend;topic: DS.belongsTo('topic', { async: true }); </code> </pre>
+        <p>Topic hasMany Posts, and a Post belongsTo a Topic.To load the data from the API, one initial call is made (which fetches a topic... topic ID 2 for example)</p> <pre class="language-javascript"> <code>GET /topics/2 </code></pre>
+        <p>After receiving the payload for this GET request, the serializer then appends a links key to the payload. This has the route to load the Posts associated with the topic: topic id": 2 links posts": "/topics/2/posts</p>
+        <p>This second request (to /topics/2/posts) is how the Posts are loaded and attached to the topic.;This all works fine when the page is first loaded.</p><p>The problem occurs when a Post is created during a page session. While I can get the topic itself to reload (by calling.reload() on the model object that represents the topic), the Posts associated with the topic are not reloaded. The second API call (to get the posts) is never even made, while the first call (to get just the topic) is made. If I refresh the page, the posts I created on the previous page load will load (but of course, if I then go and make some more posts, they won't show up until the next page load).</p>
+        <p>Looking for a solution, I came across this question;How to reload an async with links hasMany relationship? </p>
+        <p> However, it appears that the solution no longer works for the current versions of Ember/Ember-Data. The JSFiddle provided does not function.</p>
+        <p>So, how can I reload this sort of hasMany relationship? Any help is greatly appreciated.
 CONTENT;
         $question->user_id = $user_id;
         $question->save();
