@@ -6,6 +6,9 @@
 
 @section('content')
 <div class="container">
+    <div class="page-header">
+        <h1>Ask a Question</h1>
+    </div>
 {{Form::open(array('action' => 'QuestionsController@store')) }}
 <!--Question Title-->
     <div class="form-group">
