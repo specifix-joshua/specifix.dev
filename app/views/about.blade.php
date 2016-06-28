@@ -39,9 +39,9 @@
                 </div>
                 <h1>Alex</h1>
                 <h3>Full-Stack Developer</h3>
-                <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.</p>
+                <p>Contrary to popular belief Alex is not some random programmer he has a family and he has roots in Texas and maybe Mexico maybe not. Alex is a 27 year old person of moderate interest with 3 daughters and very few hobbies other than coding.</p>
                 <p>
-                <i class="fa fa-github-alt fa-2x" aria-hidden="true" id="githubIcon"></i>
+                <a href="https://github.com/garridoalex77"><i class="fa fa-github-alt fa-2x" aria-hidden="true" id="githubIcon"></i></a>
                 <i class="fa fa-linkedin-square fa-2x" aria-hidden="true" id="linkedinIcon"></i>
                 </p>
 

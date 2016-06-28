@@ -13,7 +13,40 @@ class QuestionTableSeeder extends Seeder {
                 javascript - Android phonegap application having issues with SQlite and local storage on Samsung Galaxy devices 
 TITLE;
         $question->content = <<<'CONTENT'
-        I am having an issue with a PhoneGap app that has been built for both Android and iOS. On iOS and most Android devices, it's functioning perfectly, except for Samsung Galaxy S3 and S4.;On the first page load, the app creates a local SQL database. This database is used to store values from questions and answers throughout the app.;The issue I am having on the Samsung devices is that the database will not load properly the first time the app is run, however if a user closes the app completely and reopens it, the database is created with no errors. Because the first page requires a user to enter their age and then stores the value in a SQL database, users are getting the impression that the app has frozen at this point.;Initialization code for database;index.html;document.addEventListener("deviceready", onDeviceReady, false);function onDeviceReady();populateDB();main_js.js;function populateDB();var db = window.openDatabase("Database", "1.0", "My Database", 20000);db.transaction(populate_DB, errorCB, successCB);function populate_DB(tx);tx.executeSql('CREATE TABLE IF NOT EXISTS Options (ID INTEGER UNIQUE NOT NULL, Name TEXT NOT NULL, Value INTEGER NOT NULL)');tx.executeSql('CREATE TABLE IF NOT EXISTS Questions (ID INTEGER UNIQUE NOT NULL, Question TEXT NOT NULL, Answer TEXT)');tx.executeSql('INSERT OR IGNORE INTO Options (ID, Name, Value) VALUES (1, "License", 0)');tx.executeSql('INSERT OR IGNORE INTO Questions (ID, Question, Answer) VALUES (0, "Age","")');tx.executeSql('INSERT OR IGNORE INTO Questions (ID, Question, Answer) VALUES (1, "two","")');tx.executeSql('INSERT OR IGNORE INTO Questions (ID, Question, Answer) VALUES (2, "three","")');tx.executeSql('INSERT OR IGNORE INTO Questions (ID, Question, Answer) VALUES (3, "four","")');tx.executeSql('INSERT OR IGNORE INTO Questions (ID, Question, Answer) VALUES (4, "five","")');tx.executeSql('INSERT OR IGNORE INTO Questions (ID, Question, Answer) VALUES (5, "six","")');tx.executeSql('INSERT OR IGNORE INTO Questions (ID, Question, Answer) VALUES (6, "seven","")');tx.executeSql('INSERT OR IGNORE INTO Questions (ID, Question, Answer) VALUES (7, "eigth","")');tx.executeSql('INSERT OR IGNORE INTO Questions (ID, Question, Answer) VALUES (8, "nine","")');tx.executeSql('INSERT OR IGNORE INTO Questions (ID, Question, Answer) VALUES (9, "ten","")');tx.executeSql('INSERT OR IGNORE INTO Questions (ID, Question, Answer) VALUES (10, "eleven","")');tx.executeSql('INSERT OR IGNORE INTO Questions (ID, Question, Answer) VALUES (11, "twelve","")');tx.executeSql('INSERT OR IGNORE INTO Questions (ID, Question, Answer) VALUES (12, "thirteen","")');tx.executeSql('INSERT OR IGNORE INTO Questions (ID, Question, Answer) VALUES (13, "fourteen","")');tx.executeSql('INSERT OR IGNORE INTO Questions (ID, Question, Answer) VALUES (14, "fifteen","")');tx.executeSql('INSERT OR IGNORE INTO Questions (ID, Question, Answer) VALUES (15, "sixteen","")');tx.executeSql('INSERT OR IGNORE INTO Questions (ID, Question, Answer) VALUES (16, "seventeen","")');age_button_pressed;function age_save();var db = window.openDatabase("Database", "1.0", "My Database", 20000);loc = "q_sex.html;db.transaction(age_query, errorCB);function age_query(tx);var age = document.getElementById("a_age").value;tx.executeSql('UPDATE Questions SET Answer = "' + age + '" WHERE ID="0",', [], q_querySuccess, errorCB);After age_button_pressed, there is nothing that happens and the database does not update the result.;It is only a problem on the Samsung Galaxy S3 and S4, and I am wondering if Samsung's WebKit has something to do with it?
+        I am having an issue with a PhoneGap app that has been built for both Android and iOS. On iOS and most Android devices, it's functioning perfectly, except for Samsung Galaxy S3 and S4.;On the first page load, the app creates a local SQL database. This database is used to store values from questions and answers throughout the app.<p>The issue I am having on the Samsung devices is that the database will not load properly the first time the app is run, however if a user closes the app completely and reopens it, the database is created with no errors. Because the first page requires a user to enter their age and then stores the value in a SQL database, users are getting the impression that the app has frozen at this point.</p> <pre class="language-javascript"><code>Initialization code for database;index.html;document.addEventListener("deviceready", onDeviceReady, false);
+            function onDeviceReady();
+            populateDB();
+            main_js.js;
+            function populateDB();
+            var db = window.openDatabase("Database", "1.0", "My Database", 20000);
+            db.transaction(populate_DB, errorCB, successCB);
+            function populate_DB(tx);tx.executeSql('CREATE TABLE IF NOT EXISTS Options (ID INTEGER UNIQUE NOT NULL, Name TEXT NOT NULL, Value INTEGER NOT NULL)');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS Questions (ID INTEGER UNIQUE NOT NULL, Question TEXT NOT NULL, Answer TEXT)');
+            tx.executeSql('INSERT OR IGNORE INTO Options (ID, Name, Value) VALUES (1, "License", 0)');
+            tx.executeSql('INSERT OR IGNORE INTO Questions (ID, Question, Answer) VALUES (0, "Age","")');
+            tx.executeSql('INSERT OR IGNORE INTO Questions (ID, Question, Answer) VALUES (1, "two","")');
+            tx.executeSql('INSERT OR IGNORE INTO Questions (ID, Question, Answer) VALUES (2, "three","")');
+            tx.executeSql('INSERT OR IGNORE INTO Questions (ID, Question, Answer) VALUES (3, "four","")');
+            tx.executeSql('INSERT OR IGNORE INTO Questions (ID, Question, Answer) VALUES (4, "five","")');
+            tx.executeSql('INSERT OR IGNORE INTO Questions (ID, Question, Answer) VALUES (5, "six","")');
+            tx.executeSql('INSERT OR IGNORE INTO Questions (ID, Question, Answer) VALUES (6, "seven","")');
+            tx.executeSql('INSERT OR IGNORE INTO Questions (ID, Question, Answer) VALUES (7, "eigth","")');
+            tx.executeSql('INSERT OR IGNORE INTO Questions (ID, Question, Answer) VALUES (8, "nine","")');
+            tx.executeSql('INSERT OR IGNORE INTO Questions (ID, Question, Answer) VALUES (9, "ten","")');
+            tx.executeSql('INSERT OR IGNORE INTO Questions (ID, Question, Answer) VALUES (10, "eleven","")');
+            tx.executeSql('INSERT OR IGNORE INTO Questions (ID, Question, Answer) VALUES (11, "twelve","")');
+            tx.executeSql('INSERT OR IGNORE INTO Questions (ID, Question, Answer) VALUES (12, "thirteen","")');
+            tx.executeSql('INSERT OR IGNORE INTO Questions (ID, Question, Answer) VALUES (13, "fourteen","")');
+            tx.executeSql('INSERT OR IGNORE INTO Questions (ID, Question, Answer) VALUES (14, "fifteen","")');
+            tx.executeSql('INSERT OR IGNORE INTO Questions (ID, Question, Answer) VALUES (15, "sixteen","")');
+            tx.executeSql('INSERT OR IGNORE INTO Questions (ID, Question, Answer) VALUES (16, "seventeen","")');
+            age_button_pressed;
+            function age_save();
+            var db = window.openDatabase("Database", "1.0", "My Database", 20000);
+            loc = "q_sex.html;
+            db.transaction(age_query, errorCB);
+            function age_query(tx);
+            var age = document.getElementById("a_age").value;tx.executeSql('UPDATE Questions SET Answer = "' + age + '" WHERE ID="0",', [], q_querySuccess, errorCB)</code></pre><p>After age_button_pressed, there is nothing that happens and the database does not update the result.;It is only a problem on the Samsung Galaxy S3 and S4, and I am wondering if Samsung's WebKit has something to do with it?</p>
 CONTENT;
         $question->user_id = $user_id;
         $question->save();
