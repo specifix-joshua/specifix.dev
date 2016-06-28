@@ -39,7 +39,7 @@
 			</div>
 		</div>
 		<div class="col-lg-4">
-			<h3>Questions by Language</h3>
+			<h3>Questions by Tags</h3>
 			<div class="column-holder">
 				@foreach($languageQs as $languageQ)
 					<div class="items-container">
