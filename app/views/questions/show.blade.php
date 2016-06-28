@@ -16,11 +16,12 @@
 	<div class="col-xs-12"> 
 		<h1>{{{$question->title}}}</h1>
     	<p>Posted by {{{$question->user->username}}} on {{$question->created_at->setTimezone('America/New_York')->format('F jS Y @ h:i A')}}</p>
-    	<p>Tagged:</p>
 		 <div class="inline">
+		 	<p>Tagged: 
             @foreach ($question->languages()->get() as $language)
                 <a class="language-button" method="GET" href="{{{action('QuestionsController@index', 'language='.$language->language)}}}"> {{{$language->language}}}</a><span>&nbsp&nbsp</span>
 	        @endforeach
+	        </p>
         </div>
 	</div>
 	<!-- END OPENING INFO -->

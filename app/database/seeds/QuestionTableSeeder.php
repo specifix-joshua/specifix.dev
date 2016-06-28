@@ -9,7 +9,7 @@ class QuestionTableSeeder extends Seeder {
         $user_id = 1;
 
         $question = new Question();
-        $question->Premium = 'yes';
+        $question->Premium = 'Yes';
         $question->title = <<<'TITLE'
                 javascript - Android phonegap application having issues with SQlite and local storage on Samsung Galaxy devices 
 TITLE;
@@ -223,6 +223,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         javascript - Why does gulp-useref does not seem to work with a comment in the replacement section? 
 TITLE;
@@ -287,6 +288,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         javascript - Detecting Custom Protocol Handler in Windows 8+ with Chrome 
 TITLE;
@@ -480,6 +482,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         javascript - Using epilogue, is it possible to get back a resource without associations? 
 TITLE;
@@ -492,6 +495,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         javascript - unwrapKey function with AES-KW not working in IE11 
 TITLE;
@@ -584,6 +588,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         html - Set cellpadding and cellspacing in CSS? 
 TITLE;
@@ -596,6 +601,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         javascript - Is it possible to apply CSS to half of a character? 
 TITLE;
@@ -608,6 +614,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         html - Change an element's class with JavaScript 
 TITLE;
@@ -722,6 +729,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         html - How to make div not larger than its contents? 
 TITLE;
@@ -1081,6 +1089,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         javascript - event.preventDefault() vs. return false 
 TITLE;
@@ -1153,6 +1162,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         jquery - How to format a Microsoft JSON date? 
 TITLE;
@@ -1233,6 +1243,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         jQuery scroll to element 
 TITLE;
@@ -1257,6 +1268,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         json - Convert form data to JavaScript object with jQuery 
 TITLE;
@@ -1368,6 +1380,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         How do I set/unset cookie with jQuery? 
 TITLE;
@@ -1400,6 +1413,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         input - Best way to remove an event handler in jQuery? 
 TITLE;
@@ -1544,6 +1558,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         php - How should I ethically approach user password storage for later plaintext retrieval? 
 TITLE;
@@ -1556,6 +1571,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         php - Delete an element from an array 
 TITLE;
@@ -1589,6 +1605,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         How to fix "Headers already sent" error in PHP 
 TITLE;
@@ -1601,6 +1618,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         security - Secure hash and salt for PHP passwords 
 TITLE;
@@ -1613,6 +1631,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         PHP and Enumerations 
 TITLE;
@@ -1625,6 +1644,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         security - What's the best method for sanitizing user input with PHP? 
 TITLE;
@@ -1727,6 +1747,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         Detecting request type in PHP (GET, POST, PUT or DELETE) 
 TITLE;
@@ -1739,6 +1760,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         How do I get PHP Errors to display? 
 TITLE;
@@ -1787,6 +1809,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         multithreading - What is thread safe or non thread safe in PHP 
 TITLE;
@@ -1823,6 +1846,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         date - How do I use PHP to get the current year? 
 TITLE;
@@ -1869,6 +1893,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         php - Get first key in a (possibly) associative array? 
 TITLE;
@@ -1881,6 +1906,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         coding style - Are PHP short tags acceptable to use? 
 TITLE;
@@ -1953,6 +1979,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         How do I connect to a MySQL Database in Python? 
 TITLE;
@@ -2020,6 +2047,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         sql - How to reset AUTO_INCREMENT in MySQL? 
 TITLE;
@@ -2032,6 +2060,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         How do I quickly rename a MySQL database (change schema name)? 
 TITLE;
@@ -2115,6 +2144,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         information schema - How to find all the tables in MySQL with specific column names in them? 
 TITLE;
@@ -2127,6 +2157,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         mysql - How can I SELECT rows with MAX(Column value), DISTINCT by another column in SQL? 
 TITLE;
@@ -2209,6 +2240,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         mysql - Error installing mysql2: Failed to build gem native extension 
 TITLE;
@@ -2221,6 +2253,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         Compare two MySQL databases 
 TITLE;
@@ -2263,6 +2296,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         sql - Skip certain tables with mysqldump 
 TITLE;
@@ -2275,6 +2309,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         sql - MySQL: @variable vs. variable. Whats the difference? 
 TITLE;
@@ -2317,6 +2352,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         php - Get the query executed in Laravel 3/4 
 TITLE;
@@ -2329,6 +2365,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         database - Proper Repository Pattern Design in PHP? 
 TITLE;
@@ -2341,6 +2378,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         What are the best practices and best places for laravel 4 helpers or basic functions? 
 TITLE;
@@ -2353,6 +2391,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         laravel - How do I get the query builder to output its raw SQL query as a string? 
 TITLE;
@@ -2385,6 +2424,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         php - Laravel 4 eloquent WHERE with OR AND OR? 
 TITLE;
@@ -2397,6 +2437,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         apache - Error in exception handler. - Laravel 
 TITLE;
@@ -2433,6 +2474,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         php - Laravel 4: how to "order by" using Eloquent ORM 
 TITLE;
@@ -2445,6 +2487,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         php - Laravel's Blade: how can I set variables in a template? 
 TITLE;
@@ -2507,6 +2550,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         php - Laravel 4 migrate rollback problems 
 TITLE;
@@ -2519,6 +2563,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         Laravel redirect back to original destination after login 
 TITLE;
@@ -2531,6 +2576,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         php - Laravel Eloquent: multiple where clause query 
 TITLE;
@@ -2563,6 +2609,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         laravel - Eloquent collection: counting and detect empty 
 TITLE;
@@ -2575,6 +2622,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         php - Can I Install Laravel without using Composer? 
 TITLE;
@@ -2597,6 +2645,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         mysql - Is there a way to "limit" the result with ELOQUENT ORM of Laravel? 
 TITLE;
@@ -2709,6 +2758,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         Laravel 4: how to run a raw SQL? 
 TITLE;
@@ -2721,6 +2771,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         laravel - How do you check "if not null" with Eloquent? 
 TITLE;
@@ -2763,6 +2814,7 @@ CONTENT;
         $user_id++;
 
         $question = new Question();
+        $question->Premium = "Yes";
         $question->title = <<<'TITLE'
         How do I catch exceptions / missing pages in Laravel 5? 
 TITLE;
