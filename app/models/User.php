@@ -21,7 +21,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface, Billa
 	protected $dates = ['trial_ends_at', 'subscription_ends_at'];
 	
 	public static $rules = array (
-		'username' => 'max:20|unique:users',
+		'username' => 'max:25|unique:users',
 		'email' => 'required|max:254|unique:users|email',
 		'password' => 'required',
 		'first_name' => 'required',
