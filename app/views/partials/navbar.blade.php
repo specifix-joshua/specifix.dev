@@ -123,7 +123,7 @@
 								@endif
 								<fieldset class="form-group">
 									{{ Form::label('username', 'Username') }}
-									{{ Form::text('username', Input::old('username'), ['class' => 'form-control', 'placeholder' => 'Create a Username']) }}
+									{{ Form::text('username', Input::old('username'), ['class' => 'form-control', 'maxlength' => '25', 'placeholder' => 'Create a Username']) }}
 								</fieldset>
 								@if ($errors->has('first_name'))
 								<div class="alert alert-danger">{{ $errors->first('name', '<span class="help-block">:message</span>') }}</div>

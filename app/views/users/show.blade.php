@@ -11,13 +11,21 @@
 @section('content')
 <!-- USER INFO -->
 <div class="container">
-	<div class="row">
+	<div id="pro-row" class="row">
     	<div class="col-xs-12">
             <div id="user-title">
             @if ($user->id == Auth::id())
-                <h1>Welcome, {{{ $user['first_name'] }}}!</h1>
+                <h1>Welcome, {{{ $user['first_name'] }}}!
+                @if($score >= 50)
+                    <span class="expert-icon"> &nbsp Expert &nbsp</span>
+                @endif
+                </h1>
             @else
-                <h1><span class="glyphicon glyphicon-user"></span> - {{{$user['username']}}}</h1>
+                <h1><span class="glyphicon glyphicon-user"></span> - {{{$user['username']}}}
+                @if($score >= 50)
+                    <span class="expert-icon"> &nbsp Expert &nbsp</span>
+                @endif
+                </h1>
             @endif
                 <p class="control-label">Questions: {{{$user->questions->count()}}}</p>
                 <p class="control-label">Answers: {{{$user->answers->count()}}}</p>
@@ -57,8 +65,11 @@
 			        {{ Form::submit('Save', array('class' => 'btn btn-default')) }}
 			        {{ Form::close() }}
                @else 
-                <p>Languages: @foreach($user->languages()->get() as $language)
-                    {{ $language->language }}
+                <p>Languages: 
+                	@foreach($user->languages()->get() as $language)
+
+                	<a class="language-button" method="GET" href="{{{action('QuestionsController@index', 'language='.$language->language)}}}"> {{{$language->language}}}</a><span>&nbsp&nbsp</span>
+
                     @endforeach
                 </p>
                 @endif
