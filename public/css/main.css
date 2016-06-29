@@ -261,6 +261,27 @@ html {
   height: 10rem;
   margin: 1rem auto 1rem auto;
 }
+#home-header {
+  font-size: 100px;
+  color: rgb(0,168,179);
+}
+
+#home-sub {
+  color: rgb(255,108,96);
+}
+
+#head-img {
+  margin-top: 20px;
+}
+
+#no-box {
+  padding:0px;
+  background-color:transparent; 
+}
+
+.source-code {
+  font-family: 'Source Code Pro';
+}
 
 .increment {
   flex: 1 0 0;

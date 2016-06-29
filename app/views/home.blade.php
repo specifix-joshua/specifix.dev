@@ -12,6 +12,16 @@
 @section('content')
 
 <div class="container">
+	<div id="no-box" class="jumbotron roboto-slab ">
+		<div class="row">
+			<img id='head-img' class="col-lg-2" src="/img/specifix-bounty.png"">
+			<div class="col-lg-9">
+				<h1 id='home-header'>Specifix</h1>
+				<h3 id='home-sub'>Quality Answers to Tough Coding Questions</h3>
+			</div>
+		</div>
+	</div>
+	<hr>
 	<div class="row">
 		<div class="col-lg-8">
 			<h3>Today's Top Questions</h3>
@@ -20,19 +30,20 @@
 					<div class="items-container">
 				    	<div class="item">
 						    <a class="question-link" href="{{{action('QuestionsController@show', $question->id) }}}"><h3 class="item-head">{{$question->title}}
-						    	@if($question->Premium == 'yes')
+						    	@if($question->Premium == 'Yes')
 					    		<span class="glyphicon glyphicon-star prem-star" aria-hidden="true"></span>
 					    		@endif
 					    	</h3></a>
-						    <p> 
-							    <div class="inline">
-							    	@foreach ($question->languages()->get() as $language)
-						                <a class="language-button" method="GET" href="{{{action('QuestionsController@index', 'language='.$language->language)}}}"> {{{$language->language}}}</a><span>&nbsp&nbsp</span>
-							        @endforeach
-							    </div>
-						    </p>
-						    <p class="question-date">Added by: {{{$question->user->username}}}</p>
-						    <p>{{$question->created_at->setTimezone('America/New_York')->format('F jS Y')}}</p>
+						    
+						    <div class="inline">
+						    	<p>Tag(s):&nbsp
+						    	@foreach ($question->languages()->get() as $language)
+					                <a class="language-button" method="GET" href="{{{action('QuestionsController@index', 'language='.$language->language)}}}"> {{{$language->language}}}</a><span>&nbsp&nbsp</span>
+						        @endforeach
+						        </p>
+						    </div>
+						    
+						    <p class="question-date">Asked by: {{{$question->user->username}}} on {{$question->created_at->setTimezone('America/New_York')->format('F jS')}}</p>
 					    </div>
 				    </div>
 				@endforeach
